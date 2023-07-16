@@ -1,0 +1,2940 @@
+{
+    "blueprint": {
+        "icons": [
+            {
+                "signal": {
+                    "type": "item",
+                    "name": "se-space-rail"
+                },
+                "index": 1
+            }
+        ],
+        "entities": [
+            {
+                "entity_number": 1,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 5,
+                    "y": 43
+                }
+            },
+            {
+                "entity_number": 2,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 57,
+                    "y": 43
+                }
+            },
+            {
+                "entity_number": 3,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 5,
+                    "y": 45
+                }
+            },
+            {
+                "entity_number": 4,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 19.5,
+                    "y": 45.5
+                }
+            },
+            {
+                "entity_number": 5,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 18.5,
+                    "y": 45.5
+                }
+            },
+            {
+                "entity_number": 6,
+                "name": "storage-tank",
+                "position": {
+                    "x": 21.5,
+                    "y": 46.5
+                },
+                "connections": {
+                    "1": {
+                        "red": [
+                            {
+                                "entity_id": 7
+                            },
+                            {
+                                "entity_id": 62
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 7,
+                "name": "storage-tank",
+                "position": {
+                    "x": 26.5,
+                    "y": 46.5
+                },
+                "connections": {
+                    "1": {
+                        "red": [
+                            {
+                                "entity_id": 6
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 8,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 57,
+                    "y": 45
+                }
+            },
+            {
+                "entity_number": 9,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 5,
+                    "y": 47
+                }
+            },
+            {
+                "entity_number": 10,
+                "name": "se-space-pipe-long-j-3",
+                "position": {
+                    "x": 18.5,
+                    "y": 47.5
+                }
+            },
+            {
+                "entity_number": 11,
+                "name": "se-space-pipe-long-j-5",
+                "position": {
+                    "x": 30.5,
+                    "y": 47.5
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 12,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 33.5,
+                    "y": 47.5
+                }
+            },
+            {
+                "entity_number": 13,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 57,
+                    "y": 47
+                }
+            },
+            {
+                "entity_number": 14,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 5,
+                    "y": 49
+                }
+            },
+            {
+                "entity_number": 15,
+                "name": "se-space-pipe-to-ground",
+                "position": {
+                    "x": 18.5,
+                    "y": 49.5
+                }
+            },
+            {
+                "entity_number": 16,
+                "name": "pump",
+                "position": {
+                    "x": 22.5,
+                    "y": 49
+                },
+                "connections": {
+                    "1": {
+                        "green": [
+                            {
+                                "entity_id": 17
+                            },
+                            {
+                                "entity_id": 42
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 17,
+                "name": "pump",
+                "position": {
+                    "x": 27.5,
+                    "y": 49
+                },
+                "connections": {
+                    "1": {
+                        "green": [
+                            {
+                                "entity_id": 16
+                            },
+                            {
+                                "entity_id": 49
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 18,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 33.5,
+                    "y": 48.5
+                }
+            },
+            {
+                "entity_number": 19,
+                "name": "se-space-pipe-to-ground",
+                "position": {
+                    "x": 33.5,
+                    "y": 49.5
+                }
+            },
+            {
+                "entity_number": 20,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 57,
+                    "y": 49
+                }
+            },
+            {
+                "entity_number": 21,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 5,
+                    "y": 51
+                }
+            },
+            {
+                "entity_number": 22,
+                "name": "se-space-curved-rail",
+                "position": {
+                    "x": 18,
+                    "y": 52
+                },
+                "direction": 6
+            },
+            {
+                "entity_number": 23,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 23,
+                    "y": 51
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 24,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 25,
+                    "y": 51
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 25,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 27,
+                    "y": 51
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 26,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 29,
+                    "y": 51
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 27,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 31,
+                    "y": 51
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 28,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 33,
+                    "y": 51
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 29,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 35,
+                    "y": 51
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 30,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 37,
+                    "y": 51
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 31,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 39,
+                    "y": 51
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 32,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 41,
+                    "y": 51
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 33,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 43,
+                    "y": 51
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 34,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 45,
+                    "y": 51
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 35,
+                "name": "se-space-curved-rail",
+                "position": {
+                    "x": 50,
+                    "y": 52
+                },
+                "direction": 3
+            },
+            {
+                "entity_number": 36,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 57,
+                    "y": 51
+                }
+            },
+            {
+                "entity_number": 37,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 5,
+                    "y": 53
+                }
+            },
+            {
+                "entity_number": 38,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 15,
+                    "y": 55
+                },
+                "direction": 7
+            },
+            {
+                "entity_number": 39,
+                "name": "rail-signal",
+                "position": {
+                    "x": 21.5,
+                    "y": 52.5
+                },
+                "direction": 6
+            },
+            {
+                "entity_number": 40,
+                "name": "space-miniloader-inserter",
+                "position": {
+                    "x": 23.5,
+                    "y": 53.5
+                },
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 1.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.203125
+                }
+            },
+            {
+                "entity_number": 41,
+                "name": "space-filter-miniloader-inserter",
+                "position": {
+                    "x": 23.5,
+                    "y": 52.5
+                },
+                "direction": 4,
+                "filters": [
+                    {
+                        "index": 1,
+                        "name": "se-empty-data"
+                    }
+                ],
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 0.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.80078125
+                }
+            },
+            {
+                "entity_number": 42,
+                "name": "pump",
+                "position": {
+                    "x": 22.5,
+                    "y": 53
+                },
+                "direction": 4,
+                "control_behavior": {
+                    "circuit_condition": {
+                        "first_signal": {
+                            "type": "fluid",
+                            "name": "se-chemical-gel"
+                        },
+                        "constant": 0,
+                        "comparator": ">"
+                    }
+                },
+                "connections": {
+                    "1": {
+                        "green": [
+                            {
+                                "entity_id": 16
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 43,
+                "name": "space-miniloader-inserter",
+                "position": {
+                    "x": 24.5,
+                    "y": 53.5
+                },
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 1.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.203125
+                }
+            },
+            {
+                "entity_number": 44,
+                "name": "space-filter-miniloader-inserter",
+                "position": {
+                    "x": 24.5,
+                    "y": 52.5
+                },
+                "direction": 4,
+                "filters": [
+                    {
+                        "index": 1,
+                        "name": "se-experimental-specimen"
+                    }
+                ],
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 0.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.80078125
+                }
+            },
+            {
+                "entity_number": 45,
+                "name": "space-miniloader-inserter",
+                "position": {
+                    "x": 25.5,
+                    "y": 53.5
+                },
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 1.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.203125
+                }
+            },
+            {
+                "entity_number": 46,
+                "name": "space-filter-miniloader-inserter",
+                "position": {
+                    "x": 25.5,
+                    "y": 52.5
+                },
+                "direction": 4,
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 0.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.80078125
+                }
+            },
+            {
+                "entity_number": 47,
+                "name": "space-miniloader-inserter",
+                "position": {
+                    "x": 26.5,
+                    "y": 53.5
+                },
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 1.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.203125
+                }
+            },
+            {
+                "entity_number": 48,
+                "name": "space-filter-miniloader-inserter",
+                "position": {
+                    "x": 26.5,
+                    "y": 52.5
+                },
+                "direction": 4,
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 0.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.80078125
+                }
+            },
+            {
+                "entity_number": 49,
+                "name": "pump",
+                "position": {
+                    "x": 27.5,
+                    "y": 53
+                },
+                "direction": 4,
+                "control_behavior": {
+                    "circuit_condition": {
+                        "first_signal": {
+                            "type": "fluid",
+                            "name": "se-vitalic-acid"
+                        },
+                        "constant": 0,
+                        "comparator": ">"
+                    }
+                },
+                "connections": {
+                    "1": {
+                        "green": [
+                            {
+                                "entity_id": 17
+                            },
+                            {
+                                "entity_id": 50,
+                                "circuit_id": 2
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 50,
+                "name": "arithmetic-combinator",
+                "position": {
+                    "x": 32,
+                    "y": 52.5
+                },
+                "direction": 6,
+                "control_behavior": {
+                    "arithmetic_conditions": {
+                        "first_signal": {
+                            "type": "virtual",
+                            "name": "signal-each"
+                        },
+                        "second_constant": -1,
+                        "operation": "*",
+                        "output_signal": {
+                            "type": "virtual",
+                            "name": "signal-each"
+                        }
+                    }
+                },
+                "connections": {
+                    "1": {
+                        "green": [
+                            {
+                                "entity_id": 54
+                            }
+                        ]
+                    },
+                    "2": {
+                        "green": [
+                            {
+                                "entity_id": 49
+                            },
+                            {
+                                "entity_id": 52
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 51,
+                "name": "ltn-combinator",
+                "position": {
+                    "x": 32.5,
+                    "y": 53.5
+                },
+                "control_behavior": {
+                    "filters": [
+                        {
+                            "signal": {
+                                "type": "virtual",
+                                "name": "ltn-max-trains"
+                            },
+                            "count": 2,
+                            "index": 4
+                        },
+                        {
+                            "signal": {
+                                "type": "virtual",
+                                "name": "ltn-requester-threshold"
+                            },
+                            "count": 2147483647,
+                            "index": 5
+                        },
+                        {
+                            "signal": {
+                                "type": "virtual",
+                                "name": "ltn-provider-threshold"
+                            },
+                            "count": 2147483647,
+                            "index": 9
+                        }
+                    ]
+                },
+                "connections": {
+                    "1": {
+                        "red": [
+                            {
+                                "entity_id": 53
+                            },
+                            {
+                                "entity_id": 71
+                            }
+                        ]
+                    }
+                },
+                "tags": {
+                    "ltnc": {
+                        "provider": false,
+                        "requester": false,
+                        "ltn-requester-threshold": 20000,
+                        "ltn-requester-stack-threshold": 35
+                    }
+                }
+            },
+            {
+                "entity_number": 52,
+                "name": "logistic-train-stop",
+                "position": {
+                    "x": 35,
+                    "y": 53
+                },
+                "direction": 2,
+                "control_behavior": {
+                    "read_from_train": true,
+                    "train_stopped_signal": {
+                        "type": "virtual",
+                        "name": "signal-T"
+                    }
+                },
+                "connections": {
+                    "1": {
+                        "green": [
+                            {
+                                "entity_id": 50,
+                                "circuit_id": 2
+                            }
+                        ]
+                    }
+                },
+                "station": ""
+            },
+            {
+                "entity_number": 53,
+                "name": "logistic-train-stop-input",
+                "position": {
+                    "x": 35.5,
+                    "y": 53.5
+                },
+                "control_behavior": {
+                    "circuit_condition": {
+                        "first_signal": {
+                            "type": "virtual",
+                            "name": "signal-anything"
+                        },
+                        "constant": 0,
+                        "comparator": ">"
+                    },
+                    "use_colors": true
+                },
+                "connections": {
+                    "1": {
+                        "red": [
+                            {
+                                "entity_id": 51
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 54,
+                "name": "logistic-train-stop-output",
+                "position": {
+                    "x": 35.5,
+                    "y": 52.5
+                },
+                "direction": 2,
+                "connections": {
+                    "1": {
+                        "green": [
+                            {
+                                "entity_id": 50,
+                                "circuit_id": 1
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 55,
+                "name": "rail-signal",
+                "position": {
+                    "x": 36.5,
+                    "y": 52.5
+                },
+                "direction": 6
+            },
+            {
+                "entity_number": 56,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 53,
+                    "y": 55
+                },
+                "direction": 1
+            },
+            {
+                "entity_number": 57,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 57,
+                    "y": 53
+                }
+            },
+            {
+                "entity_number": 58,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 5,
+                    "y": 55
+                }
+            },
+            {
+                "entity_number": 59,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 13,
+                    "y": 57
+                },
+                "direction": 7
+            },
+            {
+                "entity_number": 60,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 13,
+                    "y": 55
+                },
+                "direction": 3
+            },
+            {
+                "entity_number": 61,
+                "name": "se-space-pipe-to-ground",
+                "position": {
+                    "x": 18.5,
+                    "y": 55.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 62,
+                "name": "storage-tank",
+                "position": {
+                    "x": 21.5,
+                    "y": 55.5
+                },
+                "direction": 2,
+                "connections": {
+                    "1": {
+                        "red": [
+                            {
+                                "entity_id": 6
+                            },
+                            {
+                                "entity_id": 71
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 63,
+                "name": "space-miniloader-inserter",
+                "position": {
+                    "x": 23.5,
+                    "y": 55.5
+                },
+                "direction": 4,
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 0.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.80078125
+                }
+            },
+            {
+                "entity_number": 64,
+                "name": "steel-chest",
+                "position": {
+                    "x": 23.5,
+                    "y": 54.5
+                },
+                "connections": {
+                    "1": {
+                        "red": [
+                            {
+                                "entity_id": 68
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 65,
+                "name": "space-miniloader-inserter",
+                "position": {
+                    "x": 25.5,
+                    "y": 55.5
+                },
+                "direction": 4,
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 0.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.80078125
+                }
+            },
+            {
+                "entity_number": 66,
+                "name": "space-miniloader-inserter",
+                "position": {
+                    "x": 24.5,
+                    "y": 55.5
+                },
+                "direction": 4,
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 0.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.80078125
+                }
+            },
+            {
+                "entity_number": 67,
+                "name": "steel-chest",
+                "position": {
+                    "x": 25.5,
+                    "y": 54.5
+                },
+                "connections": {
+                    "1": {
+                        "red": [
+                            {
+                                "entity_id": 68
+                            },
+                            {
+                                "entity_id": 70
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 68,
+                "name": "steel-chest",
+                "position": {
+                    "x": 24.5,
+                    "y": 54.5
+                },
+                "connections": {
+                    "1": {
+                        "red": [
+                            {
+                                "entity_id": 64
+                            },
+                            {
+                                "entity_id": 67
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 69,
+                "name": "space-miniloader-inserter",
+                "position": {
+                    "x": 26.5,
+                    "y": 55.5
+                },
+                "direction": 4,
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 0.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.80078125
+                }
+            },
+            {
+                "entity_number": 70,
+                "name": "steel-chest",
+                "position": {
+                    "x": 26.5,
+                    "y": 54.5
+                },
+                "connections": {
+                    "1": {
+                        "red": [
+                            {
+                                "entity_id": 67
+                            },
+                            {
+                                "entity_id": 71
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 71,
+                "name": "storage-tank",
+                "position": {
+                    "x": 28.5,
+                    "y": 55.5
+                },
+                "connections": {
+                    "1": {
+                        "red": [
+                            {
+                                "entity_id": 51
+                            },
+                            {
+                                "entity_id": 62
+                            },
+                            {
+                                "entity_id": 70
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 72,
+                "name": "se-space-pipe-to-ground",
+                "position": {
+                    "x": 33.5,
+                    "y": 55.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 73,
+                "name": "rail-signal",
+                "position": {
+                    "x": 51.5,
+                    "y": 54.5
+                },
+                "direction": 7
+            },
+            {
+                "entity_number": 74,
+                "name": "se-space-curved-rail",
+                "position": {
+                    "x": 56,
+                    "y": 58
+                }
+            },
+            {
+                "entity_number": 75,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 57,
+                    "y": 55
+                }
+            },
+            {
+                "entity_number": 76,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 5,
+                    "y": 57
+                }
+            },
+            {
+                "entity_number": 77,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 11,
+                    "y": 59
+                },
+                "direction": 7
+            },
+            {
+                "entity_number": 78,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 11,
+                    "y": 57
+                },
+                "direction": 3
+            },
+            {
+                "entity_number": 79,
+                "name": "se-space-pipe-long-j-7",
+                "position": {
+                    "x": 18.5,
+                    "y": 60.5
+                }
+            },
+            {
+                "entity_number": 80,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 18.5,
+                    "y": 56.5
+                }
+            },
+            {
+                "entity_number": 81,
+                "name": "se-space-pipe-long-j-5",
+                "position": {
+                    "x": 20.5,
+                    "y": 59.5
+                }
+            },
+            {
+                "entity_number": 82,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 23.5,
+                    "y": 56.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 83,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 23.5,
+                    "y": 57.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 84,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 24.5,
+                    "y": 56.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 85,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 24.5,
+                    "y": 57.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 86,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 29.5,
+                    "y": 57.5
+                }
+            },
+            {
+                "entity_number": 87,
+                "name": "se-space-pipe-long-j-5",
+                "position": {
+                    "x": 33.5,
+                    "y": 58.5
+                }
+            },
+            {
+                "entity_number": 88,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 57,
+                    "y": 57
+                }
+            },
+            {
+                "entity_number": 89,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 5,
+                    "y": 59
+                }
+            },
+            {
+                "entity_number": 90,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 9,
+                    "y": 61
+                },
+                "direction": 7
+            },
+            {
+                "entity_number": 91,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 9,
+                    "y": 59
+                },
+                "direction": 3
+            },
+            {
+                "entity_number": 92,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 23.5,
+                    "y": 58.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 93,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 23.5,
+                    "y": 59.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 94,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 24.5,
+                    "y": 58.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 95,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 24.5,
+                    "y": 59.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 96,
+                "name": "se-space-pipe-long-j-3",
+                "position": {
+                    "x": 29.5,
+                    "y": 59.5
+                }
+            },
+            {
+                "entity_number": 97,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 57,
+                    "y": 59
+                }
+            },
+            {
+                "entity_number": 98,
+                "name": "se-space-curved-rail",
+                "position": {
+                    "x": 6,
+                    "y": 64
+                },
+                "direction": 1
+            },
+            {
+                "entity_number": 99,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 5,
+                    "y": 61
+                }
+            },
+            {
+                "entity_number": 100,
+                "name": "rail-signal",
+                "position": {
+                    "x": 10.5,
+                    "y": 60.5
+                },
+                "direction": 5
+            },
+            {
+                "entity_number": 101,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 23.5,
+                    "y": 60.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 102,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 23.5,
+                    "y": 61.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 103,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 24.5,
+                    "y": 60.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 104,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 24.5,
+                    "y": 61.5
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 105,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 25.5,
+                    "y": 61.5
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 106,
+                "name": "space-miniloader-inserter",
+                "position": {
+                    "x": 26.5,
+                    "y": 61.5
+                },
+                "direction": 6,
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": 1.19921875,
+                    "y": 0.25
+                },
+                "pickup_position": {
+                    "x": -0.203125,
+                    "y": 0
+                }
+            },
+            {
+                "entity_number": 107,
+                "name": "se-space-biochemical-laboratory",
+                "position": {
+                    "x": 31.5,
+                    "y": 65.5
+                },
+                "items": {
+                    "speed-module-9": 4
+                }
+            },
+            {
+                "entity_number": 108,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 57,
+                    "y": 61
+                }
+            },
+            {
+                "entity_number": 109,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 5,
+                    "y": 63
+                }
+            },
+            {
+                "entity_number": 110,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 20.5,
+                    "y": 62.5
+                }
+            },
+            {
+                "entity_number": 111,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 20.5,
+                    "y": 63.5
+                }
+            },
+            {
+                "entity_number": 112,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 21.5,
+                    "y": 63.5
+                }
+            },
+            {
+                "entity_number": 113,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 23.5,
+                    "y": 62.5
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 114,
+                "name": "se-space-pipe-long-j-5",
+                "position": {
+                    "x": 24.5,
+                    "y": 63.5
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 115,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 24.5,
+                    "y": 62.5
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 116,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 25.5,
+                    "y": 62.5
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 117,
+                "name": "space-miniloader-inserter",
+                "position": {
+                    "x": 26.5,
+                    "y": 62.5
+                },
+                "direction": 6,
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": 1.19921875,
+                    "y": 0.25
+                },
+                "pickup_position": {
+                    "x": -0.203125,
+                    "y": 0
+                }
+            },
+            {
+                "entity_number": 118,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 57,
+                    "y": 63
+                }
+            },
+            {
+                "entity_number": 119,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 5,
+                    "y": 65
+                }
+            },
+            {
+                "entity_number": 120,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 19.5,
+                    "y": 65.5
+                }
+            },
+            {
+                "entity_number": 121,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 18.5,
+                    "y": 65.5
+                }
+            },
+            {
+                "entity_number": 122,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 18.5,
+                    "y": 64.5
+                }
+            },
+            {
+                "entity_number": 123,
+                "name": "se-space-pipe-long-j-7",
+                "position": {
+                    "x": 23.5,
+                    "y": 65.5
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 124,
+                "name": "se-space-curved-rail",
+                "position": {
+                    "x": 56,
+                    "y": 68
+                },
+                "direction": 5
+            },
+            {
+                "entity_number": 125,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 5,
+                    "y": 67
+                }
+            },
+            {
+                "entity_number": 126,
+                "name": "se-space-pipe-long-j-5",
+                "position": {
+                    "x": 38.5,
+                    "y": 67.5
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 127,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 41.5,
+                    "y": 67.5
+                }
+            },
+            {
+                "entity_number": 128,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 5,
+                    "y": 69
+                }
+            },
+            {
+                "entity_number": 129,
+                "name": "space-filter-miniloader-inserter",
+                "position": {
+                    "x": 36.5,
+                    "y": 68.5
+                },
+                "direction": 2,
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": 0.19921875,
+                    "y": 0.25
+                },
+                "pickup_position": {
+                    "x": -0.80078125,
+                    "y": 0
+                }
+            },
+            {
+                "entity_number": 130,
+                "name": "space-filter-miniloader-inserter",
+                "position": {
+                    "x": 36.5,
+                    "y": 69.5
+                },
+                "direction": 2,
+                "filters": [
+                    {
+                        "index": 1,
+                        "name": "se-junk-data"
+                    }
+                ],
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": 0.19921875,
+                    "y": 0.25
+                },
+                "pickup_position": {
+                    "x": -0.80078125,
+                    "y": 0
+                }
+            },
+            {
+                "entity_number": 131,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 37.5,
+                    "y": 69.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 132,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 37.5,
+                    "y": 68.5
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 133,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 38.5,
+                    "y": 68.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 134,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 38.5,
+                    "y": 69.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 135,
+                "name": "se-space-pipe-long-j-7",
+                "position": {
+                    "x": 41.5,
+                    "y": 71.5
+                }
+            },
+            {
+                "entity_number": 136,
+                "name": "se-space-curved-rail",
+                "position": {
+                    "x": 6,
+                    "y": 74
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 137,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 33.5,
+                    "y": 70.5
+                }
+            },
+            {
+                "entity_number": 138,
+                "name": "se-space-pipe-long-j-3",
+                "position": {
+                    "x": 33.5,
+                    "y": 72.5
+                }
+            },
+            {
+                "entity_number": 139,
+                "name": "space-filter-miniloader-inserter",
+                "position": {
+                    "x": 35.5,
+                    "y": 70.5
+                },
+                "direction": 4,
+                "filters": [
+                    {
+                        "index": 1,
+                        "name": "se-experimental-specimen"
+                    }
+                ],
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 0.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.80078125
+                }
+            },
+            {
+                "entity_number": 140,
+                "name": "space-filter-miniloader-inserter",
+                "position": {
+                    "x": 34.5,
+                    "y": 70.5
+                },
+                "direction": 4,
+                "filters": [
+                    {
+                        "index": 1,
+                        "name": "se-biochemical-resistance-data"
+                    }
+                ],
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 0.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.80078125
+                }
+            },
+            {
+                "entity_number": 141,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 35.5,
+                    "y": 71.5
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 142,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 34.5,
+                    "y": 71.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 143,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 36.5,
+                    "y": 71.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 144,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 37.5,
+                    "y": 70.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 145,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 37.5,
+                    "y": 71.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 146,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 38.5,
+                    "y": 70.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 147,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 38.5,
+                    "y": 71.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 148,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 53,
+                    "y": 73
+                },
+                "direction": 7
+            },
+            {
+                "entity_number": 149,
+                "name": "rail-signal",
+                "position": {
+                    "x": 51.5,
+                    "y": 71.5
+                },
+                "direction": 1
+            },
+            {
+                "entity_number": 150,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 53,
+                    "y": 71
+                },
+                "direction": 3
+            },
+            {
+                "entity_number": 151,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 34.5,
+                    "y": 72.5
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 152,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 35.5,
+                    "y": 72.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 153,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 35.5,
+                    "y": 73.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 154,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 36.5,
+                    "y": 72.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 155,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 36.5,
+                    "y": 73.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 156,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 37.5,
+                    "y": 72.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 157,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 37.5,
+                    "y": 73.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 158,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 38.5,
+                    "y": 72.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 159,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 38.5,
+                    "y": 73.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 160,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 51,
+                    "y": 75
+                },
+                "direction": 7
+            },
+            {
+                "entity_number": 161,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 51,
+                    "y": 73
+                },
+                "direction": 3
+            },
+            {
+                "entity_number": 162,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 30.5,
+                    "y": 75.5
+                }
+            },
+            {
+                "entity_number": 163,
+                "name": "storage-tank",
+                "position": {
+                    "x": 33.5,
+                    "y": 76.5
+                },
+                "connections": {
+                    "1": {
+                        "red": [
+                            {
+                                "entity_id": 172
+                            },
+                            {
+                                "entity_id": 183
+                            },
+                            {
+                                "entity_id": 230
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 164,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 33.5,
+                    "y": 74.5
+                }
+            },
+            {
+                "entity_number": 165,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 32.5,
+                    "y": 74.5
+                }
+            },
+            {
+                "entity_number": 166,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 35.5,
+                    "y": 74.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 167,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 35.5,
+                    "y": 75.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 168,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 36.5,
+                    "y": 74.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 169,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 36.5,
+                    "y": 75.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 170,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 37.5,
+                    "y": 74.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 171,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 37.5,
+                    "y": 75.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 172,
+                "name": "storage-tank",
+                "position": {
+                    "x": 40.5,
+                    "y": 76.5
+                },
+                "direction": 2,
+                "connections": {
+                    "1": {
+                        "red": [
+                            {
+                                "entity_id": 163
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 173,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 38.5,
+                    "y": 74.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 174,
+                "name": "se-space-transport-belt",
+                "position": {
+                    "x": 38.5,
+                    "y": 75.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 175,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 43.5,
+                    "y": 75.5
+                }
+            },
+            {
+                "entity_number": 176,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 49,
+                    "y": 77
+                },
+                "direction": 7
+            },
+            {
+                "entity_number": 177,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 49,
+                    "y": 75
+                },
+                "direction": 3
+            },
+            {
+                "entity_number": 178,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 9,
+                    "y": 77
+                },
+                "direction": 5
+            },
+            {
+                "entity_number": 179,
+                "name": "se-space-curved-rail",
+                "position": {
+                    "x": 12,
+                    "y": 80
+                },
+                "direction": 7
+            },
+            {
+                "entity_number": 180,
+                "name": "rail-signal",
+                "position": {
+                    "x": 10.5,
+                    "y": 77.5
+                },
+                "direction": 3
+            },
+            {
+                "entity_number": 181,
+                "name": "se-space-pipe-to-ground",
+                "position": {
+                    "x": 30.5,
+                    "y": 76.5
+                }
+            },
+            {
+                "entity_number": 182,
+                "name": "space-miniloader-inserter",
+                "position": {
+                    "x": 35.5,
+                    "y": 76.5
+                },
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 1.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.203125
+                }
+            },
+            {
+                "entity_number": 183,
+                "name": "steel-chest",
+                "position": {
+                    "x": 35.5,
+                    "y": 77.5
+                },
+                "connections": {
+                    "1": {
+                        "red": [
+                            {
+                                "entity_id": 163
+                            },
+                            {
+                                "entity_id": 187
+                            },
+                            {
+                                "entity_id": 196
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 184,
+                "name": "space-miniloader-inserter",
+                "position": {
+                    "x": 37.5,
+                    "y": 76.5
+                },
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 1.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.203125
+                }
+            },
+            {
+                "entity_number": 185,
+                "name": "space-miniloader-inserter",
+                "position": {
+                    "x": 36.5,
+                    "y": 76.5
+                },
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 1.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.203125
+                }
+            },
+            {
+                "entity_number": 186,
+                "name": "steel-chest",
+                "position": {
+                    "x": 37.5,
+                    "y": 77.5
+                },
+                "connections": {
+                    "1": {
+                        "red": [
+                            {
+                                "entity_id": 187
+                            },
+                            {
+                                "entity_id": 189
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 187,
+                "name": "steel-chest",
+                "position": {
+                    "x": 36.5,
+                    "y": 77.5
+                },
+                "connections": {
+                    "1": {
+                        "red": [
+                            {
+                                "entity_id": 183
+                            },
+                            {
+                                "entity_id": 186
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 188,
+                "name": "space-miniloader-inserter",
+                "position": {
+                    "x": 38.5,
+                    "y": 76.5
+                },
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 1.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.203125
+                }
+            },
+            {
+                "entity_number": 189,
+                "name": "steel-chest",
+                "position": {
+                    "x": 38.5,
+                    "y": 77.5
+                },
+                "connections": {
+                    "1": {
+                        "red": [
+                            {
+                                "entity_id": 186
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 190,
+                "name": "se-space-curved-rail",
+                "position": {
+                    "x": 44,
+                    "y": 80
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 191,
+                "name": "se-space-pipe-to-ground",
+                "position": {
+                    "x": 43.5,
+                    "y": 76.5
+                }
+            },
+            {
+                "entity_number": 192,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 47,
+                    "y": 77
+                },
+                "direction": 3
+            },
+            {
+                "entity_number": 193,
+                "name": "ltn-combinator",
+                "position": {
+                    "x": 25.5,
+                    "y": 78.5
+                },
+                "direction": 4,
+                "control_behavior": {
+                    "filters": [
+                        {
+                            "signal": {
+                                "type": "virtual",
+                                "name": "ltn-requester-threshold"
+                            },
+                            "count": 2147483647,
+                            "index": 5
+                        },
+                        {
+                            "signal": {
+                                "type": "virtual",
+                                "name": "ltn-provider-stack-threshold"
+                            },
+                            "count": 10,
+                            "index": 10
+                        },
+                        {
+                            "signal": {
+                                "type": "virtual",
+                                "name": "ltn-provider-priority"
+                            },
+                            "count": 10,
+                            "index": 11
+                        }
+                    ]
+                },
+                "connections": {
+                    "1": {
+                        "red": [
+                            {
+                                "entity_id": 196
+                            }
+                        ]
+                    }
+                },
+                "tags": {
+                    "ltnc": {
+                        "provider": true,
+                        "requester": false,
+                        "ltn-provider-stack-threshold": 10
+                    }
+                }
+            },
+            {
+                "entity_number": 194,
+                "name": "rail-signal",
+                "position": {
+                    "x": 25.5,
+                    "y": 79.5
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 195,
+                "name": "logistic-train-stop",
+                "position": {
+                    "x": 27,
+                    "y": 79
+                },
+                "direction": 6,
+                "control_behavior": {
+                    "read_from_train": true,
+                    "train_stopped_signal": {
+                        "type": "virtual",
+                        "name": "signal-T"
+                    }
+                },
+                "connections": {
+                    "1": {
+                        "green": [
+                            {
+                                "entity_id": 198,
+                                "circuit_id": 1
+                            }
+                        ]
+                    }
+                },
+                "station": ""
+            },
+            {
+                "entity_number": 196,
+                "name": "logistic-train-stop-input",
+                "position": {
+                    "x": 26.5,
+                    "y": 78.5
+                },
+                "control_behavior": {
+                    "circuit_condition": {
+                        "first_signal": {
+                            "type": "virtual",
+                            "name": "signal-anything"
+                        },
+                        "constant": 0,
+                        "comparator": ">"
+                    },
+                    "use_colors": true
+                },
+                "connections": {
+                    "1": {
+                        "red": [
+                            {
+                                "entity_id": 183
+                            },
+                            {
+                                "entity_id": 193
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 197,
+                "name": "logistic-train-stop-output",
+                "position": {
+                    "x": 26.5,
+                    "y": 79.5
+                },
+                "direction": 6,
+                "connections": {
+                    "1": {
+                        "green": [
+                            {
+                                "entity_id": 198,
+                                "circuit_id": 2
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 198,
+                "name": "arithmetic-combinator",
+                "position": {
+                    "x": 30,
+                    "y": 79.5
+                },
+                "direction": 2,
+                "control_behavior": {
+                    "arithmetic_conditions": {
+                        "first_signal": {
+                            "type": "virtual",
+                            "name": "signal-each"
+                        },
+                        "second_constant": -1,
+                        "operation": "*",
+                        "output_signal": {
+                            "type": "virtual",
+                            "name": "signal-each"
+                        }
+                    }
+                },
+                "connections": {
+                    "1": {
+                        "green": [
+                            {
+                                "entity_id": 195
+                            }
+                        ]
+                    },
+                    "2": {
+                        "green": [
+                            {
+                                "entity_id": 197
+                            },
+                            {
+                                "entity_id": 201
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 199,
+                "name": "space-filter-miniloader-inserter",
+                "position": {
+                    "x": 35.5,
+                    "y": 79.5
+                },
+                "control_behavior": {
+                    "circuit_mode_of_operation": 1
+                },
+                "connections": {
+                    "1": {
+                        "green": [
+                            {
+                                "entity_id": 201
+                            },
+                            {
+                                "entity_id": 204
+                            }
+                        ]
+                    }
+                },
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 1.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.203125
+                }
+            },
+            {
+                "entity_number": 200,
+                "name": "space-miniloader-inserter",
+                "position": {
+                    "x": 35.5,
+                    "y": 78.5
+                },
+                "direction": 4,
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 0.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.80078125
+                }
+            },
+            {
+                "entity_number": 201,
+                "name": "pump",
+                "position": {
+                    "x": 34.5,
+                    "y": 79
+                },
+                "direction": 4,
+                "control_behavior": {
+                    "circuit_condition": {
+                        "first_signal": {
+                            "type": "fluid",
+                            "name": "se-contaminated-space-water"
+                        },
+                        "constant": 0,
+                        "comparator": ">"
+                    }
+                },
+                "connections": {
+                    "1": {
+                        "green": [
+                            {
+                                "entity_id": 198,
+                                "circuit_id": 2
+                            },
+                            {
+                                "entity_id": 199
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 202,
+                "name": "space-filter-miniloader-inserter",
+                "position": {
+                    "x": 37.5,
+                    "y": 79.5
+                },
+                "control_behavior": {
+                    "circuit_mode_of_operation": 1
+                },
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 1.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.203125
+                }
+            },
+            {
+                "entity_number": 203,
+                "name": "space-miniloader-inserter",
+                "position": {
+                    "x": 37.5,
+                    "y": 78.5
+                },
+                "direction": 4,
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 0.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.80078125
+                }
+            },
+            {
+                "entity_number": 204,
+                "name": "space-filter-miniloader-inserter",
+                "position": {
+                    "x": 36.5,
+                    "y": 79.5
+                },
+                "control_behavior": {
+                    "circuit_mode_of_operation": 1
+                },
+                "connections": {
+                    "1": {
+                        "green": [
+                            {
+                                "entity_id": 199
+                            }
+                        ]
+                    }
+                },
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 1.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.203125
+                }
+            },
+            {
+                "entity_number": 205,
+                "name": "space-miniloader-inserter",
+                "position": {
+                    "x": 36.5,
+                    "y": 78.5
+                },
+                "direction": 4,
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 0.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.80078125
+                }
+            },
+            {
+                "entity_number": 206,
+                "name": "space-filter-miniloader-inserter",
+                "position": {
+                    "x": 38.5,
+                    "y": 79.5
+                },
+                "control_behavior": {
+                    "circuit_mode_of_operation": 1
+                },
+                "connections": {
+                    "1": {
+                        "green": [
+                            {
+                                "entity_id": 208
+                            }
+                        ]
+                    }
+                },
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 1.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.203125
+                }
+            },
+            {
+                "entity_number": 207,
+                "name": "space-miniloader-inserter",
+                "position": {
+                    "x": 38.5,
+                    "y": 78.5
+                },
+                "direction": 4,
+                "override_stack_size": 1,
+                "drop_position": {
+                    "x": -0.25,
+                    "y": 0.19921875
+                },
+                "pickup_position": {
+                    "x": 0,
+                    "y": -0.80078125
+                }
+            },
+            {
+                "entity_number": 208,
+                "name": "pump",
+                "position": {
+                    "x": 39.5,
+                    "y": 79
+                },
+                "direction": 4,
+                "control_behavior": {
+                    "circuit_condition": {
+                        "first_signal": {
+                            "type": "fluid",
+                            "name": "se-contaminated-bio-sludge"
+                        },
+                        "constant": 0,
+                        "comparator": ">"
+                    }
+                },
+                "connections": {
+                    "1": {
+                        "green": [
+                            {
+                                "entity_id": 206
+                            },
+                            {
+                                "entity_id": 225
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 209,
+                "name": "rail-signal",
+                "position": {
+                    "x": 40.5,
+                    "y": 79.5
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 210,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 17,
+                    "y": 81
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 211,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 19,
+                    "y": 81
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 212,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 21,
+                    "y": 81
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 213,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 23,
+                    "y": 81
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 214,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 25,
+                    "y": 81
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 215,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 27,
+                    "y": 81
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 216,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 29,
+                    "y": 81
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 217,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 31,
+                    "y": 81
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 218,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 33,
+                    "y": 81
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 219,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 35,
+                    "y": 81
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 220,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 37,
+                    "y": 81
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 221,
+                "name": "se-space-straight-rail",
+                "position": {
+                    "x": 39,
+                    "y": 81
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 222,
+                "name": "se-space-pipe-to-ground",
+                "position": {
+                    "x": 30.5,
+                    "y": 82.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 223,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 30.5,
+                    "y": 83.5
+                }
+            },
+            {
+                "entity_number": 224,
+                "name": "pump",
+                "position": {
+                    "x": 34.5,
+                    "y": 83
+                },
+                "connections": {
+                    "1": {
+                        "green": [
+                            {
+                                "entity_id": 225
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 225,
+                "name": "pump",
+                "position": {
+                    "x": 39.5,
+                    "y": 83
+                },
+                "connections": {
+                    "1": {
+                        "green": [
+                            {
+                                "entity_id": 208
+                            },
+                            {
+                                "entity_id": 224
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 226,
+                "name": "se-space-pipe-to-ground",
+                "position": {
+                    "x": 43.5,
+                    "y": 82.5
+                },
+                "direction": 4
+            },
+            {
+                "entity_number": 227,
+                "name": "se-space-pipe-long-j-3",
+                "position": {
+                    "x": 43.5,
+                    "y": 84.5
+                }
+            },
+            {
+                "entity_number": 228,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 30.5,
+                    "y": 84.5
+                }
+            },
+            {
+                "entity_number": 229,
+                "name": "se-space-pipe-long-j-3",
+                "position": {
+                    "x": 32.5,
+                    "y": 84.5
+                },
+                "direction": 2
+            },
+            {
+                "entity_number": 230,
+                "name": "storage-tank",
+                "position": {
+                    "x": 35.5,
+                    "y": 85.5
+                },
+                "connections": {
+                    "1": {
+                        "red": [
+                            {
+                                "entity_id": 163
+                            },
+                            {
+                                "entity_id": 231
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 231,
+                "name": "storage-tank",
+                "position": {
+                    "x": 40.5,
+                    "y": 85.5
+                },
+                "connections": {
+                    "1": {
+                        "red": [
+                            {
+                                "entity_id": 230
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entity_number": 232,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 42.5,
+                    "y": 86.5
+                }
+            },
+            {
+                "entity_number": 233,
+                "name": "se-space-pipe",
+                "position": {
+                    "x": 43.5,
+                    "y": 86.5
+                }
+            }
+        ],
+        "item": "blueprint",
+        "version": 281479276920832
+    }
+}

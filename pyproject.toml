@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "factorython"
+version = "0.1.0"
+description = ""
+authors = ["swozny <arpheno@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pytest = "^7.4.0"
+pydantic = "^2.0"
+numpy = "^1.25.0"
+pandas = "^2.0.3"
+jupyter = "^1.0.0"
+pulp = "^2.7.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
