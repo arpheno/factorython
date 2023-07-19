@@ -2265,3 +2265,6 @@ class AssemblingMachine(BaseModel):
     placeable_by: Optional[PlaceableBy] = None
 
 
+    @property
+    def crafting_categories_list(self):
+        return list(self.crafting_categories.keys())

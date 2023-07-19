@@ -1,4 +1,4 @@
-from prototype_parser import parse_prototypes
+from parsing.prototype_parser import parse_prototypes
 
 
 def test_parse_prototypes():

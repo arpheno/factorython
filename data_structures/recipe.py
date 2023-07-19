@@ -79,16 +79,6 @@ class Recipe(BaseModel):
     def average_amount(self, product: Product):
         return next((p.average_amount for p in self.products if p.name == product.name), None)
 
-    def relative_cost(self, product: Product):
-        # return how expensive a unit of product is in terms of all ingredients
-        result = {i: (i.amount / product.average_amount) for i in self.ingredients}
-        return result
-
-    def relative_products(self, product: Product):
-        # return how expensive a unit of product is in terms of all ingredients
-        result = {i: (i.average_amount / product.average_amount) for i in self.products}
-        return result
-
     def __str__(self):
         products_str = "\n  - ".join([str(product) for product in self.products])
         ingredients_str = "\n  - ".join([str(ingredient) for ingredient in self.ingredients])
@@ -102,10 +92,6 @@ class Recipe(BaseModel):
     def to_series(self):
         inputs = pd.Series({i.name: i.amount for i in self.ingredients})
         outputs = pd.Series({p.name: p.average_amount for p in self.products})
-        if None in inputs.index or None in outputs.index:
-            print('?')
-        if None in inputs.values or None in outputs.values:
-            print('?')
         result = outputs.subtract(inputs, fill_value=0)
         result.name = self.name
         return result

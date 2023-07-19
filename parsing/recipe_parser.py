@@ -1,4 +1,4 @@
-from recipe import Recipe
+from data_structures.recipe import Recipe
 
 
 def parse_recipes(recipes:dict):

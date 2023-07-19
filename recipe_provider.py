@@ -1,6 +1,6 @@
 import pandas as pd
 
-from recipe import Recipe, Product
+from data_structures.recipe import Recipe, Product
 
 
 class RecipeProvider:

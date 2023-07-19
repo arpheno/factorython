@@ -1,5 +1,5 @@
-from recipe import Recipe, Product
-from recipe_parser import parse_recipes
+from data_structures.recipe import Recipe, Product
+from parsing.recipe_parser import parse_recipes
 
 
 def test_recipe_parsing():
