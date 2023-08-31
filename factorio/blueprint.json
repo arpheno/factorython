@@ -1,0 +1,5763 @@
+{
+  "blueprint": {
+    "icons": [
+      {
+        "signal": {
+          "type": "item",
+          "name": "se-space-manufactory"
+        },
+        "index": 1
+      }
+    ],
+    "entities": [
+      {
+        "entity_number": 1,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 608.5,
+          "y": -42.5
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 2,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 613.5,
+          "y": -42.5
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 3,
+        "name": "se-space-assembling-machine",
+        "position": {
+          "x": 608.5,
+          "y": -39.5
+        },
+        "direction": 4,
+        "recipe": "se-space-underground-belt"
+      },
+      {
+        "entity_number": 4,
+        "name": "fast-inserter",
+        "position": {
+          "x": 608.5,
+          "y": -41.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 5,
+        "name": "fast-inserter",
+        "position": {
+          "x": 613.5,
+          "y": -41.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 6,
+        "name": "se-space-assembling-machine",
+        "position": {
+          "x": 614.5,
+          "y": -39.5
+        },
+        "direction": 4,
+        "recipe": "se-space-splitter"
+      },
+      {
+        "entity_number": 7,
+        "name": "fast-inserter",
+        "position": {
+          "x": 610.5,
+          "y": -39.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 8,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 611.5,
+          "y": -39.5
+        },
+        "request_filters": [
+          {
+            "index": 1,
+            "name": "advanced-circuit",
+            "count": 37
+          },
+          {
+            "index": 2,
+            "name": "se-space-transport-belt",
+            "count": 15
+          },
+          {
+            "index": 3,
+            "name": "steel-plate",
+            "count": 37
+          }
+        ]
+      },
+      {
+        "entity_number": 9,
+        "name": "fast-inserter",
+        "position": {
+          "x": 612.5,
+          "y": -39.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 10,
+        "name": "logistic-chest-active-provider",
+        "position": {
+          "x": 601.5,
+          "y": -36.5
+        }
+      },
+      {
+        "entity_number": 11,
+        "name": "se-space-assembling-machine",
+        "position": {
+          "x": 604.5,
+          "y": -35.5
+        },
+        "direction": 6,
+        "recipe": "empty-lubricant-barrel"
+      },
+      {
+        "entity_number": 12,
+        "name": "fast-inserter",
+        "position": {
+          "x": 602.5,
+          "y": -36.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 13,
+        "name": "se-space-pipe",
+        "position": {
+          "x": 606.5,
+          "y": -37.5
+        }
+      },
+      {
+        "entity_number": 14,
+        "name": "se-space-pipe-long-j-3",
+        "position": {
+          "x": 606.5,
+          "y": -35.5
+        }
+      },
+      {
+        "entity_number": 15,
+        "name": "se-space-pipe-long-j-3",
+        "position": {
+          "x": 608.5,
+          "y": -37.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 16,
+        "name": "substation",
+        "position": {
+          "x": 610,
+          "y": -36
+        },
+        "neighbours": [
+          251
+        ]
+      },
+      {
+        "entity_number": 17,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 608.5,
+          "y": -36.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 18,
+        "name": "se-space-pipe-long-j-3",
+        "position": {
+          "x": 611.5,
+          "y": -37.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 19,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 612.5,
+          "y": -36.5
+        },
+        "bar": 10
+      },
+      {
+        "entity_number": 20,
+        "name": "se-space-pipe-long-j-3",
+        "position": {
+          "x": 614.5,
+          "y": -37.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 21,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 614.5,
+          "y": -36.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 22,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 601.5,
+          "y": -34.5
+        },
+        "request_filters": [
+          {
+            "index": 1,
+            "name": "lubricant-barrel",
+            "count": 187
+          }
+        ]
+      },
+      {
+        "entity_number": 23,
+        "name": "fast-inserter",
+        "position": {
+          "x": 602.5,
+          "y": -34.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 24,
+        "name": "se-space-manufactory",
+        "position": {
+          "x": 611.5,
+          "y": -30.5
+        },
+        "direction": 6,
+        "recipe": "se-space-transport-belt"
+      },
+      {
+        "entity_number": 25,
+        "name": "fast-inserter",
+        "position": {
+          "x": 612.5,
+          "y": -35.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 26,
+        "name": "se-space-manufactory",
+        "position": {
+          "x": 621.5,
+          "y": -30.5
+        },
+        "direction": 4,
+        "recipe": "se-space-telescope"
+      },
+      {
+        "entity_number": 27,
+        "name": "se-space-manufactory",
+        "position": {
+          "x": 632.5,
+          "y": -30.5
+        },
+        "direction": 4,
+        "recipe": "se-space-plasma-generator"
+      },
+      {
+        "entity_number": 28,
+        "name": "se-space-manufactory",
+        "position": {
+          "x": 642.5,
+          "y": -30.5
+        },
+        "direction": 4,
+        "recipe": "se-space-hypercooler"
+      },
+      {
+        "entity_number": 29,
+        "name": "se-space-manufactory",
+        "position": {
+          "x": 652.5,
+          "y": -30.5
+        },
+        "direction": 4,
+        "recipe": "se-space-laser-laboratory"
+      },
+      {
+        "entity_number": 30,
+        "name": "se-space-manufactory",
+        "position": {
+          "x": 662.5,
+          "y": -30.5
+        },
+        "direction": 4,
+        "recipe": "se-space-electromagnetics-laboratory"
+      },
+      {
+        "entity_number": 31,
+        "name": "se-space-manufactory",
+        "position": {
+          "x": 672.5,
+          "y": -30.5
+        },
+        "direction": 4,
+        "recipe": "se-space-particle-accelerator"
+      },
+      {
+        "entity_number": 32,
+        "name": "se-space-pipe-long-j-3",
+        "position": {
+          "x": 606.5,
+          "y": -32.5
+        }
+      },
+      {
+        "entity_number": 33,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 605.5,
+          "y": -26.5
+        },
+        "request_filters": [
+          {
+            "index": 1,
+            "name": "electric-motor",
+            "count": 60
+          }
+        ]
+      },
+      {
+        "entity_number": 34,
+        "name": "fast-inserter",
+        "position": {
+          "x": 606.5,
+          "y": -26.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 35,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 605.5,
+          "y": -24.5
+        },
+        "request_filters": [
+          {
+            "index": 1,
+            "name": "se-heat-shielding",
+            "count": 50
+          }
+        ]
+      },
+      {
+        "entity_number": 36,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 607.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 37,
+        "name": "stack-inserter",
+        "position": {
+          "x": 606.5,
+          "y": -24.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 38,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 609.5,
+          "y": -24.5
+        },
+        "request_filters": [
+          {
+            "index": 1,
+            "name": "accumulator",
+            "count": 50
+          }
+        ]
+      },
+      {
+        "entity_number": 39,
+        "name": "stack-inserter",
+        "position": {
+          "x": 608.5,
+          "y": -24.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 40,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 610.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 41,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 612.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 42,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 617.5,
+          "y": -24.5
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 43,
+        "name": "fast-inserter",
+        "position": {
+          "x": 617.5,
+          "y": -25.5
+        }
+      },
+      {
+        "entity_number": 44,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 619.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 45,
+        "name": "fast-inserter",
+        "position": {
+          "x": 621.5,
+          "y": -25.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 46,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 621.5,
+          "y": -24.5
+        },
+        "request_filters": [
+          {
+            "index": 1,
+            "name": "se-space-mirror",
+            "count": 20
+          }
+        ]
+      },
+      {
+        "entity_number": 47,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 620.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 48,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 623.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 49,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 625.5,
+          "y": -25.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 50,
+        "name": "fast-inserter",
+        "position": {
+          "x": 628.5,
+          "y": -25.5
+        }
+      },
+      {
+        "entity_number": 51,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 628.5,
+          "y": -24.5
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 52,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 629.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 53,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 631.5,
+          "y": -25.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 54,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 631.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 55,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 632.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 56,
+        "name": "fast-inserter",
+        "position": {
+          "x": 634.5,
+          "y": -25.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 57,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 634.5,
+          "y": -24.5
+        },
+        "request_filters": [
+          {
+            "index": 2,
+            "name": "se-space-pipe",
+            "count": 10
+          }
+        ]
+      },
+      {
+        "entity_number": 58,
+        "name": "ee-infinity-accumulator-primary-output",
+        "position": {
+          "x": 637,
+          "y": -25
+        },
+        "buffer_size": 8333333333.333334
+      },
+      {
+        "entity_number": 59,
+        "name": "fast-inserter",
+        "position": {
+          "x": 638.5,
+          "y": -25.5
+        }
+      },
+      {
+        "entity_number": 60,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 638.5,
+          "y": -24.5
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 61,
+        "name": "fast-inserter",
+        "position": {
+          "x": 639.5,
+          "y": -25.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 62,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 639.5,
+          "y": -24.5
+        },
+        "request_filters": [
+          {
+            "index": 2,
+            "name": "se-space-pipe",
+            "count": 10
+          },
+          {
+            "index": 3,
+            "name": "storage-tank",
+            "count": 10
+          },
+          {
+            "index": 4,
+            "name": "pump",
+            "count": 10
+          }
+        ]
+      },
+      {
+        "entity_number": 63,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 641.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 64,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 640.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 65,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 643.5,
+          "y": -25.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 66,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 646.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 67,
+        "name": "fast-inserter",
+        "position": {
+          "x": 648.5,
+          "y": -25.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 68,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 648.5,
+          "y": -24.5
+        },
+        "request_filters": [
+          {
+            "index": 2,
+            "name": "laser-turret",
+            "count": 10
+          }
+        ]
+      },
+      {
+        "entity_number": 69,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 649.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 70,
+        "name": "fast-inserter",
+        "position": {
+          "x": 651.5,
+          "y": -25.5
+        }
+      },
+      {
+        "entity_number": 71,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 651.5,
+          "y": -24.5
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 72,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 650.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 73,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 652.5,
+          "y": -25.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 74,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 655.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 75,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 659.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 76,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 658.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 77,
+        "name": "fast-inserter",
+        "position": {
+          "x": 660.5,
+          "y": -25.5
+        }
+      },
+      {
+        "entity_number": 78,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 660.5,
+          "y": -24.5
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 79,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 664.5,
+          "y": -25.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 80,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 664.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 81,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 669.5,
+          "y": -25.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 82,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 669.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 83,
+        "name": "fast-inserter",
+        "position": {
+          "x": 670.5,
+          "y": -25.5
+        }
+      },
+      {
+        "entity_number": 84,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 670.5,
+          "y": -24.5
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 85,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 675.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 86,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 674.5,
+          "y": -24.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 87,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 674.5,
+          "y": -25.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 88,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 602.5,
+          "y": -23.5
+        },
+        "request_filters": [
+          {
+            "index": 1,
+            "name": "electric-engine-unit",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "entity_number": 89,
+        "name": "fast-inserter",
+        "position": {
+          "x": 603.5,
+          "y": -23.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 90,
+        "name": "stack-inserter",
+        "position": {
+          "x": 605.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 91,
+        "name": "se-deep-space-underground-belt-yellow",
+        "position": {
+          "x": 605.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "input"
+      },
+      {
+        "entity_number": 92,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 604.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 93,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 604.5,
+          "y": -23.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 94,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 607.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 95,
+        "name": "se-deep-space-underground-belt-cyan",
+        "position": {
+          "x": 607.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "input"
+      },
+      {
+        "entity_number": 96,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 606.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 97,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 606.5,
+          "y": -23.5
+        },
+        "request_filters": [
+          {
+            "index": 1,
+            "name": "low-density-structure",
+            "count": 50
+          }
+        ]
+      },
+      {
+        "entity_number": 98,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 608.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 99,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 609.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 100,
+        "name": "se-deep-space-underground-belt-yellow",
+        "position": {
+          "x": 611.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "input"
+      },
+      {
+        "entity_number": 101,
+        "name": "se-deep-space-underground-belt-yellow",
+        "position": {
+          "x": 610.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "output"
+      },
+      {
+        "entity_number": 102,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 611.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 103,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 610.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 104,
+        "name": "se-deep-space-underground-belt-cyan",
+        "position": {
+          "x": 613.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "input"
+      },
+      {
+        "entity_number": 105,
+        "name": "se-deep-space-underground-belt-cyan",
+        "position": {
+          "x": 612.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "output"
+      },
+      {
+        "entity_number": 106,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 613.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 107,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 612.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 108,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 615.5,
+          "y": -23.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 109,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 615.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 110,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 614.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 111,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 617.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 112,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 617.5,
+          "y": -22.5
+        }
+      },
+      {
+        "entity_number": 113,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 616.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 114,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 619.5,
+          "y": -22.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 115,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 618.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 116,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 619.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 117,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 618.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 118,
+        "name": "se-deep-space-underground-belt-yellow",
+        "position": {
+          "x": 620.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "output"
+      },
+      {
+        "entity_number": 119,
+        "name": "se-deep-space-underground-belt-yellow",
+        "position": {
+          "x": 621.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "input"
+      },
+      {
+        "entity_number": 120,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 620.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 121,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 621.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 122,
+        "name": "se-deep-space-underground-belt-cyan",
+        "position": {
+          "x": 622.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "output"
+      },
+      {
+        "entity_number": 123,
+        "name": "se-deep-space-underground-belt-cyan",
+        "position": {
+          "x": 623.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "input"
+      },
+      {
+        "entity_number": 124,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 622.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 125,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 623.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 126,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 624.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 127,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 625.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 128,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 625.5,
+          "y": -23.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 129,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 626.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 130,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 627.5,
+          "y": -22.5
+        }
+      },
+      {
+        "entity_number": 131,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 627.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 132,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 629.5,
+          "y": -22.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 133,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 628.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 134,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 629.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 135,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 628.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 136,
+        "name": "se-deep-space-underground-belt-yellow",
+        "position": {
+          "x": 631.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "input"
+      },
+      {
+        "entity_number": 137,
+        "name": "se-deep-space-underground-belt-yellow",
+        "position": {
+          "x": 630.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "output"
+      },
+      {
+        "entity_number": 138,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 630.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 139,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 631.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 140,
+        "name": "se-deep-space-underground-belt-cyan",
+        "position": {
+          "x": 633.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "input"
+      },
+      {
+        "entity_number": 141,
+        "name": "se-deep-space-underground-belt-cyan",
+        "position": {
+          "x": 632.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "output"
+      },
+      {
+        "entity_number": 142,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 632.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 143,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 633.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 144,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 634.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 145,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 635.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 146,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 635.5,
+          "y": -23.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 147,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 636.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 148,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 637.5,
+          "y": -22.5
+        }
+      },
+      {
+        "entity_number": 149,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 637.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 150,
+        "name": "se-deep-space-underground-belt-yellow",
+        "position": {
+          "x": 639.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "output"
+      },
+      {
+        "entity_number": 151,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 639.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 152,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 638.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 153,
+        "name": "se-deep-space-underground-belt-yellow",
+        "position": {
+          "x": 640.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "input"
+      },
+      {
+        "entity_number": 154,
+        "name": "se-deep-space-underground-belt-cyan",
+        "position": {
+          "x": 641.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "output"
+      },
+      {
+        "entity_number": 155,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 641.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 156,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 640.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 157,
+        "name": "se-deep-space-underground-belt-cyan",
+        "position": {
+          "x": 642.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "input"
+      },
+      {
+        "entity_number": 158,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 643.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 159,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 642.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 160,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 645.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 161,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 645.5,
+          "y": -22.5
+        }
+      },
+      {
+        "entity_number": 162,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 644.5,
+          "y": -23.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 163,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 644.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 164,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 647.5,
+          "y": -22.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 165,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 646.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 166,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 647.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 167,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 646.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 168,
+        "name": "se-deep-space-underground-belt-yellow",
+        "position": {
+          "x": 649.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "input"
+      },
+      {
+        "entity_number": 169,
+        "name": "se-deep-space-underground-belt-yellow",
+        "position": {
+          "x": 648.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "output"
+      },
+      {
+        "entity_number": 170,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 649.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 171,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 648.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 172,
+        "name": "se-deep-space-underground-belt-cyan",
+        "position": {
+          "x": 651.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "input"
+      },
+      {
+        "entity_number": 173,
+        "name": "se-deep-space-underground-belt-cyan",
+        "position": {
+          "x": 650.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "output"
+      },
+      {
+        "entity_number": 174,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 651.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 175,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 650.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 176,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 653.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 177,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 653.5,
+          "y": -23.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 178,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 652.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 179,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 655.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 180,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 654.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 181,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 654.5,
+          "y": -22.5
+        }
+      },
+      {
+        "entity_number": 182,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 655.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 183,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 656.5,
+          "y": -22.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 184,
+        "name": "se-deep-space-underground-belt-yellow",
+        "position": {
+          "x": 657.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "output"
+      },
+      {
+        "entity_number": 185,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 657.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 186,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 656.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 187,
+        "name": "se-deep-space-underground-belt-yellow",
+        "position": {
+          "x": 658.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "input"
+      },
+      {
+        "entity_number": 188,
+        "name": "se-deep-space-underground-belt-cyan",
+        "position": {
+          "x": 659.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "output"
+      },
+      {
+        "entity_number": 189,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 659.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 190,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 658.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 191,
+        "name": "se-deep-space-underground-belt-cyan",
+        "position": {
+          "x": 660.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "input"
+      },
+      {
+        "entity_number": 192,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 661.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 193,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 660.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 194,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 663.5,
+          "y": -22.5
+        }
+      },
+      {
+        "entity_number": 195,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 662.5,
+          "y": -23.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 196,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 663.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 197,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 662.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 198,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 665.5,
+          "y": -22.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 199,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 664.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 200,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 665.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 201,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 664.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 202,
+        "name": "se-deep-space-underground-belt-yellow",
+        "position": {
+          "x": 667.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "input"
+      },
+      {
+        "entity_number": 203,
+        "name": "se-deep-space-underground-belt-yellow",
+        "position": {
+          "x": 666.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "output"
+      },
+      {
+        "entity_number": 204,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 666.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 205,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 667.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 206,
+        "name": "se-deep-space-underground-belt-cyan",
+        "position": {
+          "x": 669.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "input"
+      },
+      {
+        "entity_number": 207,
+        "name": "se-deep-space-underground-belt-cyan",
+        "position": {
+          "x": 668.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "output"
+      },
+      {
+        "entity_number": 208,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 668.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 209,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 669.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 210,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 671.5,
+          "y": -22.5
+        }
+      },
+      {
+        "entity_number": 211,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 670.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 212,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 670.5,
+          "y": -23.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 213,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 671.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 214,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 673.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 215,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 672.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 216,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 673.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 217,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 674.5,
+          "y": -22.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 218,
+        "name": "se-deep-space-underground-belt-yellow",
+        "position": {
+          "x": 675.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "output"
+      },
+      {
+        "entity_number": 219,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 675.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 220,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 674.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 221,
+        "name": "se-deep-space-underground-belt-yellow",
+        "position": {
+          "x": 676.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "input"
+      },
+      {
+        "entity_number": 222,
+        "name": "se-deep-space-underground-belt-cyan",
+        "position": {
+          "x": 677.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "output"
+      },
+      {
+        "entity_number": 223,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 677.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 224,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 676.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 225,
+        "name": "se-deep-space-underground-belt-cyan",
+        "position": {
+          "x": 678.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "input"
+      },
+      {
+        "entity_number": 226,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 679.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 227,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 678.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 228,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 681.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 229,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 680.5,
+          "y": -23.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 230,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 680.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 231,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 683.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 232,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 682.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 233,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 682.5,
+          "y": -22.5
+        }
+      },
+      {
+        "entity_number": 234,
+        "name": "se-deep-space-underground-belt-yellow",
+        "position": {
+          "x": 685.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "input"
+      },
+      {
+        "entity_number": 235,
+        "name": "se-deep-space-underground-belt-yellow",
+        "position": {
+          "x": 684.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "output"
+      },
+      {
+        "entity_number": 236,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 684.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 237,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 685.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 238,
+        "name": "se-deep-space-underground-belt-cyan",
+        "position": {
+          "x": 687.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "input"
+      },
+      {
+        "entity_number": 239,
+        "name": "se-deep-space-underground-belt-cyan",
+        "position": {
+          "x": 686.5,
+          "y": -22.5
+        },
+        "direction": 2,
+        "type": "output"
+      },
+      {
+        "entity_number": 240,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 686.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 241,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 687.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 242,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 688.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 243,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 689.5,
+          "y": -23.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 244,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 689.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 245,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 690.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 246,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 691.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 247,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 691.5,
+          "y": -22.5
+        }
+      },
+      {
+        "entity_number": 248,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 692.5,
+          "y": -23.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 249,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 692.5,
+          "y": -22.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 250,
+        "name": "ee-aggregate-chest-passive-provider",
+        "position": {
+          "x": 601.5,
+          "y": -20.5
+        },
+        "infinity_settings": {
+          "remove_unfiltered_items": true
+        }
+      },
+      {
+        "entity_number": 251,
+        "name": "substation",
+        "position": {
+          "x": 603,
+          "y": -21
+        },
+        "neighbours": [
+          16,
+          273
+        ]
+      },
+      {
+        "entity_number": 252,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 604.5,
+          "y": -20.5
+        },
+        "request_filters": [
+          {
+            "index": 1,
+            "name": "glass",
+            "count": 100
+          }
+        ]
+      },
+      {
+        "entity_number": 253,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 605.5,
+          "y": -20.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 254,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 604.5,
+          "y": -21.5
+        },
+        "request_filters": [
+          {
+            "index": 1,
+            "name": "steel-plate",
+            "count": 100
+          }
+        ]
+      },
+      {
+        "entity_number": 255,
+        "name": "fast-inserter",
+        "position": {
+          "x": 605.5,
+          "y": -21.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 256,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 606.5,
+          "y": -20.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 257,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 607.5,
+          "y": -20.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 258,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 606.5,
+          "y": -21.5
+        }
+      },
+      {
+        "entity_number": 259,
+        "name": "fast-inserter",
+        "position": {
+          "x": 607.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 260,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 608.5,
+          "y": -20.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 261,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 609.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 262,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 609.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 263,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 608.5,
+          "y": -21.5
+        },
+        "request_filters": [
+          {
+            "index": 1,
+            "name": "processing-unit",
+            "count": 100
+          }
+        ]
+      },
+      {
+        "entity_number": 264,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 610.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 265,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 611.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 266,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 612.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 267,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 613.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 268,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 614.5,
+          "y": -20.5
+        },
+        "request_filters": [
+          {
+            "index": 2,
+            "name": "se-space-pipe",
+            "count": 10
+          }
+        ]
+      },
+      {
+        "entity_number": 269,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 615.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 270,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 615.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 271,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 614.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 272,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 616.5,
+          "y": -20.5
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 273,
+        "name": "substation",
+        "position": {
+          "x": 618,
+          "y": -20
+        },
+        "neighbours": [
+          251,
+          299,
+          458
+        ]
+      },
+      {
+        "entity_number": 274,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 617.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 275,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 616.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 276,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 618.5,
+          "y": -21.5
+        }
+      },
+      {
+        "entity_number": 277,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 619.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 278,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 621.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 279,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 620.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 280,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 620.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 281,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 623.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 282,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 622.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 283,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 622.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 284,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 624.5,
+          "y": -20.5
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 285,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 624.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 286,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 625.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 287,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 625.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 288,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 627.5,
+          "y": -20.5
+        },
+        "request_filters": [
+          {
+            "index": 2,
+            "name": "pump",
+            "count": 10
+          }
+        ]
+      },
+      {
+        "entity_number": 289,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 626.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 290,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 627.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 291,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 628.5,
+          "y": -21.5
+        }
+      },
+      {
+        "entity_number": 292,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 629.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 293,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 631.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 294,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 631.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 295,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 630.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 296,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 632.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 297,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 633.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 298,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 632.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 299,
+        "name": "substation",
+        "position": {
+          "x": 634,
+          "y": -20
+        },
+        "neighbours": [
+          273,
+          328,
+          477
+        ]
+      },
+      {
+        "entity_number": 300,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 634.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 301,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 635.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 302,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 635.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 303,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 636.5,
+          "y": -20.5
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 304,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 637.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 305,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 636.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 306,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 637.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 307,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 639.5,
+          "y": -20.5
+        },
+        "request_filters": [
+          {
+            "index": 1,
+            "name": "concrete",
+            "count": 100
+          }
+        ]
+      },
+      {
+        "entity_number": 308,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 639.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 309,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 638.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 310,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 640.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 311,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 641.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 312,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 641.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 313,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 640.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 314,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 642.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 315,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 643.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 316,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 645.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 317,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 644.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 318,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 644.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 319,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 647.5,
+          "y": -20.5
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 320,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 646.5,
+          "y": -21.5
+        }
+      },
+      {
+        "entity_number": 321,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 647.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 322,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 649.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 323,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 648.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 324,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 649.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 325,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 651.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 326,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 650.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 327,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 650.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 328,
+        "name": "substation",
+        "position": {
+          "x": 652,
+          "y": -20
+        },
+        "neighbours": [
+          299,
+          343
+        ]
+      },
+      {
+        "entity_number": 329,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 653.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 330,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 653.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 331,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 652.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 332,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 655.5,
+          "y": -21.5
+        }
+      },
+      {
+        "entity_number": 333,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 654.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 334,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 656.5,
+          "y": -20.5
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 335,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 657.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 336,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 656.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 337,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 658.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 338,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 659.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 339,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 659.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 340,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 658.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 341,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 661.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 342,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 660.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 343,
+        "name": "substation",
+        "position": {
+          "x": 661,
+          "y": -20
+        },
+        "neighbours": [
+          328,
+          357
+        ]
+      },
+      {
+        "entity_number": 344,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 663.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 345,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 662.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 346,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 662.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 347,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 665.5,
+          "y": -20.5
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 348,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 664.5,
+          "y": -20.5
+        },
+        "request_filters": [
+          {
+            "index": 1,
+            "name": "storage-tank",
+            "count": 10
+          }
+        ]
+      },
+      {
+        "entity_number": 349,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 664.5,
+          "y": -21.5
+        }
+      },
+      {
+        "entity_number": 350,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 665.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 351,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 667.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 352,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 667.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 353,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 666.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 354,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 668.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 355,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 669.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 356,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 668.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 357,
+        "name": "substation",
+        "position": {
+          "x": 670,
+          "y": -20
+        },
+        "neighbours": [
+          343,
+          373
+        ]
+      },
+      {
+        "entity_number": 358,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 670.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 359,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 671.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 360,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 671.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 361,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 673.5,
+          "y": -20.5
+        },
+        "request_filters": [
+          {
+            "index": 2,
+            "name": "se-nutrient-vat",
+            "count": 20
+          }
+        ]
+      },
+      {
+        "entity_number": 362,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 673.5,
+          "y": -21.5
+        }
+      },
+      {
+        "entity_number": 363,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 672.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 364,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 674.5,
+          "y": -20.5
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 365,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 675.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 366,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 674.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 367,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 677.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 368,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 676.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 369,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 676.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 370,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 677.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 371,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 678.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 372,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 679.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 373,
+        "name": "substation",
+        "position": {
+          "x": 679,
+          "y": -20
+        },
+        "neighbours": [
+          357,
+          386
+        ]
+      },
+      {
+        "entity_number": 374,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 681.5,
+          "y": -20.5
+        },
+        "request_filters": [
+          {
+            "index": 6,
+            "name": "uranium-fuel-cell",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "entity_number": 375,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 681.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 376,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 680.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 377,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 680.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 378,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 682.5,
+          "y": -20.5
+        },
+        "connections": {
+          "1": {
+            "red": [
+              {
+                "entity_id": 443
+              }
+            ]
+          }
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 379,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 683.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 380,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 682.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 381,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 684.5,
+          "y": -20.5
+        },
+        "request_filters": [
+          {
+            "index": 1,
+            "name": "small-lamp",
+            "count": 100
+          },
+          {
+            "index": 2,
+            "name": "pump",
+            "count": 10
+          }
+        ]
+      },
+      {
+        "entity_number": 382,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 684.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 383,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 685.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 384,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 686.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 385,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 687.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 386,
+        "name": "substation",
+        "position": {
+          "x": 688,
+          "y": -20
+        },
+        "neighbours": [
+          373
+        ]
+      },
+      {
+        "entity_number": 387,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 688.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 388,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 689.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 389,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 689.5,
+          "y": -20.5
+        }
+      },
+      {
+        "entity_number": 390,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 691.5,
+          "y": -20.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 391,
+        "name": "se-space-splitter",
+        "position": {
+          "x": 690.5,
+          "y": -21
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 392,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 691.5,
+          "y": -21.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 393,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 692.5,
+          "y": -20.5
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 394,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 692.5,
+          "y": -21.5
+        }
+      },
+      {
+        "entity_number": 395,
+        "name": "stack-inserter",
+        "position": {
+          "x": 604.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 396,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 604.5,
+          "y": -18.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 397,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 605.5,
+          "y": -18.5
+        }
+      },
+      {
+        "entity_number": 398,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 605.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 399,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 610.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 400,
+        "name": "se-space-manufactory",
+        "position": {
+          "x": 614.5,
+          "y": -14.5
+        },
+        "recipe": "se-space-radiator"
+      },
+      {
+        "entity_number": 401,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 612.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 402,
+        "name": "fast-inserter",
+        "position": {
+          "x": 614.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 403,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 615.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 404,
+        "name": "fast-inserter",
+        "position": {
+          "x": 616.5,
+          "y": -19.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 405,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 620.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 406,
+        "name": "se-space-manufactory",
+        "position": {
+          "x": 624.5,
+          "y": -14.5
+        },
+        "recipe": "se-space-biochemical-laboratory"
+      },
+      {
+        "entity_number": 407,
+        "name": "fast-inserter",
+        "position": {
+          "x": 624.5,
+          "y": -19.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 408,
+        "name": "fast-inserter",
+        "position": {
+          "x": 627.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 409,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 631.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 410,
+        "name": "se-space-manufactory",
+        "position": {
+          "x": 634.5,
+          "y": -14.5
+        },
+        "recipe": "se-space-decontamination-facility"
+      },
+      {
+        "entity_number": 411,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 632.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 412,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 635.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 413,
+        "name": "fast-inserter",
+        "position": {
+          "x": 636.5,
+          "y": -19.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 414,
+        "name": "fast-inserter",
+        "position": {
+          "x": 637.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 415,
+        "name": "fast-inserter",
+        "position": {
+          "x": 639.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 416,
+        "name": "se-space-manufactory",
+        "position": {
+          "x": 643.5,
+          "y": -14.5
+        },
+        "recipe": "se-space-mechanical-laboratory"
+      },
+      {
+        "entity_number": 417,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 641.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 418,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 640.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 419,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 644.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 420,
+        "name": "fast-inserter",
+        "position": {
+          "x": 647.5,
+          "y": -19.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 421,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 649.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 422,
+        "name": "se-space-manufactory",
+        "position": {
+          "x": 652.5,
+          "y": -14.5
+        },
+        "recipe": "se-space-supercomputer-1"
+      },
+      {
+        "entity_number": 423,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 650.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 424,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 653.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 425,
+        "name": "fast-inserter",
+        "position": {
+          "x": 656.5,
+          "y": -19.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 426,
+        "name": "se-space-manufactory",
+        "position": {
+          "x": 661.5,
+          "y": -14.5
+        },
+        "recipe": "se-space-thermodynamics-laboratory"
+      },
+      {
+        "entity_number": 427,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 659.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 428,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 658.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 429,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 662.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 430,
+        "name": "fast-inserter",
+        "position": {
+          "x": 665.5,
+          "y": -19.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 431,
+        "name": "fast-inserter",
+        "position": {
+          "x": 664.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 432,
+        "name": "se-space-manufactory",
+        "position": {
+          "x": 670.5,
+          "y": -14.5
+        },
+        "recipe": "se-space-genetics-laboratory"
+      },
+      {
+        "entity_number": 433,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 667.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 434,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 668.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 435,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 671.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 436,
+        "name": "fast-inserter",
+        "position": {
+          "x": 673.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 437,
+        "name": "fast-inserter",
+        "position": {
+          "x": 674.5,
+          "y": -19.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 438,
+        "name": "se-space-manufactory",
+        "position": {
+          "x": 679.5,
+          "y": -14.5
+        },
+        "recipe": "se-space-radiation-laboratory"
+      },
+      {
+        "entity_number": 439,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 677.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 440,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 676.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 441,
+        "name": "fast-inserter",
+        "position": {
+          "x": 681.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 442,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 680.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 443,
+        "name": "fast-inserter",
+        "position": {
+          "x": 682.5,
+          "y": -19.5
+        },
+        "direction": 4,
+        "control_behavior": {
+          "circuit_condition": {
+            "first_signal": {
+              "type": "item",
+              "name": "se-space-radiation-laboratory"
+            },
+            "constant": 0,
+            "comparator": "="
+          }
+        },
+        "connections": {
+          "1": {
+            "red": [
+              {
+                "entity_id": 378
+              }
+            ]
+          }
+        }
+      },
+      {
+        "entity_number": 444,
+        "name": "fast-inserter",
+        "position": {
+          "x": 684.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 445,
+        "name": "se-space-manufactory",
+        "position": {
+          "x": 688.5,
+          "y": -14.5
+        },
+        "recipe": "se-space-growth-facility"
+      },
+      {
+        "entity_number": 446,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 685.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 447,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 686.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 448,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 689.5,
+          "y": -19.5
+        }
+      },
+      {
+        "entity_number": 449,
+        "name": "space-miniloader-inserter",
+        "position": {
+          "x": 691.5,
+          "y": -19.5
+        },
+        "override_stack_size": 1,
+        "drop_position": {
+          "x": -0.25,
+          "y": 1.203125
+        },
+        "pickup_position": {
+          "x": 0,
+          "y": -0.19921875
+        }
+      },
+      {
+        "entity_number": 450,
+        "name": "fast-inserter",
+        "position": {
+          "x": 692.5,
+          "y": -19.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 451,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 604.5,
+          "y": -16.5
+        },
+        "request_filters": [
+          {
+            "index": 1,
+            "name": "se-space-assembling-machine",
+            "count": 50
+          }
+        ]
+      },
+      {
+        "entity_number": 452,
+        "name": "fast-inserter",
+        "position": {
+          "x": 604.5,
+          "y": -17.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 453,
+        "name": "fast-inserter",
+        "position": {
+          "x": 609.5,
+          "y": -16.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 454,
+        "name": "fast-inserter",
+        "position": {
+          "x": 606.5,
+          "y": -14.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 455,
+        "name": "fast-inserter",
+        "position": {
+          "x": 609.5,
+          "y": -12.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 456,
+        "name": "se-space-assembling-machine",
+        "position": {
+          "x": 610.5,
+          "y": -7.5
+        },
+        "recipe": "copper-cable"
+      },
+      {
+        "entity_number": 457,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 610.5,
+          "y": -9.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 458,
+        "name": "substation",
+        "position": {
+          "x": 613,
+          "y": -9
+        },
+        "neighbours": [
+          273,
+          525
+        ]
+      },
+      {
+        "entity_number": 459,
+        "name": "fast-inserter",
+        "position": {
+          "x": 614.5,
+          "y": -8.5
+        }
+      },
+      {
+        "entity_number": 460,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 614.5,
+          "y": -9.5
+        },
+        "request_filters": [
+          {
+            "index": 1,
+            "name": "se-copper-ingot",
+            "count": 30
+          }
+        ]
+      },
+      {
+        "entity_number": 461,
+        "name": "se-space-assembling-machine",
+        "position": {
+          "x": 618.5,
+          "y": -7.5
+        },
+        "recipe": "copper-cable"
+      },
+      {
+        "entity_number": 462,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 618.5,
+          "y": -9.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 463,
+        "name": "fast-inserter",
+        "position": {
+          "x": 639.5,
+          "y": -8.5
+        }
+      },
+      {
+        "entity_number": 464,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 639.5,
+          "y": -9.5
+        },
+        "request_filters": [
+          {
+            "index": 1,
+            "name": "se-iron-ingot",
+            "count": 15
+          }
+        ]
+      },
+      {
+        "entity_number": 465,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 643.5,
+          "y": -9.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 466,
+        "name": "se-space-assembling-machine",
+        "position": {
+          "x": 614.5,
+          "y": -6.5
+        },
+        "recipe": "se-copper-ingot-to-plate"
+      },
+      {
+        "entity_number": 467,
+        "name": "fast-inserter",
+        "position": {
+          "x": 612.5,
+          "y": -7.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 468,
+        "name": "fast-inserter",
+        "position": {
+          "x": 616.5,
+          "y": -7.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 469,
+        "name": "se-space-assembling-machine",
+        "position": {
+          "x": 639.5,
+          "y": -6.5
+        },
+        "recipe": "se-iron-ingot-to-plate"
+      },
+      {
+        "entity_number": 470,
+        "name": "se-space-assembling-machine",
+        "position": {
+          "x": 643.5,
+          "y": -6.5
+        },
+        "recipe": "gun-turret"
+      },
+      {
+        "entity_number": 471,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 611.5,
+          "y": -4.5
+        }
+      },
+      {
+        "entity_number": 472,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 617.5,
+          "y": -4.5
+        }
+      },
+      {
+        "entity_number": 473,
+        "name": "fast-inserter",
+        "position": {
+          "x": 619.5,
+          "y": -4.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 474,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 618.5,
+          "y": -4.5
+        },
+        "request_filters": [
+          {
+            "index": 1,
+            "name": "se-steel-ingot",
+            "count": 7
+          }
+        ]
+      },
+      {
+        "entity_number": 475,
+        "name": "se-space-assembling-machine",
+        "position": {
+          "x": 621.5,
+          "y": -4.5
+        },
+        "recipe": "se-steel-ingot-to-plate"
+      },
+      {
+        "entity_number": 476,
+        "name": "fast-inserter",
+        "position": {
+          "x": 639.5,
+          "y": -4.5
+        }
+      },
+      {
+        "entity_number": 477,
+        "name": "substation",
+        "position": {
+          "x": 641,
+          "y": -4
+        },
+        "neighbours": [
+          299
+        ]
+      },
+      {
+        "entity_number": 478,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 643.5,
+          "y": -4.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 479,
+        "name": "ee-super-roboport",
+        "position": {
+          "x": 601,
+          "y": -2
+        }
+      },
+      {
+        "entity_number": 480,
+        "name": "se-space-assembling-machine",
+        "position": {
+          "x": 607.5,
+          "y": -1.5
+        },
+        "recipe": "se-space-pipe-to-ground"
+      },
+      {
+        "entity_number": 481,
+        "name": "logistic-chest-requester",
+        "position": {
+          "x": 608.5,
+          "y": -3.5
+        },
+        "request_filters": [
+          {
+            "index": 2,
+            "name": "plastic-bar",
+            "count": 30
+          },
+          {
+            "index": 3,
+            "name": "glass",
+            "count": 30
+          }
+        ]
+      },
+      {
+        "entity_number": 482,
+        "name": "stack-inserter",
+        "position": {
+          "x": 609.5,
+          "y": -3.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 483,
+        "name": "se-space-manufactory",
+        "position": {
+          "x": 614.5,
+          "y": 0.5
+        },
+        "recipe": "se-space-pipe"
+      },
+      {
+        "entity_number": 484,
+        "name": "stack-inserter",
+        "position": {
+          "x": 619.5,
+          "y": -3.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 485,
+        "name": "se-space-assembling-machine",
+        "position": {
+          "x": 621.5,
+          "y": -1.5
+        },
+        "recipe": "se-space-pipe-long-j-5"
+      },
+      {
+        "entity_number": 486,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 639.5,
+          "y": -3.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 487,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 639.5,
+          "y": -2.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 488,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 640.5,
+          "y": -2.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 489,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 641.5,
+          "y": -2.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 490,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 642.5,
+          "y": -2.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 491,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 643.5,
+          "y": -2.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 492,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 642.5,
+          "y": -3.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 493,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 644.5,
+          "y": -2.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 494,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 645.5,
+          "y": -2.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 495,
+        "name": "long-handed-inserter",
+        "position": {
+          "x": 644.5,
+          "y": -3.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 496,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 646.5,
+          "y": -2.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 497,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 647.5,
+          "y": -2.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 498,
+        "name": "fast-inserter",
+        "position": {
+          "x": 605.5,
+          "y": -0.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 499,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 604.5,
+          "y": -0.5
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 500,
+        "name": "fast-inserter",
+        "position": {
+          "x": 609.5,
+          "y": -0.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 501,
+        "name": "fast-inserter",
+        "position": {
+          "x": 619.5,
+          "y": -0.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 502,
+        "name": "fast-inserter",
+        "position": {
+          "x": 623.5,
+          "y": -0.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 503,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 624.5,
+          "y": -0.5
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 504,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 639.5,
+          "y": -0.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 505,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 639.5,
+          "y": -1.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 506,
+        "name": "se-space-assembling-machine",
+        "position": {
+          "x": 641.5,
+          "y": -0.5
+        },
+        "recipe": "iron-gear-wheel"
+      },
+      {
+        "entity_number": 507,
+        "name": "fast-inserter",
+        "position": {
+          "x": 643.5,
+          "y": -0.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 508,
+        "name": "se-space-assembling-machine",
+        "position": {
+          "x": 645.5,
+          "y": -0.5
+        },
+        "recipe": "motor"
+      },
+      {
+        "entity_number": 509,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 647.5,
+          "y": -1.5
+        }
+      },
+      {
+        "entity_number": 510,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 647.5,
+          "y": -0.5
+        }
+      },
+      {
+        "entity_number": 511,
+        "name": "fast-inserter",
+        "position": {
+          "x": 605.5,
+          "y": 0.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 512,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 604.5,
+          "y": 0.5
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 513,
+        "name": "se-space-assembling-machine",
+        "position": {
+          "x": 607.5,
+          "y": 1.5
+        },
+        "recipe": "se-space-pipe-long-j-3"
+      },
+      {
+        "entity_number": 514,
+        "name": "fast-inserter",
+        "position": {
+          "x": 609.5,
+          "y": 0.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 515,
+        "name": "fast-inserter",
+        "position": {
+          "x": 619.5,
+          "y": 0.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 516,
+        "name": "se-space-assembling-machine",
+        "position": {
+          "x": 621.5,
+          "y": 1.5
+        },
+        "recipe": "se-space-pipe-long-j-7"
+      },
+      {
+        "entity_number": 517,
+        "name": "fast-inserter",
+        "position": {
+          "x": 623.5,
+          "y": 0.5
+        },
+        "direction": 6
+      },
+      {
+        "entity_number": 518,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 624.5,
+          "y": 0.5
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 519,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 639.5,
+          "y": 1.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 520,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 639.5,
+          "y": 0.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 521,
+        "name": "fast-inserter",
+        "position": {
+          "x": 641.5,
+          "y": 1.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 522,
+        "name": "fast-inserter",
+        "position": {
+          "x": 645.5,
+          "y": 1.5
+        },
+        "direction": 4
+      },
+      {
+        "entity_number": 523,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 647.5,
+          "y": 0.5
+        }
+      },
+      {
+        "entity_number": 524,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 647.5,
+          "y": 1.5
+        }
+      },
+      {
+        "entity_number": 525,
+        "name": "substation",
+        "position": {
+          "x": 609,
+          "y": 4
+        },
+        "neighbours": [
+          458,
+          526
+        ]
+      },
+      {
+        "entity_number": 526,
+        "name": "substation",
+        "position": {
+          "x": 620,
+          "y": 4
+        },
+        "neighbours": [
+          525
+        ]
+      },
+      {
+        "entity_number": 527,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 639.5,
+          "y": 2.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 528,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 640.5,
+          "y": 2.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 529,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 641.5,
+          "y": 2.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 530,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 642.5,
+          "y": 2.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 531,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 643.5,
+          "y": 2.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 532,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 644.5,
+          "y": 2.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 533,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 645.5,
+          "y": 2.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 534,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 647.5,
+          "y": 2.5
+        }
+      },
+      {
+        "entity_number": 535,
+        "name": "se-space-transport-belt",
+        "position": {
+          "x": 646.5,
+          "y": 2.5
+        },
+        "direction": 2
+      },
+      {
+        "entity_number": 536,
+        "name": "fast-inserter",
+        "position": {
+          "x": 610.5,
+          "y": 5.5
+        }
+      },
+      {
+        "entity_number": 537,
+        "name": "fast-inserter",
+        "position": {
+          "x": 611.5,
+          "y": 5.5
+        }
+      },
+      {
+        "entity_number": 538,
+        "name": "se-space-assembling-machine",
+        "position": {
+          "x": 609.5,
+          "y": 7.5
+        },
+        "recipe": "se-space-pipe-long-s-9"
+      },
+      {
+        "entity_number": 539,
+        "name": "se-space-assembling-machine",
+        "position": {
+          "x": 612.5,
+          "y": 7.5
+        },
+        "recipe": "se-space-pipe-long-s-15"
+      },
+      {
+        "entity_number": 540,
+        "name": "fast-inserter",
+        "position": {
+          "x": 610.5,
+          "y": 9.5
+        },
+        "control_behavior": {
+          "circuit_condition": {
+            "first_signal": {
+              "type": "item",
+              "name": "se-space-pipe-long-s-9"
+            },
+            "constant": 5,
+            "comparator": "<"
+          }
+        },
+        "connections": {
+          "1": {
+            "red": [
+              {
+                "entity_id": 542
+              }
+            ]
+          }
+        }
+      },
+      {
+        "entity_number": 541,
+        "name": "fast-inserter",
+        "position": {
+          "x": 611.5,
+          "y": 9.5
+        },
+        "control_behavior": {
+          "circuit_condition": {
+            "first_signal": {
+              "type": "item",
+              "name": "se-space-pipe-long-s-15"
+            },
+            "constant": 5,
+            "comparator": "<"
+          }
+        },
+        "connections": {
+          "1": {
+            "red": [
+              {
+                "entity_id": 543
+              }
+            ]
+          }
+        }
+      },
+      {
+        "entity_number": 542,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 610.5,
+          "y": 10.5
+        },
+        "connections": {
+          "1": {
+            "red": [
+              {
+                "entity_id": 540
+              }
+            ]
+          }
+        },
+        "bar": 1
+      },
+      {
+        "entity_number": 543,
+        "name": "logistic-chest-passive-provider",
+        "position": {
+          "x": 611.5,
+          "y": 10.5
+        },
+        "connections": {
+          "1": {
+            "red": [
+              {
+                "entity_id": 541
+              }
+            ]
+          }
+        },
+        "bar": 1
+      }
+    ],
+    "tiles": [
+      {
+        "position": {
+          "x": 631,
+          "y": 0
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 631,
+          "y": 1
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 632,
+          "y": 0
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 632,
+          "y": 1
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 684,
+          "y": -19
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 684,
+          "y": -18
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 684,
+          "y": -17
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 684,
+          "y": -16
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 684,
+          "y": -15
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 684,
+          "y": -14
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 684,
+          "y": -13
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 684,
+          "y": -12
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 684,
+          "y": -11
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 685,
+          "y": -19
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 685,
+          "y": -18
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 685,
+          "y": -17
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 685,
+          "y": -16
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 685,
+          "y": -15
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 685,
+          "y": -14
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 685,
+          "y": -13
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 685,
+          "y": -12
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 685,
+          "y": -11
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 686,
+          "y": -19
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 686,
+          "y": -18
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 686,
+          "y": -17
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 686,
+          "y": -16
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 686,
+          "y": -15
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 686,
+          "y": -14
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 686,
+          "y": -13
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 686,
+          "y": -12
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 686,
+          "y": -11
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 687,
+          "y": -19
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 687,
+          "y": -18
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 687,
+          "y": -17
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 687,
+          "y": -16
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 687,
+          "y": -15
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 687,
+          "y": -14
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 687,
+          "y": -13
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 687,
+          "y": -12
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 687,
+          "y": -11
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 688,
+          "y": -19
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 688,
+          "y": -18
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 688,
+          "y": -17
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 688,
+          "y": -16
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 688,
+          "y": -15
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 688,
+          "y": -14
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 688,
+          "y": -13
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 688,
+          "y": -12
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 688,
+          "y": -11
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 689,
+          "y": -19
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 689,
+          "y": -18
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 689,
+          "y": -17
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 689,
+          "y": -16
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 689,
+          "y": -15
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 689,
+          "y": -14
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 689,
+          "y": -13
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 689,
+          "y": -12
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 689,
+          "y": -11
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 690,
+          "y": -19
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 690,
+          "y": -18
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 690,
+          "y": -17
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 690,
+          "y": -16
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 690,
+          "y": -15
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 690,
+          "y": -14
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 690,
+          "y": -13
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 690,
+          "y": -12
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 690,
+          "y": -11
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 691,
+          "y": -19
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 691,
+          "y": -18
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 691,
+          "y": -17
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 691,
+          "y": -16
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 691,
+          "y": -15
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 691,
+          "y": -14
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 691,
+          "y": -13
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 691,
+          "y": -12
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 691,
+          "y": -11
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 692,
+          "y": -19
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 692,
+          "y": -18
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 692,
+          "y": -17
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 692,
+          "y": -16
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 692,
+          "y": -15
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 692,
+          "y": -14
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 692,
+          "y": -13
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 692,
+          "y": -12
+        },
+        "name": "se-space-platform-scaffold"
+      },
+      {
+        "position": {
+          "x": 692,
+          "y": -11
+        },
+        "name": "se-space-platform-scaffold"
+      }
+    ],
+    "item": "blueprint",
+    "version": 281479275675648
+  }
+}

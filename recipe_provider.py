@@ -10,8 +10,8 @@ class RecipeProvider:
             Recipe(
                 name=f"free {name}",
                 ingredients=[],
-                products=[Product(name=name, amount=1, type="free")],
-                energy=1,
+                products=[Product(name=name, amount=100, type="free")],
+                energy=0.000001,
                 category="free",
             )
             for name in free_materials]
@@ -19,13 +19,20 @@ class RecipeProvider:
             Recipe(
                 name=f"nauvis {name}",
                 ingredients=[],
-                products=[Product(name=name, amount=1, type="nauvis")],
-                energy=1,
+                products=[Product(name=name, amount=100, type="nauvis")],
+                energy=0.000001,
                 category="nauvis",
             )
             for name in nauvis_materials
         ]
         self.blacklist = blacklist
+    def by_name(self, name):
+        for r in self.recipes + self.free_materials + self.nauvis_materials:
+            if r.name == name:
+                return r
+        raise ValueError(f"Recipe {name} not found")
+    def name_includes(self, name):
+        return [r for r in self.recipes + self.free_materials + self.nauvis_materials if name in r.name]
 
     def as_dataframe(self):
         recipes_df = pd.DataFrame(

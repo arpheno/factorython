@@ -1,17 +1,22 @@
+from typing import List, Dict
+
+from production_site import ProductionSite
+
+
 class ProductionLine:
-    def __init__(self, status, optimal_quantities, production_exprs):
+    def __init__(self, status, production_sites: Dict[str,ProductionSite], net_production:Dict[str,float]):
         self.status = status
-        self.optimal_quantities = optimal_quantities
-        self.production_exprs = production_exprs
+        self.production_sites = production_sites
+        self.net_production = net_production
 
-    def print(self,epsilon=0.0001):
-        print("Status:", self.status)
-        print("Optimal Quantities:")
-        for transformation, quantity in self.optimal_quantities.items():
-            if quantity.value() > epsilon:
-                print(transformation, ":", quantity.value())
+    def print(self, ):
 
-        print("Production:")
-        for item, expr in self.production_exprs.items():
-            if expr.value() >epsilon:
-                print(item, ":", expr.value())
+        if self.status != "Optimal":
+            print("Production line is not optimal")
+        else:
+            print("Production Sites")
+            for recipe_name,production_site in self.production_sites.items():
+                print(recipe_name, ":", production_site.quantity)
+            print("Net Production:")
+            for item, production in self.net_production.items():
+                print(item, ":", production)

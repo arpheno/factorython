@@ -1,10 +1,10 @@
 from data_structures.recipe import Recipe
 
 
-def parse_recipes(recipes:dict):
+def parse_recipes(recipes: dict) -> list[Recipe]:
     recipes = list(recipes.values())
     for r in recipes:
-        #sometimes the ingredients or products can be empty dictionaries, in that case change them to empty lists
+        # sometimes the ingredients or products can be empty dictionaries, in that case change them to empty lists
         if r['ingredients'] == {}:
             r['ingredients'] = []
         if r['products'] == {}:
