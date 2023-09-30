@@ -76,8 +76,9 @@ def optimize_transformations(recipe_df, production_rates, product_min_quantity):
     for item in {"se-broken-data", "se-contaminated-scrap"}:
         problem += net_production[item] == 0
 
-    # Objective: Minimize excess production
-    objective_terms = [building_count[transformation] for transformation in recipes]
+    # Objective: Minimize excess production (free recipes are not part of the objective)
+    objective_terms = [building_count[transformation] for transformation in recipes if not transformation.startswith("ltn")]
+    objective_terms = [building_count[transformation] for transformation in recipes]# if not transformation.startswith("ltn")]
     problem += lpSum(objective_terms)
 
     problem.solve()
