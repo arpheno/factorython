@@ -16,7 +16,8 @@ class ProductionLine:
         else:
             print("Production Sites")
             for recipe_name,production_site in self.production_sites.items():
-                print(recipe_name, ":", production_site.quantity)
+                print(f'{recipe_name}: {production_site.quantity:.2f} x {production_site.building.name}')
+
             print("Net Production:")
             for item, production in self.net_production.items():
                 print(item, ":", production)

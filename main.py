@@ -18,7 +18,7 @@ def main():
     recipe_provider = build_recipe_provider(recipes_path)
 
     production_line_builder = ProductionLineBuilder(recipe_provider, building_resolver)
-    line = production_line_builder.build([("se-chemical-gel", 1.0)])
+    line = production_line_builder.build([("inserter", 1.0)])
     line.print()
     return line
     # line = production_line_builder.build([("se-observation-frame-uv", 1.0)])

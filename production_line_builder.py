@@ -6,13 +6,14 @@ import pulp
 
 from pulp import LpProblem, LpMinimize, LpVariable, lpSum, LpStatus
 
+from building_resolver import BuildingResolver
 from production_line import ProductionLine
 from production_site import ProductionSite
 from recipe_provider import RecipeProvider
 
 
 class ProductionLineBuilder:
-    def __init__(self, recipe_provider, building_resolver):
+    def __init__(self, recipe_provider, building_resolver:BuildingResolver):
         self.recipe_provider: RecipeProvider = recipe_provider
         self.building_resolver = building_resolver
         self.production_rates = {

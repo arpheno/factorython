@@ -34,6 +34,8 @@ class Product(BaseModel):
 
     def __str__(self):
         return f"{self.name}"
+    def __mul__(self, other):
+        return Product(type=self.type, amount=self.amount * other, name=self.name)
 
 
 class Ingredient(BaseModel):
