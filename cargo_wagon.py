@@ -9,6 +9,7 @@ from draftsman.data.modules import raw as modules
 
 from building_resolver import BuildingResolver
 from cargo_block_maker import cargo_wagon_blueprint
+from cargo_wagon_assignment_problem import create_cargo_wagon_assignment_problem
 from model_finalizer import CargoWagonProblem
 from module import ModuleBuilder
 from module_inserter import insert_module
@@ -188,13 +189,21 @@ def main():
     line = production_line_builder.build()
     line.print()
     production_sites=[]
+    global_input = {}
+    entities=[]
     for production_site in line.production_sites.values():
-        for q in range(ceil(production_site.quantity)):
-            if not 'ltn' in production_site.recipe.name:
+        if not 'ltn' in production_site.recipe.name:
+            for q in range(ceil(production_site.quantity)):
                 production_sites.append(production_site.recipe.name)
+                products={product.name:product.average_amount for product in production_site.recipe.products}
+                ingredients={ingredient.name:-ingredient.amount for ingredient in production_site.recipe.ingredients}
+                entity={good : products.get(good,0)+ingredients.get(good,0) for good in products.keys()|ingredients.keys()}
+                entities.append(entity)
+        else:
+            global_input[production_site.recipe.products[0].name]=production_site.quantity*1.1
     pprint(production_sites)
     # production_sites= ['copper-cable']*4+['electronic-circuit-stone']*3+['stone-tablet']
-    shuffle(production_sites)
+    production_sites=create_cargo_wagon_assignment_problem(entities,global_input,production_sites)
     cargo_wagon_blueprint(production_sites)
     return line
 
