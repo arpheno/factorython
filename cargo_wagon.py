@@ -6,6 +6,7 @@ from draftsman.data.modules import raw as modules
 from building_resolver import BuildingResolver
 from data_structures.recipe import Product
 from materials import intermediate_products
+from model_finalizer import ProductionLineProblem
 from module import ModuleBuilder, Module
 from production_line_builder import ProductionLineBuilder
 from parsing.prototype_parser import parse_prototypes
@@ -19,7 +20,7 @@ def insert_module(recipe_provider, module: Module):
         if recipe.name in intermediate_products
     ]
     for recipe in moduleable_recipes:
-        recipe.products = [product*(1+module.consumption) for product in recipe.products]
+        recipe.products = [product*(1+module.productivity) for product in recipe.products]
         recipe.energy = recipe.energy/(1+module.speed)
     return recipe_provider
 
@@ -31,7 +32,7 @@ def main():
         assembly = json.load(f)
     crafting_categories = parse_prototypes(assembly)
     building_resolver = BuildingResolver(crafting_categories, overrides={"crafting": "assembling-machine-3"})
-    building_resolver = BuildingResolver(crafting_categories)
+    # building_resolver = BuildingResolver(crafting_categories)
     # deal with recipes
     recipes_path = "data/recipes.json"
     recipe_provider = build_recipe_provider(recipes_path)
@@ -39,8 +40,9 @@ def main():
     speed_module_2 = module_builder.build("speed-module-2")
     productivity_module_2 = module_builder.build("productivity-module-2")
     recipe_provider = insert_module(recipe_provider, speed_module_2*4+productivity_module_2*4)
-    production_line_builder = ProductionLineBuilder(recipe_provider, building_resolver)
-    line = production_line_builder.build([("electronic-circuit", 15.0)])
+    model_finalizer=ProductionLineProblem([("electronic-circuit", 15.0)])
+    production_line_builder = ProductionLineBuilder(recipe_provider, building_resolver, model_finalizer)
+    line = production_line_builder.build()
     line.print()
     return line
 

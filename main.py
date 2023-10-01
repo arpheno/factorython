@@ -1,6 +1,7 @@
 import json
 
 from building_resolver import BuildingResolver
+from model_finalizer import ProductionLineProblem
 from production_line_builder import ProductionLineBuilder
 from parsing.prototype_parser import parse_prototypes
 from recipe_provider_builder import build_recipe_provider
@@ -17,8 +18,9 @@ def main():
     recipes_path = "data/recipes.json"
     recipe_provider = build_recipe_provider(recipes_path)
 
-    production_line_builder = ProductionLineBuilder(recipe_provider, building_resolver)
-    line = production_line_builder.build([("inserter", 1.0)])
+    model_finalizer = ProductionLineProblem([("inserter", 1.0)])
+    production_line_builder = ProductionLineBuilder(recipe_provider, building_resolver, model_finalizer)
+    line = production_line_builder.build()
     line.print()
     return line
     # line = production_line_builder.build([("se-observation-frame-uv", 1.0)])

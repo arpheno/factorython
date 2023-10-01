@@ -29,6 +29,7 @@ intermediate_products = [
     "nuclear-fuel",
     "iron-gear-wheel",
     "electronic-circuit",
+    "electronic-circuit-stone",
     "advanced-circuit",
     "copper-cable",
     "iron-stick",
