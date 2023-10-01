@@ -4,7 +4,7 @@ from data_structures.recipe import Recipe, Product
 
 
 class RecipeProvider:
-    def __init__(self, recipes, ltn_materials, blacklist):
+    def __init__(self, recipes, ltn_materials):
         self.recipes = recipes
         self.recipes.extend([
             Recipe(
@@ -15,6 +15,12 @@ class RecipeProvider:
                 category="free",
             )
             for name in ltn_materials])
+        # This really needs to be implemented more flexibly
+        delivery_cannon = [r.name for r in recipes if "se-delivery-cannon-pack" in r.name]
+        inferior_simulations = [
+            r.name for r in recipes if "se-simulation" in r.name if not "asbm" in r.name
+        ]
+        blacklist = inferior_simulations + delivery_cannon + ["coal-liquefaction"]
         self.blacklist = blacklist
 
     def by_name(self, name):
