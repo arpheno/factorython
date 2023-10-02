@@ -22,6 +22,8 @@ def create_cargo_wagon_assignment_problem(entities,global_input,production_sites
                                   pulp.LpContinuous)
     inv = pulp.LpVariable.dicts("inv", ((group, good) for group in range(N // 4) for good in goods), None, None,
                                   pulp.LpContinuous)
+    penalty = pulp.LpVariable.dicts("penalty", ((group, good) for group in range(N // 4) for good in goods), 0, None,
+                                pulp.LpContinuous)
     # Constraints:
     # 1. Each entity is assigned to exactly one position
     for entity in range(N):
@@ -49,9 +51,9 @@ def create_cargo_wagon_assignment_problem(entities,global_input,production_sites
                 problem += tally[g,good] == lpSum(
                     [assignment_var * entities[entity].get(good,0) for (entity, position), assignment_var in group.items()])
                 problem+= inv[g,good]==(tally[g,good] + flows[g,good])
-                problem+= inv[g,good]>=-0
+                problem+= inv[g,good]>=-penalty[g,good]
     # Objective: Minimize flows
-    problem += lpSum(flows.values())
+    problem += lpSum(flows.values())+lpSum(penalty.values())*1000
     # Solve the problem
     problem.solve()
 

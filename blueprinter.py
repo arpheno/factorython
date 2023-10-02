@@ -9,18 +9,25 @@ class MachineCell:
             machine_cell.find_entities_filtered(name="logistic-train-stop")[0],
             machine_cell.find_entities_filtered(name="logistic-train-stop")[-1],
         )
-        machine_cell.translate(- self.train_stops[0].position["x"], - self.train_stops[0].position["y"])
+        machine_cell.translate(
+            -self.train_stops[0].position["x"], -self.train_stops[0].position["y"]
+        )
         self.cell = machine_cell
-        self.characteristic_distance = self.train_stop_distance(self.train_stops[0], self.train_stops[1])
+        self.characteristic_distance = self.train_stop_distance(
+            self.train_stops[0], self.train_stops[1]
+        )
 
     def translate(self, x, y):
         self.cell.translate(x, y)
 
     def align(self, other) -> [(int, int)]:
-        possible_grid_positions=[]
+        possible_grid_positions = []
         for stop1 in other.find_entities_filtered(name="logistic-train-stop"):
             for stop2 in other.find_entities_filtered(name="logistic-train-stop"):
-                if self.train_stop_distance(stop1, stop2) == self.characteristic_distance:
+                if (
+                    self.train_stop_distance(stop1, stop2)
+                    == self.characteristic_distance
+                ):
                     possible_grid_positions.append(stop1.position)
         return possible_grid_positions
 
@@ -38,7 +45,7 @@ nine_by_twelve_cell = MachineCell(nine_by_twelve_cell)
 possible_grid_positions = nine_by_twelve_cell.align(block)
 
 for grid_position in possible_grid_positions[0::2]:
-    cell=deepcopy(nine_by_twelve_cell)
+    cell = deepcopy(nine_by_twelve_cell)
     cell.translate(grid_position["x"], grid_position["y"])
     block.entities.append(cell.cell)
 
