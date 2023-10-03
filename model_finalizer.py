@@ -7,12 +7,19 @@ class ModelSpecialization:
     def finalize(self, problem):
         pass
 
+class CoreHelmodModel(LpVariable):
+    def __init__(self,*args,**kwargs):
+        super(CoreHelmodModel, self).__init__(*args,**kwargs)
+        self.net_production = None
+        self.building_count = None
+        self.recipes = None
+
 
 class ProductionLineProblem(ModelSpecialization):
     def __init__(self, product_min_quantity: List[Tuple[str, float]]):
         self.product_min_quantity = product_min_quantity
 
-    def finalize(self, problem):
+    def finalize(self, problem:CoreHelmodModel):
         # Make the required quantity of product
         for product, min_quantity in self.product_min_quantity:
             problem += problem.net_production[product] >= min_quantity
@@ -21,7 +28,7 @@ class ProductionLineProblem(ModelSpecialization):
         for item in {"se-broken-data", "se-contaminated-scrap"}:
             problem += problem.net_production[item] == 0
 
-        # Objective: Minimize excess production (free recipes are not part of the objective)
+        # Objective: Minimize building count (free recipes are not part of the objective)
         objective_terms = [problem.building_count[transformation] for transformation in problem.recipes if
                            not transformation.startswith("ltn")]
         problem += lpSum(objective_terms)
@@ -33,10 +40,7 @@ class CargoWagonProblem(ModelSpecialization):
         self.products = products
         self.max_assemblers = max_assemblers
 
-    def finalize(self, problem:LpProblem):
-        # Make a little bit of everything at least
-        for product in self.products:
-            problem += problem.net_production[product] >= 0
+    def finalize(self, problem:CoreHelmodModel):
         # New Variables: Integer variables for the number of assemblers
         problem.int_building_count = LpVariable.dicts(
             "int_building_count", problem.recipes, lowBound=0, cat="Integer"
