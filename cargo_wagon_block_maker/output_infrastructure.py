@@ -1,23 +1,24 @@
 from draftsman.classes.blueprint import Blueprint
 from draftsman.classes.group import Group
 from draftsman.constants import Direction
-from draftsman.data.entities import inserters, transport_belts
 from draftsman.prototypes.inserter import Inserter
-from draftsman.prototypes.transport_belt import TransportBelt
+from draftsman.prototypes.underground_belt import UndergroundBelt
 
 from cargo_wagon_block_maker.assembling_machines_group import AssemblingMachinesGroup
 from cargo_wagon_block_maker.bbmm import BlueprintMakerModule
+from cargo_wagon_block_maker.belt import belt
+
 
 def undergrounds():
-    g=Group(entities=[
+    g = Group(entities=[
         {
             "name": "underground-belt",
             "position": {
-                "x": 0,
+                "x": -1,
                 "y": 3
             },
-            "direction": Direction.EAST,
-            "type": "input"
+            "direction": Direction.WEST,
+            "type": "output"
         },
         {
             "name": "underground-belt",
@@ -25,67 +26,128 @@ def undergrounds():
                 "x": 4,
                 "y": 3
             },
-            "direction": Direction.EAST,
-            "type": "output"
+            "direction": Direction.WEST,
+            "type": "input"
         },
+        {'name': 'underground-belt',
+         'position': {'x': -2, 'y': 3},
+         'direction': Direction.WEST,
+         'type': 'input'
+         },
+        {'name': 'underground-belt',
+         'position': {'x': 5, 'y': 3},
+         'direction': Direction.WEST,
+         'type': 'output'
+         },
     ])
     return g
+
+
 class OutputInfrastructure(BlueprintMakerModule):
     def build(self, assembling_machines: AssemblingMachinesGroup, output: str):
-        g = Group(entities=[ {
-                "name": "fast-inserter",
-                "position": {
-                    "x": machine.global_position["x"],
-                    "y": machine.global_position["y"] - 2
-                },
-                "direction": Direction.SOUTH
-            }for machine in assembling_machines.top_row])
-        mapping = {2:1}
-        for i,machine in enumerate(assembling_machines.bottom_row):
-            if not machine.recipe==output:
+        g = Group()
+        mapping = {0: 1, 2: 1, 1: -1, 3: -1}
+        for i, machine in enumerate(assembling_machines.top_row):
+            if not machine.recipe == output:
                 continue
-            i= Inserter(**
-                {
-                    "name": "fast-inserter",
-                    "direction": Direction.NORTH,
-                    "position": {
-                        "x": machine.global_position["x"]+mapping.get(i%4,0),
-                        "y": machine.global_position["y"]+2,
-                    },
-                })
+            i = Inserter(**
+                         {
+                             "name": "inserter",
+                             "direction": Direction.SOUTH,
+                             "position": {
+                                 "x": machine.global_position["x"] + mapping.get(i % 4, 0),
+                                 "y": machine.global_position["y"] - 2,
+                             },
+                         })
             g.entities.append(i)
 
-        #Lower belt
+        for i, machine in enumerate(assembling_machines.bottom_row):
+            if not machine.recipe == output:
+                continue
+            i = Inserter(**
+                         {
+                             "name": "inserter",
+                             "direction": Direction.NORTH,
+                             "position": {
+                                 "x": machine.global_position["x"] + mapping.get(i % 4, 0),
+                                 "y": machine.global_position["y"] + 2,
+                             },
+                         })
+            g.entities.append(i)
+
+        # Lower belt
         for machine in assembling_machines.bottom_row[1::4]:
             p = undergrounds()
             p.translate(machine.global_position['x'], machine.global_position['y'])
             g.entities.append(p)
-        u=sorted([e.global_position['x'] for e in g.find_entities_filtered(name='underground-belt')])
-        u.insert(0,assembling_machines.bottom_row[0].global_position['x']-1)
-        u.append(assembling_machines.bottom_row[-1].global_position['x']+2)
-        for source,destination in zip(u[::2],u[1::2]):
-            for x in range(int(source+1),int(destination)):
-                g.entities.append(TransportBelt(**{
-                    "name": "transport-belt",
-                    "position": {
-                        "x": x,
-                        "y": assembling_machines.bottom_row[0].global_position['y']+3
-                    },
-                    "direction": Direction.EAST,
-                }))
-        u=[]
-        u.insert(0,assembling_machines.top_row[0].global_position['x']-1)
-        u.append(assembling_machines.top_row[-1].global_position['x']+2)
-        for source,destination in zip(u[::2],u[1::2]):
-            for x in range(int(source+1),int(destination)):
-                g.entities.append(TransportBelt(**{
-                    "name": "transport-belt",
-                    "position": {
-                        "x": x,
-                        "y": assembling_machines.top_row[0].global_position['y']-3
-                    },
-                    "direction": Direction.EAST,
-                }))
+        # Upper belt
+        for machine in assembling_machines.top_row[1::4]:
+            p = undergrounds()
+            p.translate(machine.global_position['x'], machine.global_position['y'])
+            p.translate(0, -6)  # To offset it from below the machine to above
+            g.entities.append(p)
+        # upper output
+        underground = UndergroundBelt(**{
+            "name": "underground-belt",
+            "position": {
+                "x": assembling_machines.top_row[0].global_position['x'] - 3,
+                "y": assembling_machines.top_row[0].global_position['y'] - 3,
+            },
+            "direction": Direction.WEST,
+            "type": "output"
+        })
+        g.entities.append(underground)
+        b = belt((underground.global_position['x'] - 1, underground.global_position['y']),
+                 (underground.global_position['x'] - 1, underground.global_position['y'] + 4))
+        g.entities.append(b)
+        #crossing
+        underground = UndergroundBelt(**{
+            "name": "underground-belt",
+            "position": {
+                "x": assembling_machines.top_row[0].global_position['x'] - 4,
+                "y": assembling_machines.top_row[0].global_position['y'] + 1,
+            },
+            "direction": Direction.SOUTH,
+            "type": "input"
+        })
+        g.entities.append(underground)
+        # lower output
+        underground = UndergroundBelt(**{
+            "name": "underground-belt",
+            "position": {
+                "x": assembling_machines.bottom_row[0].global_position['x'] - 3,
+                "y": assembling_machines.bottom_row[0].global_position['y'] + 3,
+            },
+            "direction": Direction.WEST,
+            "type": "output"
+        })
+
+        p = belt((underground.global_position['x'] , underground.global_position['y']),
+                 (underground.global_position['x'] - 4, underground.global_position['y']))
+        b = belt((underground.global_position['x'] - 1, underground.global_position['y'] - 3),
+                 (underground.global_position['x'] - 1, underground.global_position['y']))
+        g.entities.append(p)
+        g.entities.append(underground)
+        g.entities.append(b)
+        #crossing
+        crossing = UndergroundBelt(**{
+            "name": "underground-belt",
+            "position": {
+                "x": assembling_machines.bottom_row[0].global_position['x'] -4 ,
+                "y": assembling_machines.bottom_row[0].global_position['y'] - 1,
+            },
+            "direction": Direction.SOUTH,
+            "type": "output"
+        })
+        g.entities.append(crossing)
+        # Little output belt to the left
         return g
+
+
 if __name__ == '__main__':
-    print(transport_belts)
+    b = Blueprint()
+    b.entities.append(belt((0, 0), (10, 0)))
+    b.entities.append(belt((0, 0), (0, 10)))
+    b.entities.append(belt((0, 10), (10, 10)))
+    b.entities.append(belt((10, 0), (10, 10)))
+    print(b.to_string())
