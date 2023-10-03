@@ -53,9 +53,9 @@ def create_cargo_wagon_assignment_problem(entities,global_input,production_sites
                 problem+= inv[g,good]==(tally[g,good] + flows[g,good])
                 problem+= inv[g,good]>=-penalty[g,good]
     # Objective: Minimize flows
-    problem += lpSum(flows.values())+lpSum(penalty.values())*1000
+    problem += lpSum(flows.values())+lpSum(penalty.values())*10000000
     # Solve the problem
-    problem.solve()
+    problem.solve(pulp.PULP_CBC_CMD( mip=True,maxSeconds=10))
 
     # Check the status of the solution
     result = []
