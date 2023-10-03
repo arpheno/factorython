@@ -22,7 +22,7 @@ def filter_connector(mat1, mat2):
     return g
 
 
-def filter_connector_4(mat1, mat2, mat3, mat4):
+def filter_connector_4(mat1, mat2, mat3='fish', mat4='fish'):
     g = Group(entities=[{'name': 'stack-filter-inserter',
                          'position': {'x': x, 'y': y},
                          'direction': 6} for x in range(2) for y in range(2)])

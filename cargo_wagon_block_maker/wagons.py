@@ -27,8 +27,10 @@ def wagon(filters):
 class Wagons(BlueprintMakerModule):
     def build(self, assembling_machines: AssemblingMachinesGroup, output: str):
         g = Group()
-        for block in assembling_machines.groups:
-            w=wagon(block.items_used)
+        all_items_used = set()
+        for block in assembling_machines.groups[::-1]:
+            all_items_used.update(block.items_used)
+            w=wagon(all_items_used)
             w.translate( block[0].global_position['x']+2, 4)
             g.entities.append(w)
         return g

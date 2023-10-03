@@ -3,9 +3,9 @@ from typing import Dict, Any
 
 from draftsman.classes.blueprint import Blueprint
 
-from cargo_wagon_block_maker import eight_block_maker, filter_connector
+from cargo_wagon_block_maker import eight_block_maker
 from cargo_wagon_block_maker.belt_input import belt_input
-from cargo_wagon_block_maker.filter_connector import filter_connector_4
+from cargo_wagon_block_maker.filter_connector import filter_connector_4, filter_connector
 
 
 def cargo_wagon_blueprint(production_sites: [str], machines: Dict[Any, Dict[str, float]], output):
@@ -13,7 +13,7 @@ def cargo_wagon_blueprint(production_sites: [str], machines: Dict[Any, Dict[str,
     i = belt_input()
     i.translate(-1, 4)
     b.entities.append(i)
-    assert len(production_sites) > 8
+    assert len(production_sites) >= 8
     for i in range(len(production_sites) // 8):
         eight_block = eight_block_maker.eight_block_maker()
         active_recipes = production_sites[i * 8:(i + 1) * 8]

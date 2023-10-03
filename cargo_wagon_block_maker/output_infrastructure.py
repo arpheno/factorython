@@ -49,8 +49,20 @@ class OutputInfrastructure(BlueprintMakerModule):
         mapping = {0: 1, 2: 1, 1: -1, 3: -1}
         for i, machine in enumerate(assembling_machines.top_row):
             if not machine.recipe == output:
-                continue
-            i = Inserter(**
+                i= Inserter(**
+                            {
+                                "name": "fast-inserter",
+                                "position": {
+                                    "x": machine.global_position["x"],
+                                    "y": machine.global_position["y"] +2 if machine.direction == Direction.NORTH else
+                                    machine.global_position["y"] -2,
+                                },
+                                "direction": Direction.SOUTH
+                                if machine.direction == Direction.SOUTH
+                                else Direction.NORTH,
+                            })
+            else:
+                i = Inserter(**
                          {
                              "name": "inserter",
                              "direction": Direction.SOUTH,
@@ -63,8 +75,20 @@ class OutputInfrastructure(BlueprintMakerModule):
 
         for i, machine in enumerate(assembling_machines.bottom_row):
             if not machine.recipe == output:
-                continue
-            i = Inserter(**
+                i= Inserter(**
+            {
+                "name": "fast-inserter",
+                "position": {
+                    "x": machine.global_position["x"],
+                    "y": machine.global_position["y"] +2 if machine.direction == Direction.NORTH else
+                    machine.global_position["y"] -2,
+                },
+                "direction": Direction.SOUTH
+                if machine.direction == Direction.SOUTH
+                else Direction.NORTH,
+            })
+            else:
+                i = Inserter(**
                          {
                              "name": "inserter",
                              "direction": Direction.NORTH,

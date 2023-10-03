@@ -68,7 +68,7 @@ class InputInfrastructure(BlueprintMakerModule):
             {
                 "name": "fast-inserter",
                 "position": {
-                    "x": machine.global_position["x"],
+                    "x": machine.global_position["x"]-1,
                     "y": machine.global_position["y"] - 2 if machine.direction == Direction.SOUTH else
                     machine.global_position["y"] + 2,
                 },

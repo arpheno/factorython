@@ -48,13 +48,15 @@ class ProductionLine(Group):
             **kwargs,
     ):
         all_groups = [
-            assembling_machines,
-            connectors,
             wagons,
+            connectors,
+            assembling_machines,
             input_infrastructure,
             output_infrastructure,
             power
         ]
+        for group in all_groups[2:]:
+            group.translate(-1, 0)
         super(ProductionLine, self).__init__(
             **kwargs, entities=all_groups
         )
@@ -79,7 +81,16 @@ class BlueprintMaker:
         self.recipe_provider = recipe_provider
 
     def make_blueprint(self,recipes, output, ugly_reassignment):
-        assembling_machines = self.modules['assembling_machines'](recipes, ugly_reassignment, self.building_resolver,self.recipe_provider)
+        #recipes is in a form of grouped recipes by 4, so the first two apply to the top row, the second two to the bottom row of a group of 4
+        # i need to reshape this into a list of recipes, where the first half is the top row, the second half is the bottom row for the entire row
+        # yield chunks of 4 recipes
+        def chunks(lst, n):
+            for i in range(0, len(lst), n):
+                yield lst[i:i + n]
+        # Oh god the horror
+        mrecipes = list(chain.from_iterable(zip(chunks(recipes, 2))))
+        mrecipes= list(chain.from_iterable(mrecipes[::2]))+list(chain.from_iterable(mrecipes[1::2]))
+        assembling_machines = self.modules['assembling_machines'](mrecipes, ugly_reassignment, self.building_resolver,self.recipe_provider)
         stuff = {entity_type: module.build(assembling_machines, output) for entity_type, module in self.modules.items() if not entity_type == 'assembling_machines'}
         b=Blueprint()
         g = ProductionLine(assembling_machines=assembling_machines,**stuff)

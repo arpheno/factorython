@@ -43,7 +43,7 @@ def main():
     recipes_path = "data/recipes.json"
 
     recipe_provider = build_recipe_provider(
-        recipes_path, ["electronic-circuit", "advanced-circuit"]
+        recipes_path, ["electronic-circuit", "advanced-circuit",'electric-motor']
     )
     module_builder = ModuleBuilder(modules)
     recipe_provider = insert_module(
@@ -51,9 +51,9 @@ def main():
         module_builder.build("speed-module-2") * 4
         + module_builder.build("productivity-module-2") * 4,
     )
-    target_product = "rocket-control-unit"
+    target_product = "steam-turbine"
     # model_finalizer = CargoWagonProblem([("advanced-circuit")], max_assemblers=24)
-    model_finalizer = CargoWagonProblem([target_product], max_assemblers=32)
+    model_finalizer = CargoWagonProblem([target_product], max_assemblers=8)
     # model_finalizer = CargoWagonProblem([("electric-engine-unit")], max_assemblers=32)
     # model_finalizer = CargoWagonProblem([("electronic-circuit")], max_assemblers=8)
     production_line_builder = ProductionLineBuilder(
