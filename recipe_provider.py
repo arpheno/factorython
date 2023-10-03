@@ -21,8 +21,8 @@ class RecipeProvider:
         inferior_simulations = [
             r.name for r in recipes if "se-simulation" in r.name if not "asbm" in r.name
         ]
-        blacklist = inferior_simulations + delivery_cannon + ["coal-liquefaction"]+recycling
-        self.blacklist = blacklist
+        blocklist = inferior_simulations + delivery_cannon + ["coal-liquefaction"]+recycling+['se-processing-unit-holmium']
+        self.blocklist = blocklist
 
     def by_name(self, name):
         if name=='electronic-circuit':
@@ -38,5 +38,5 @@ class RecipeProvider:
     def as_dataframe(self):
         recipes_df = pd.DataFrame(
             [r.to_series() for r in self.recipes]).fillna(0).T
-        recipes_df.drop(self.blacklist, axis=1, inplace=True)
+        recipes_df.drop(self.blocklist, axis=1, inplace=True)
         return recipes_df
