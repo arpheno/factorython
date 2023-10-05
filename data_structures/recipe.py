@@ -23,7 +23,7 @@ class Product(BaseModel):
         elif self.amount_min is not None and self.amount_max is not None and self.probability is not None:
             return float(self.amount_min + self.amount_max) / 2 * self.probability
         else:
-            return None
+            raise ValueError("Product has no amount")
 
     def __eq__(self, other):
         # check based on name
@@ -36,7 +36,7 @@ class Product(BaseModel):
         return f"{self.name}"
 
     def __mul__(self, other):
-        return Product(type=self.type, amount=self.amount * other, name=self.name)
+        return Product(type=self.type, amount=self.average_amount * other, name=self.name)
 
 
 class Ingredient(BaseModel):
