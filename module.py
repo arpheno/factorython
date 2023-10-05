@@ -6,10 +6,10 @@ from draftsman.data import modules
 @dataclasses.dataclass
 class Module:
     name: str
-    speed: float
-    consumption: float
-    pollution: float
-    productivity: float
+    speed: float=1
+    consumption: float=1
+    pollution: float=1
+    productivity: float=1
 
     def __add__(self, other):
         return Module(
@@ -28,6 +28,12 @@ class Module:
             pollution=self.pollution * other,
             productivity=self.productivity * other,
         )
+    def __call__(self,recipe):
+        recipe.products = [
+            product * (1 + self.productivity) for product in recipe.products
+        ]
+        recipe.energy = recipe.energy / (1 + self.speed)
+        return recipe
 
 
 class ModuleBuilder:

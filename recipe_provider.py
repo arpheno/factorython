@@ -17,16 +17,17 @@ class RecipeProvider:
             for name in ltn_materials])
         # This really needs to be implemented more flexibly
         delivery_cannon = [r.name for r in recipes if "se-delivery-cannon-pack" in r.name]
-        recycling = [r.name for r in recipes if "se-recycle-radar" in r.name]
+        recycling = [r.name for r in recipes if "se-recycle" in r.name]
         inferior_simulations = [
             r.name for r in recipes if "se-simulation" in r.name if not "asbm" in r.name
         ]
-        blocklist = inferior_simulations + delivery_cannon + ["coal-liquefaction"]+recycling+['se-processing-unit-holmium']
+        blocklist = inferior_simulations + delivery_cannon + ["coal-liquefaction"] + recycling + [
+            'se-processing-unit-holmium','se-heat-shielding-iridium','se-low-density-structure-beryllium']
         self.blocklist = blocklist
 
     def by_name(self, name):
-        if name=='electronic-circuit':
-            name='electronic-circuit-stone'
+        if name == 'electronic-circuit':
+            name = 'electronic-circuit-stone'
         for r in self.recipes:
             if r.name == name:
                 return r
