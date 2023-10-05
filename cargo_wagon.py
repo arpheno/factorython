@@ -12,12 +12,15 @@ from cargo_wagon_block_maker.assembling_machines import (
     BlueprintMaker,
     assembling_machines,
 )
+from cargo_wagon_block_maker.beacons import Beacons
 from cargo_wagon_block_maker.cargo_wagon_blueprint import cargo_wagon_blueprint
 from cargo_wagon_assignment_problem import create_cargo_wagon_assignment_problem
 from cargo_wagon_block_maker.connectors import Connectors
 from cargo_wagon_block_maker.input_infrastructure import InputInfrastructure
+from cargo_wagon_block_maker.lights import Lights
 from cargo_wagon_block_maker.output_infrastructure import OutputInfrastructure
 from cargo_wagon_block_maker.power import Power
+from cargo_wagon_block_maker.roboports import Roboports
 from cargo_wagon_block_maker.wagons import Wagons
 from model_finalizer import CargoWagonProblem
 from module import ModuleBuilder
@@ -43,17 +46,19 @@ def main():
     recipes_path = "data/recipes.json"
 
     recipe_provider = build_recipe_provider(
-        recipes_path, ["electronic-circuit", "advanced-circuit",'electric-motor']
+        recipes_path, ["electronic-circuit", "advanced-circuit", 'electric-motor']
     )
     module_builder = ModuleBuilder(modules)
     recipe_provider = insert_module(
         recipe_provider,
-        module_builder.build("speed-module-2") * 4
-        + module_builder.build("productivity-module-2") * 4,
+        dict(
+            productivity=module_builder.build("speed-module-2") * 4 + module_builder.build("productivity-module-2") * 4,
+            speed=module_builder.build("speed-module-2") * 4)
     )
-    target_product = "steam-turbine"
+    target_product = "low-density-structure"
+    target_product = "se-heat-shielding"
     # model_finalizer = CargoWagonProblem([("advanced-circuit")], max_assemblers=24)
-    model_finalizer = CargoWagonProblem([target_product], max_assemblers=8)
+    model_finalizer = CargoWagonProblem([target_product], max_assemblers=32)
     # model_finalizer = CargoWagonProblem([("electric-engine-unit")], max_assemblers=32)
     # model_finalizer = CargoWagonProblem([("electronic-circuit")], max_assemblers=8)
     production_line_builder = ProductionLineBuilder(
@@ -70,7 +75,7 @@ def main():
         if not "ltn" in production_site.recipe.name:
             for q in range(ceil(production_site.quantity)):
                 production_sites.append(production_site.recipe.name)
-                rate=building_resolver(production_site.recipe).crafting_speed / production_site.recipe.energy
+                rate = building_resolver(production_site.recipe).crafting_speed / production_site.recipe.energy
                 products = {
                     product.name: product.average_amount
                     for product in production_site.recipe.products
@@ -80,29 +85,35 @@ def main():
                     for ingredient in production_site.recipe.ingredients
                 }
                 entity = {
-                    good: products.get(good, 0)*rate + ingredients.get(good, 0)*rate
+                    good: products.get(good, 0) * rate + ingredients.get(good, 0) * rate
                     for good in products.keys() | ingredients.keys()
                 }
                 entities.append(entity)
         else:
             global_input[production_site.recipe.products[0].name] = (
-                production_site.quantity * 1.1
+                    production_site.quantity * 1.1
             )
     pprint(production_sites)
+    if len(global_input)>4:
+        raise Exception("This production line would require more than 4 pre-made things, but we only have 4 slots")
     ugly_reassignment = {}
     for site, entity in zip(production_sites, entities):
         ugly_reassignment[site] = entity
-    production_sites = create_cargo_wagon_assignment_problem(
-        entities, global_input, production_sites
+    production_sites,flows = create_cargo_wagon_assignment_problem(
+        entities, global_input, production_sites,output=target_product
     )
+
     cargo_wagon_blueprint(production_sites, ugly_reassignment, output=target_product)
     blueprint_maker_modules = {
         "assembling_machines": assembling_machines,
         "connectors": Connectors(),
-        'wagons':Wagons(),
+        'wagons': Wagons(),
         'input_infrastructure': InputInfrastructure(),
-        'power':Power(),
-        'output_infrastructure':OutputInfrastructure(),
+        'power': Power(),
+        'output_infrastructure': OutputInfrastructure(),
+        'beacons':Beacons(),
+        'roboports':Roboports(),
+        'lights':Lights(),
     }
     maker = BlueprintMaker(
         modules=blueprint_maker_modules,

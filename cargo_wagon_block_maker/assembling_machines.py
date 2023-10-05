@@ -43,7 +43,9 @@ class ProductionLine(Group):
             input_infrastructure: Group,
             power:Group,
             output_infrastructure:Group,
-            beacons: Group=[],
+            beacons: Group,
+            roboports:Group,
+            lights=Group,
             entities: Group=[],
             **kwargs,
     ):
@@ -53,7 +55,10 @@ class ProductionLine(Group):
             assembling_machines,
             input_infrastructure,
             output_infrastructure,
-            power
+            power,
+            beacons,
+            roboports,
+            lights
         ]
         for group in all_groups[2:]:
             group.translate(-1, 0)
