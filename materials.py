@@ -35,7 +35,7 @@ intermediate_products = [
     "iron-stick",
     "motor",
     "electric-motor",
-    "heat-shielding",
+    "se-heat-shielding",
     "stone-tablet",
 ]
 basic_processing = [
@@ -48,7 +48,6 @@ basic_processing = [
     "battery",
     "glass",
     "explosives",
-    "heat-shielding",
     "sulfuric-acid",
     "light-oil",
     "heavy-oil",
