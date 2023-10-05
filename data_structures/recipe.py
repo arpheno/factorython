@@ -24,6 +24,8 @@ class Product(BaseModel):
             return float(self.amount_min + self.amount_max) / 2 * self.probability
         else:
             raise ValueError("Product has no amount")
+    def __str__(self):
+        return f"type={self.type} amount={self.average_amount} name={self.name}"
 
     def __eq__(self, other):
         # check based on name
@@ -31,9 +33,6 @@ class Product(BaseModel):
 
     def __hash__(self):
         return hash(self.name)
-
-    def __str__(self):
-        return f"{self.name}"
 
     def __mul__(self, other):
         return Product(type=self.type, amount=self.average_amount * other, name=self.name)
