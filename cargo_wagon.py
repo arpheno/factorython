@@ -91,7 +91,7 @@ def main():
                 entities.append(entity)
         else:
             global_input[production_site.recipe.products[0].name] = (
-                    production_site.quantity * 1.1
+                    production_site.quantity
             )
     pprint(production_sites)
     if len(global_input)>4:
@@ -102,8 +102,8 @@ def main():
     production_sites,flows = create_cargo_wagon_assignment_problem(
         entities, global_input, production_sites,output=target_product
     )
-
-    cargo_wagon_blueprint(production_sites, ugly_reassignment, output=target_product)
+    pprint(flows)
+    cargo_wagon_blueprint(production_sites, ugly_reassignment, output=target_product,flows=flows)
     blueprint_maker_modules = {
         "assembling_machines": assembling_machines,
         "connectors": Connectors(),
@@ -121,7 +121,7 @@ def main():
         recipe_provider=recipe_provider,
     )
     maker.make_blueprint(
-        production_sites, ugly_reassignment=ugly_reassignment, output=target_product
+        production_sites, ugly_reassignment=ugly_reassignment, output=target_product,flows=flows
     )
     return line
 

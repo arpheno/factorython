@@ -15,12 +15,13 @@ def create_cargo_wagon_assignment_problem(entities, global_input, production_sit
     goods = set()
     for entity in entities:
         goods |= entity.keys()
+    goods.remove(output)
     # Create binary decision variables using pulp.LpVariable.dicts
     x = pulp.LpVariable.dicts("Assignment", ((entity, position) for entity in range(N) for position in range(N)), 0, 1,
                               pulp.LpBinary)
     tally = pulp.LpVariable.dicts("Tally", ((group, good) for group in range(N // 4) for good in goods), None, None,
                                   pulp.LpContinuous)
-    flows = pulp.LpVariable.dicts("Flow", ((group, good) for group in range(N // 4) for good in goods), None, None,
+    flows = pulp.LpVariable.dicts("Flow", ((group, good) for group in range(N // 4 + 1) for good in goods), None, None,
                                   pulp.LpContinuous)
     inv = pulp.LpVariable.dicts("inv", ((group, good) for group in range(N // 4) for good in goods), None, None,
                                 pulp.LpContinuous)
@@ -34,8 +35,6 @@ def create_cargo_wagon_assignment_problem(entities, global_input, production_sit
     # 2. Each position is assigned to exactly one entity
     for position in range(N):
         problem += pulp.lpSum(x[(entity, position)] for entity in range(N)) == 1
-    for good in goods:
-        tally[-1, good] = global_input.get(good, 0)
     groups = []
     for group_start in range(0, N, 4):
         groups.append(
@@ -43,20 +42,27 @@ def create_cargo_wagon_assignment_problem(entities, global_input, production_sit
              range(group_start, group_start + 4)
              }
         )
+    for good in goods:
+        problem += flows[0, good] <= global_input.get(good, 0)
+        problem += flows[len(groups), good] >= 0
+    for g, group in enumerate(groups):
         for good in goods:
-            problem += flows[0, good] == tally[-1, good]
-            flows[len(groups), good] =0
-        for g, group in enumerate(groups):
-            for good in goods:
-                # Sum up the contributions of all chosen entities in the group
-                if not good == output:
-                    problem += tally[g, good] == lpSum(
-                        [assignment_var * entities[entity].get(good, 0) for (entity, position), assignment_var in
-                         group.items()])
-                    problem += inv[g, good] == (tally[g, good] + flows[g, good] - flows[g+1,good])
-                    problem += inv[g, good] >= -penalty[g, good]
-    # Objective: Minimize flows
-    problem += lpSum(flows.values()) + lpSum(penalty.values()) * 10000000
+            # Sum up the contributions of all chosen entities in the group
+            problem += tally[g, good] == lpSum(
+                [assignment_var * entities[entity].get(good, 0)
+                 for (entity, position), assignment_var in
+                 group.items()])
+
+            # The inventory of the group is the sum of the tally and the flows
+            problem += inv[g, good] == (tally[g, good] + flows[g, good] - flows[g + 1, good])
+
+            # The flows should be positive, so we add a penalty for negative flows
+            problem += inv[g, good] >= -penalty[g, good]
+            problem += flows[g, good] >= -penalty[g, good]
+
+    # Objective: Minimize penalty
+    problem += lpSum(flows.values()) + lpSum(penalty.values()) * 10_000_000
+
     # Solve the problem
     problem.solve(pulp.PULP_CBC_CMD(mip=True, maxSeconds=10))
 
@@ -70,8 +76,12 @@ def create_cargo_wagon_assignment_problem(entities, global_input, production_sit
                     result.append(production_sites[entity])
                     # print(f"Entity {entity} is assigned to Position {position}")
         flows = {key: pulp.value(value) for key, value in flows.items()}
+        inv = {key: pulp.value(value) for key, value in inv.items()}
+        tally = {key: pulp.value(value) for key, value in tally.items()}
+        penalty = {key: pulp.value(value) for key, value in penalty.items()}
+
         # group the flows by group
-        flows = {key[0]: {key[1]: value for key, value in flows.items() if key[0] == key[0]} for key in flows.keys()}
+        flows = [{good: flows[g, good] for good in goods} for g in range(len(groups))]
         return result, flows
     else:
         raise Exception("No optimal solution found.")
