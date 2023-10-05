@@ -11,8 +11,11 @@ class Connectors(BlueprintMakerModule):
     def build(self, assembling_machines: AssemblingMachinesGroup, output: str):
         # We go through all blocks backwards, except first block
         g = Group()
+
+        all_items_used = set()
         for block in assembling_machines.groups[::-1][:-1]:
-            items_used = block.items_used
+            all_items_used.update(block.items_used)
+            items_used = all_items_used
             if len(items_used) == 4:
                 print("We can be smart about inserters")
                 c = filter_connector_4(*items_used)
