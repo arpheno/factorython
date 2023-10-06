@@ -9,8 +9,7 @@ from draftsman.data.modules import raw as modules
 
 from building_resolver import BuildingResolver
 from cargo_wagon_block_maker.assembling_machines import (
-    BlueprintMaker,
-    assembling_machines,
+    BlueprintMaker, AssemblingMachines,
 )
 from cargo_wagon_block_maker.beacons import Beacons
 from cargo_wagon_block_maker.cargo_wagon_blueprint import cargo_wagon_blueprint
@@ -23,7 +22,7 @@ from cargo_wagon_block_maker.power import Power
 from cargo_wagon_block_maker.roboports import Roboports
 from cargo_wagon_block_maker.wagons import Wagons
 from model_finalizer import CargoWagonProblem
-from module import ModuleBuilder
+from module import ModuleBuilder, Module
 from module_inserter import insert_module
 from production_line_builder import ProductionLineBuilder
 from parsing.prototype_parser import parse_prototypes
@@ -41,6 +40,7 @@ def main():
         overrides={
             "crafting": "assembling-machine-3",
             "crafting-with-fluid": "assembling-machine-3",
+            'advanced-crafting': 'assembling-machine-3',
         },
     )
     recipes_path = "data/recipes.json"
@@ -49,23 +49,42 @@ def main():
         recipes_path, ["electronic-circuit", "advanced-circuit", 'electric-motor']
     )
     module_builder = ModuleBuilder(modules)
+    beacon_modules = ['speed-module-2'] * 8
+    assembling_machine_modules = ['productivity-module-2'] * 4
     recipe_provider = insert_module(
         recipe_provider,
         dict(
-            productivity=module_builder.build("speed-module-2") * 4 + module_builder.build("productivity-module-2") * 4,
-            speed=module_builder.build("speed-module-2") * 4)
+            productivity=sum((module_builder.build(module) for module in assembling_machine_modules),
+                             Module(name='productivity', productivity=0)),
+            speed=sum((module_builder.build(module) for module in beacon_modules), Module(name='speed', speed=0)),
+        ))
+    target_product = "military-science-pack"
+
+    blueprint_maker_modules = {
+        "assembling_machines": AssemblingMachines(modules=assembling_machine_modules,
+                                                  building_resolver=building_resolver,
+                                                  recipe_provider=recipe_provider),
+        "connectors": Connectors(),
+        'wagons': Wagons(),
+        'input_infrastructure': InputInfrastructure(),
+        'power': Power(),
+        'output_infrastructure': OutputInfrastructure(),
+        'beacons': Beacons(),
+        'roboports': Roboports(),
+        'lights': Lights(),
+    }
+    blueprint_maker = BlueprintMaker(
+        modules=blueprint_maker_modules,
     )
-    target_product = "low-density-structure"
-    target_product = "se-heat-shielding"
-    # model_finalizer = CargoWagonProblem([("advanced-circuit")], max_assemblers=24)
-    model_finalizer = CargoWagonProblem([target_product], max_assemblers=32)
-    # model_finalizer = CargoWagonProblem([("electric-engine-unit")], max_assemblers=32)
-    # model_finalizer = CargoWagonProblem([("electronic-circuit")], max_assemblers=8)
+    model_finalizer = CargoWagonProblem([target_product], max_assemblers=16)
+
+    # Determine the flow of goods through the production line
     production_line_builder = ProductionLineBuilder(
         recipe_provider, building_resolver, model_finalizer
     )
     line = production_line_builder.build()
     line.print()
+
     production_sites = []
     global_input = {}
     entities = []
@@ -91,37 +110,22 @@ def main():
                 entities.append(entity)
         else:
             global_input[production_site.recipe.products[0].name] = (
-                    production_site.quantity
+                production_site.quantity
             )
     pprint(production_sites)
-    if len(global_input)>4:
-        raise Exception("This production line would require more than 4 pre-made things, but we only have 4 slots")
+    # if len(global_input)>4:
+    #     raise Exception("This production line would require more than 4 pre-made things, but we only have 4 slots")
     ugly_reassignment = {}
     for site, entity in zip(production_sites, entities):
         ugly_reassignment[site] = entity
-    production_sites,flows = create_cargo_wagon_assignment_problem(
-        entities, global_input, production_sites,output=target_product
+    # Now that we know the flow of goods, we can assign them to wagons by determining the order of machines
+    production_sites, flows = create_cargo_wagon_assignment_problem(
+        entities, global_input, production_sites, output=target_product
     )
     pprint(flows)
-    cargo_wagon_blueprint(production_sites, ugly_reassignment, output=target_product,flows=flows)
-    blueprint_maker_modules = {
-        "assembling_machines": assembling_machines,
-        "connectors": Connectors(),
-        'wagons': Wagons(),
-        'input_infrastructure': InputInfrastructure(),
-        'power': Power(),
-        'output_infrastructure': OutputInfrastructure(),
-        'beacons':Beacons(),
-        'roboports':Roboports(),
-        'lights':Lights(),
-    }
-    maker = BlueprintMaker(
-        modules=blueprint_maker_modules,
-        building_resolver=building_resolver,
-        recipe_provider=recipe_provider,
-    )
-    maker.make_blueprint(
-        production_sites, ugly_reassignment=ugly_reassignment, output=target_product,flows=flows
+    # cargo_wagon_blueprint(production_sites, ugly_reassignment, output=target_product, flows=flows)
+    blueprint_maker.make_blueprint(
+        production_sites, ugly_reassignment=ugly_reassignment, output=target_product, flows=flows
     )
     return line
 

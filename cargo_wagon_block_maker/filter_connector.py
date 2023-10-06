@@ -1,3 +1,5 @@
+from itertools import product
+
 from draftsman.classes.group import Group
 
 
@@ -30,4 +32,11 @@ def filter_connector_4(mat1, mat2, mat3='fish', mat4='fish'):
     g.entities[1].filters = [{'index': 1, 'name': mat2}]
     g.entities[2].filters = [{'index': 1, 'name': mat3}]
     g.entities[3].filters = [{'index': 1, 'name': mat4}]
+    return g
+def flow_connector(mats,inserter_names):
+    coords= product(range(2),range(2))
+    g = Group(entities=[{'name': inserter_name,
+                         'position': {'x': x, 'y': y},
+                         'filters':[{'index': 1, 'name': mat}],
+                         'direction': 6} for (x,y),mat,inserter_name in zip(coords,mats,inserter_names)])
     return g

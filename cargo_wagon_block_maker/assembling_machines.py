@@ -1,3 +1,4 @@
+from collections import Counter
 from itertools import chain
 
 from draftsman.classes.blueprint import Blueprint
@@ -11,27 +12,35 @@ from cargo_wagon_block_maker.bbmm import BlueprintMakerModule
 from recipe_provider import RecipeProvider
 
 
-def assembling_machines(recipe_names, import_export, building_resolver: BuildingResolver,
-                        recipe_provider: RecipeProvider, flows):
-    assert len(recipe_names) % 8 == 0
-    machine_names = [building_resolver(recipe_provider.by_name(recipe)).name for recipe in recipe_names]
-    half = (len(recipe_names) / 2)
-    machine_positions = [(3 * (i % half), (i // half) * 7) for i in range(len(recipe_names))]
-    entities = [
-        {
-            "name": machine,
-            "recipe": recipe,
-            "position": {"x": x, "y": y},
-            "direction": Direction.NORTH if y == 0 else Direction.SOUTH,
-        }
-        for (x, y), machine, recipe in zip(machine_positions, machine_names, recipe_names)
-    ]
-    g = AssemblingMachinesGroup(entities=entities, flows=flows)
-    for entity in g.entities:
-        entity.import_export = import_export[entity.recipe]
+class AssemblingMachines:
+    def __init__(self, modules, building_resolver: BuildingResolver, recipe_provider: RecipeProvider):
+        self.modules = modules
+        self.building_resolver = building_resolver
+        self.recipe_provider = recipe_provider
 
-    g.translate(-2, 1)
-    return g
+    def build(self, recipe_names, import_export, flows):
+        assert len(recipe_names) % 8 == 0
+        machine_names = [self.building_resolver(self.recipe_provider.by_name(recipe)).name for recipe in recipe_names]
+        half = (len(recipe_names) / 2)
+        # Put half the machines in top row, half in bottom row (y is 0 or 7)
+        # Offset by assembling machine width in x direction
+        machine_positions = [(3 * (i % half), (i // half) * 7) for i in range(len(recipe_names))]
+        entities = [
+            {
+                "name": machine,
+                "recipe": recipe,
+                "position": {"x": x, "y": y},
+                "items": dict(Counter(self.modules)),
+                "direction": Direction.NORTH if y == 0 else Direction.SOUTH,
+            }
+            for (x, y), machine, recipe in zip(machine_positions, machine_names, recipe_names)
+        ]
+        g = AssemblingMachinesGroup(entities=entities, flows=flows)
+        for entity in g.entities:
+            entity.import_export = import_export[entity.recipe]
+
+        g.translate(-2, 1)
+        return g
 
 
 class ProductionLine(Group):
@@ -79,12 +88,8 @@ class BlueprintMaker:
     def __init__(
             self,
             modules: Dict[str, BlueprintMakerModule],
-            building_resolver: BuildingResolver,
-            recipe_provider: RecipeProvider
     ):
         self.modules = modules
-        self.building_resolver = building_resolver
-        self.recipe_provider = recipe_provider
 
     def make_blueprint(self, recipes, output, ugly_reassignment, flows):
         # recipes is in a form of grouped recipes by 4, so the first two apply to the top row, the second two to the bottom row of a group of 4
@@ -95,10 +100,15 @@ class BlueprintMaker:
                 yield lst[i:i + n]
 
         # Oh god the horror
+
+        # This reshapes the top/bottom row enumeration of machines into a grouped enumeration of machines
+        # This is necessary because the decision making model works on groups and i'm too lazy to change it
+        # to the top/bottom row enumeration
         mrecipes = list(chain.from_iterable(zip(chunks(recipes, 2))))
         mrecipes = list(chain.from_iterable(mrecipes[::2])) + list(chain.from_iterable(mrecipes[1::2]))
-        assembling_machines = self.modules['assembling_machines'](mrecipes, ugly_reassignment, self.building_resolver,
-                                                                  self.recipe_provider, flows)
+
+
+        assembling_machines = self.modules['assembling_machines'].build(mrecipes, ugly_reassignment, flows)
         stuff = {entity_type: module.build(assembling_machines, output) for entity_type, module in self.modules.items()
                  if not entity_type == 'assembling_machines'}
         b = Blueprint()
@@ -107,11 +117,3 @@ class BlueprintMaker:
         b.generate_power_connections(only_axis=True)
         print(b.to_string())
         return g
-
-
-if __name__ == "__main__":
-    b = Blueprint()
-    b.entities.append(
-        assembling_machines(["assembling-machine-3"] * 8, ["copper-cable"] * 8)
-    )
-    print(b.to_string())
