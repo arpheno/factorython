@@ -8,6 +8,11 @@ minable_resources = [
     "uranium-ore"
 ]
 intermediate_products = [
+    "military-science-pack",
+    "automation-science-pack",
+    "logistics-science-pack",
+    "chemical-science-pack",
+    "rocket-science-pack",
     "iron-plate",
     "copper-plate",
     "steel-plate",
