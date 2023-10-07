@@ -1,24 +1,22 @@
 import json
 from math import ceil
 from pprint import pprint
-from random import shuffle
 
-from draftsman.constants import Direction
 from draftsman.data import modules
 from draftsman.data.modules import raw as modules
 
 from building_resolver import BuildingResolver
 from cargo_wagon_block_maker.assembling_machines import (
-    BlueprintMaker, AssemblingMachines,
+    BlueprintMaker,
+    AssemblingMachines,
 )
 from cargo_wagon_block_maker.beacons import Beacons
-from cargo_wagon_block_maker.cargo_wagon_blueprint import cargo_wagon_blueprint
 from cargo_wagon_assignment_problem import create_cargo_wagon_assignment_problem
 from cargo_wagon_block_maker.connectors import Connectors
 from cargo_wagon_block_maker.input_infrastructure import InputInfrastructure
 from cargo_wagon_block_maker.lights import Lights
 from cargo_wagon_block_maker.output_infrastructure import OutputInfrastructure
-from cargo_wagon_block_maker.power import Power
+from cargo_wagon_block_maker.power import MediumPowerPoles, Substations
 from cargo_wagon_block_maker.roboports import Roboports
 from cargo_wagon_block_maker.wagons import Wagons
 from model_finalizer import CargoWagonProblem
@@ -30,48 +28,60 @@ from recipe_provider_builder import build_recipe_provider
 
 
 def main():
+    available_resources = ["electronic-circuit", "advanced-circuit", "electric-motor"]
+    building_resolver_overrides = {
+        "crafting": "assembling-machine-3",
+        "crafting-with-fluid": "assembling-machine-3",
+        "advanced-crafting": "assembling-machine-3",
+    }
+    target_product = "military-science-pack"
     # deal with buildings
     assembly_path = "data/assembly_machine.json"
+    recipes_path = "data/recipes.json"
+    beacon_modules = ["speed-module-2"] * 8
+    assembling_machine_modules = ["productivity-module-2"] * 4
+
     with open(assembly_path, "r") as f:
         assembly = json.load(f)
     crafting_categories = parse_prototypes(assembly)
     building_resolver = BuildingResolver(
         crafting_categories,
-        overrides={
-            "crafting": "assembling-machine-3",
-            "crafting-with-fluid": "assembling-machine-3",
-            'advanced-crafting': 'assembling-machine-3',
-        },
+        overrides=building_resolver_overrides,
     )
-    recipes_path = "data/recipes.json"
 
-    recipe_provider = build_recipe_provider(
-        recipes_path, ["electronic-circuit", "advanced-circuit", 'electric-motor']
-    )
+    recipe_provider = build_recipe_provider(recipes_path, available_resources)
     module_builder = ModuleBuilder(modules)
-    beacon_modules = ['speed-module-2'] * 8
-    assembling_machine_modules = ['productivity-module-2'] * 4
     recipe_provider = insert_module(
         recipe_provider,
         dict(
-            productivity=sum((module_builder.build(module) for module in assembling_machine_modules),
-                             Module(name='productivity', productivity=0)),
-            speed=sum((module_builder.build(module) for module in beacon_modules), Module(name='speed', speed=0)),
-        ))
-    target_product = "military-science-pack"
+            productivity=sum(
+                (module_builder.build(module) for module in assembling_machine_modules),
+                Module(name="productivity", productivity=0),
+            )+sum(
+                (module_builder.build(module) for module in beacon_modules),
+                Module(name="speed", speed=0),
+            )*0.5,
+            speed=sum(
+                (module_builder.build(module) for module in beacon_modules),
+                Module(name="speed", speed=0),
+            )*0.5,
+        ),
+    )
 
     blueprint_maker_modules = {
-        "assembling_machines": AssemblingMachines(modules=assembling_machine_modules,
-                                                  building_resolver=building_resolver,
-                                                  recipe_provider=recipe_provider),
+        "assembling_machines": AssemblingMachines(
+            modules=assembling_machine_modules,
+            building_resolver=building_resolver,
+            recipe_provider=recipe_provider,
+        ),
         "connectors": Connectors(),
-        'wagons': Wagons(),
-        'input_infrastructure': InputInfrastructure(),
-        'power': Power(),
-        'output_infrastructure': OutputInfrastructure(),
-        'beacons': Beacons(),
-        'roboports': Roboports(),
-        'lights': Lights(),
+        "wagons": Wagons(),
+        "input_infrastructure": InputInfrastructure(),
+        "power": Substations(),
+        "output_infrastructure": OutputInfrastructure(),
+        "beacons": Beacons(),
+        "roboports": Roboports(),
+        "lights": Lights(),
     }
     blueprint_maker = BlueprintMaker(
         modules=blueprint_maker_modules,
@@ -90,11 +100,13 @@ def main():
     entities = []
 
     for production_site in line.production_sites.values():
-
         if not "ltn" in production_site.recipe.name:
             for q in range(ceil(production_site.quantity)):
                 production_sites.append(production_site.recipe.name)
-                rate = building_resolver(production_site.recipe).crafting_speed / production_site.recipe.energy
+                rate = (
+                    building_resolver(production_site.recipe).crafting_speed
+                    / production_site.recipe.energy
+                )
                 products = {
                     product.name: product.average_amount
                     for product in production_site.recipe.products
@@ -109,9 +121,9 @@ def main():
                 }
                 entities.append(entity)
         else:
-            global_input[production_site.recipe.products[0].name] = (
-                production_site.quantity
-            )
+            global_input[
+                production_site.recipe.products[0].name
+            ] = production_site.quantity
     pprint(production_sites)
     # if len(global_input)>4:
     #     raise Exception("This production line would require more than 4 pre-made things, but we only have 4 slots")
@@ -125,7 +137,10 @@ def main():
     pprint(flows)
     # cargo_wagon_blueprint(production_sites, ugly_reassignment, output=target_product, flows=flows)
     blueprint_maker.make_blueprint(
-        production_sites, ugly_reassignment=ugly_reassignment, output=target_product, flows=flows
+        production_sites,
+        ugly_reassignment=ugly_reassignment,
+        output=target_product,
+        flows=flows,
     )
     return line
 

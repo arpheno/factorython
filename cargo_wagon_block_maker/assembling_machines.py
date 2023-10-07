@@ -70,11 +70,14 @@ class ProductionLine(Group):
             roboports,
             lights
         ]
-        for group in all_groups[2:]:
-            group.translate(-1, 0)
+        # for group in all_groups[2:]:
+        #     group.translate(-1, 0)
         super(ProductionLine, self).__init__(
             **kwargs, entities=all_groups
         )
+        for i, _ in enumerate(assembling_machines.groups):
+            self.add_circuit_connection('green', (3, i, 0), (1, f'circuit_{i}', 0))
+            self.add_circuit_connection('green', (4, i, 0), (1, f'circuit_{i}', 2))
         self.assembling_machines = assembling_machines
         self.connectors = connectors
         self.wagons = wagons
@@ -106,7 +109,6 @@ class BlueprintMaker:
         # to the top/bottom row enumeration
         mrecipes = list(chain.from_iterable(zip(chunks(recipes, 2))))
         mrecipes = list(chain.from_iterable(mrecipes[::2])) + list(chain.from_iterable(mrecipes[1::2]))
-
 
         assembling_machines = self.modules['assembling_machines'].build(mrecipes, ugly_reassignment, flows)
         stuff = {entity_type: module.build(assembling_machines, output) for entity_type, module in self.modules.items()

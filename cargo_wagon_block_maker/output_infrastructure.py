@@ -1,3 +1,5 @@
+from itertools import product
+
 from draftsman.classes.blueprint import Blueprint
 from draftsman.classes.group import Group
 from draftsman.constants import Direction
@@ -45,60 +47,17 @@ def undergrounds():
 
 class OutputInfrastructure(BlueprintMakerModule):
     def build(self, assembling_machines: AssemblingMachinesGroup, output: str):
+        self.output=output
         g = Group()
-        mapping = {0: 1, 2: 1, 1: -1, 3: -1}
-        for i, machine in enumerate(assembling_machines.top_row):
-            if not machine.recipe == output:
-                i= Inserter(**
-                            {
-                                "name": "fast-inserter",
-                                "position": {
-                                    "x": machine.global_position["x"],
-                                    "y": machine.global_position["y"] +2 if machine.direction == Direction.NORTH else
-                                    machine.global_position["y"] -2,
-                                },
-                                "direction": Direction.SOUTH
-                                if machine.direction == Direction.SOUTH
-                                else Direction.NORTH,
-                            })
-            else:
-                i = Inserter(**
-                         {
-                             "name": "inserter",
-                             "direction": Direction.SOUTH,
-                             "position": {
-                                 "x": machine.global_position["x"] + mapping.get(i % 4, 0),
-                                 "y": machine.global_position["y"] - 2,
-                             },
-                         })
-            g.entities.append(i)
-
-        for i, machine in enumerate(assembling_machines.bottom_row):
-            if not machine.recipe == output:
-                i= Inserter(**
-            {
-                "name": "fast-inserter",
-                "position": {
-                    "x": machine.global_position["x"],
-                    "y": machine.global_position["y"] +2 if machine.direction == Direction.NORTH else
-                    machine.global_position["y"] -2,
-                },
-                "direction": Direction.SOUTH
-                if machine.direction == Direction.SOUTH
-                else Direction.NORTH,
-            })
-            else:
-                i = Inserter(**
-                         {
-                             "name": "inserter",
-                             "direction": Direction.NORTH,
-                             "position": {
-                                 "x": machine.global_position["x"] + mapping.get(i % 4, 0),
-                                 "y": machine.global_position["y"] + 2,
-                             },
-                         })
-            g.entities.append(i)
-
+        for group in assembling_machines.groups:
+            #Sort the group by y position then x position
+            group=sorted(group,key=lambda x: (x.global_position['y'], x.global_position['x']))
+            g.entities.append(Group(entities=[
+                self.inserter(machine,i) for i,machine in enumerate(group)
+            ]))
+            for i1, i2 in product(g.entities[-1].entities[::], g.entities[-1].entities[::]):
+                g.entities[-1].add_circuit_connection('red', i1, i2)
+                g.entities[-1].add_circuit_connection('green', i1, i2)
         # Lower belt
         for machine in assembling_machines.bottom_row[1::4]:
             p = undergrounds()
@@ -166,6 +125,34 @@ class OutputInfrastructure(BlueprintMakerModule):
         g.entities.append(crossing)
         # Little output belt to the left
         return g
+
+    def inserter(self, machine,i):
+        mapping = {0: 1, 2: 1, 1: -1, 3: -1}
+        if not machine.recipe == self.output:
+            i = Inserter(**
+                         {
+                             "name": "fast-inserter",
+                             "position": {
+                                 "x": machine.global_position["x"],
+                                 "y": machine.global_position["y"] + 2 if machine.direction == Direction.NORTH else
+                                 machine.global_position["y"] - 2,
+                             },
+                             "direction": Direction.SOUTH
+                             if machine.direction == Direction.SOUTH
+                             else Direction.NORTH,
+
+                         })
+        else:
+            i = Inserter(**
+                         {
+                             "name": "inserter",
+                             "direction": Direction.NORTH if machine.direction == Direction.SOUTH else Direction.SOUTH,
+                             "position": {
+                                 "x": machine.global_position["x"] + mapping[i],
+                                 "y": machine.global_position["y"] + 2 if machine.direction == Direction.SOUTH else -1,
+                             },
+                         })
+        return i
 
 
 if __name__ == '__main__':
