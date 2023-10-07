@@ -35,7 +35,7 @@ def main():
         "crafting-with-fluid": "assembling-machine-3",
         "advanced-crafting": "assembling-machine-3",
     }
-    target_product = 'steam-turbine' #"military-science-pack"
+    target_product = 'advanced-circuit' #"military-science-pack"
     max_assemblers=24
     # deal with buildings
     assembly_path = "data/assembly_machine.json"

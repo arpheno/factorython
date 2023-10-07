@@ -6,10 +6,10 @@ from draftsman.data import modules
 @dataclasses.dataclass
 class Module:
     name: str
-    speed: float=1
-    consumption: float=1
-    pollution: float=1
-    productivity: float=1
+    speed: float=0
+    consumption: float=0
+    pollution: float=0
+    productivity: float=0
 
     def __add__(self, other):
         return Module(
