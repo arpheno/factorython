@@ -76,8 +76,8 @@ class ProductionLine(Group):
             **kwargs, entities=all_groups
         )
         for i, _ in enumerate(assembling_machines.groups):
-            self.add_circuit_connection('green', (3, i, 0), (1, f'circuit_{i}', 0))
-            self.add_circuit_connection('green', (4, i, 0), (1, f'circuit_{i}', 2))
+            self.add_circuit_connection('green', (4, i, 0), (1, f'circuit_{i}', 0))
+            self.add_circuit_connection('green', (3, i, 0), (1, f'circuit_{i}', 2))
         self.assembling_machines = assembling_machines
         self.connectors = connectors
         self.wagons = wagons

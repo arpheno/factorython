@@ -137,6 +137,7 @@ class OutputInfrastructure(BlueprintMakerModule):
                                  "y": machine.global_position["y"] + 2 if machine.direction == Direction.NORTH else
                                  machine.global_position["y"] - 2,
                              },
+                             'control_behavior':{'circuit_mode_of_operation': 3, 'circuit_read_hand_contents': True},
                              "direction": Direction.SOUTH
                              if machine.direction == Direction.SOUTH
                              else Direction.NORTH,
@@ -147,6 +148,7 @@ class OutputInfrastructure(BlueprintMakerModule):
                          {
                              "name": "inserter",
                              "direction": Direction.NORTH if machine.direction == Direction.SOUTH else Direction.SOUTH,
+                             'control_behavior':{'circuit_mode_of_operation': 3, 'circuit_read_hand_contents': True},
                              "position": {
                                  "x": machine.global_position["x"] + mapping[i],
                                  "y": machine.global_position["y"] + 2 if machine.direction == Direction.SOUTH else -1,

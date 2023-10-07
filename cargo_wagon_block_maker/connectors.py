@@ -29,6 +29,9 @@ def counter_combinator(flow):
                     k.add_circuit_connection(color, e, connection['entity_id'] - 1, int(number),
                                              int(connection.get('circuit_id', 1)))
     k.translate(-k.entities[0].position['x'], -k.entities[0].position['y'])
+    constant_combinator = k.find_entities_filtered(name='constant-combinator')[0]
+    constant_combinator.signals = [{'index': i + 1, 'signal': {'type': 'item', 'name': item}, 'count': flow[item]} for i, item
+                                   in enumerate(flow)]
     return k
 
 
@@ -36,7 +39,7 @@ def counting_connector():
     g = Group()
     for (x, y) in [(0, 0), (0, 1), (1, 0), (1, 1)]:
         g.entities.append(name='stack-filter-inserter', position={'x': x, 'y': y}, direction=Direction.WEST,
-                          control_behavior= {'circuit_mode_of_operation': 1, 'circuit_read_hand_contents': True})
+                          control_behavior={'circuit_mode_of_operation': 1, 'circuit_read_hand_contents': True})
     # add circuit connections for red and green between all entities
     for i1, i2 in product(g.entities[::], g.entities[::]):
         g.add_circuit_connection('red', i1, i2)
@@ -52,22 +55,28 @@ class Connectors(BlueprintMakerModule):
 
     def build(self, assembling_machines: AssemblingMachinesGroup, output: str):
         g = Group()
-        for i,machine in enumerate(assembling_machines.top_row[1::2]):
-            circuit = counter_combinator(0)
-            circuit.id=f'circuit_{i}'
+        for i, (group, flow) in enumerate(zip(assembling_machines.groups, assembling_machines.flows)):
+            # sort machines by y position then x position
+            group = sorted(group, key=lambda x: (x.global_position['y'], x.global_position['x']))
+            machine = group[1]
+            if i==0:
+                circuit = counter_combinator({k: 1 for k, v in flow.items() if v })
+            else:
+                circuit = counter_combinator({k: 1 for k, v in flow.items() if v })
+            circuit.id = f'circuit_{i}'
             circuit.translate(machine.global_position['x'], machine.global_position['y'] - 2)
             g.entities.append(circuit)
             connector = counting_connector()
-            connector.id=f'connector_{i}'
+            connector.id = f'connector_{i}'
             connector.translate(machine.global_position['x'] - 5, machine.global_position['y'] + 3)
             g.entities.append(connector)
-        for i in range(len(g.entities)//2):
-            g.add_circuit_connection('red',(f'circuit_{i}',0),(f'connector_{i}',0))
-            g.add_circuit_connection('green',(f'circuit_{i}',1),(f'connector_{i}',0))
+        for i in range(len(g.entities) // 2):
+            g.add_circuit_connection('red', (f'circuit_{i}', 0), (f'connector_{i}', 0))
+            g.add_circuit_connection('green', (f'circuit_{i}', 1), (f'connector_{i}', 0))
             try:
-                g.add_circuit_connection('red',(f'circuit_{i}',2),(f'connector_{i+1}',0))
+                g.add_circuit_connection('red', (f'circuit_{i}', 2), (f'connector_{i + 1}', 0))
             except:
-                pass # Index error but that's ok, we're at the end
+                pass  # Index error but that's ok, we're at the end
         return g
 
     def nbuild(self, assembling_machines: AssemblingMachinesGroup, output: str):

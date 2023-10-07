@@ -29,12 +29,14 @@ from recipe_provider_builder import build_recipe_provider
 
 def main():
     available_resources = ["electronic-circuit", "advanced-circuit", "electric-motor"]
+    available_resources = []
     building_resolver_overrides = {
         "crafting": "assembling-machine-3",
         "crafting-with-fluid": "assembling-machine-3",
         "advanced-crafting": "assembling-machine-3",
     }
-    target_product = "military-science-pack"
+    target_product = 'steam-turbine' #"military-science-pack"
+    max_assemblers=24
     # deal with buildings
     assembly_path = "data/assembly_machine.json"
     recipes_path = "data/recipes.json"
@@ -86,7 +88,7 @@ def main():
     blueprint_maker = BlueprintMaker(
         modules=blueprint_maker_modules,
     )
-    model_finalizer = CargoWagonProblem([target_product], max_assemblers=16)
+    model_finalizer = CargoWagonProblem([target_product], max_assemblers=max_assemblers)
 
     # Determine the flow of goods through the production line
     production_line_builder = ProductionLineBuilder(

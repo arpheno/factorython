@@ -103,6 +103,7 @@ def input_inseter(machine):
             "y": machine.global_position["y"] - 2 if machine.direction == Direction.SOUTH else
             machine.global_position["y"] + 2,
         },
+        'control_behavior':{'circuit_mode_of_operation': 3, 'circuit_read_hand_contents': True},
         "direction": Direction.SOUTH
         if machine.direction == Direction.NORTH
         else Direction.NORTH,

@@ -12,7 +12,7 @@ class Roboports(BlueprintMakerModule):
         g.entities.append(
         Roboport(**{'name': 'roboport',
                   'position':{'x':top_ref.global_position['x']+14,
-                              'y':top_ref.global_position['y']-4},
+                              'y':top_ref.global_position['y']-5},
                   'items': {'speed-module-2':8},
                      }))
         return g
