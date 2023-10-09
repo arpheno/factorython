@@ -13,8 +13,12 @@ class BuildingResolver:
         return override or default
 
     def search(self, name):
-        building = next((building for category in self.crafting_categories.values() for building in category if
+        try:
+            building = next((building for category in self.crafting_categories.values() for building in category if
                          building.name == name))
+        except:
+            print(f"Could not find building {name}")
+            raise Exception("Building not found")
         return building
 
 

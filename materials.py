@@ -50,7 +50,7 @@ basic_processing = [
     "steel-plate",
     "plastic-bar",
     "sulfur",
-    "battery",
+    # "battery",
     "glass",
     "explosives",
     "sulfuric-acid",
@@ -58,6 +58,8 @@ basic_processing = [
     "heavy-oil",
     "petroleum-gas",
     "concrete",
+    'lubricant',
+'se-satellite-telemetry',
 
 ]
 nauvis_materials = [
@@ -72,7 +74,6 @@ nauvis_materials = [
     "electric-engine-unit",
     "firearm-magazine",
     "locomotive",
-    "lubricant",
     "uranium-235",
     "uranium-238",
     "storage-tank",

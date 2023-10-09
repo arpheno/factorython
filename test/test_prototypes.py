@@ -1,3 +1,5 @@
+import json
+
 from parsing.prototype_parser import parse_prototypes
 
 

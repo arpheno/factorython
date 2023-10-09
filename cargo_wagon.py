@@ -35,8 +35,10 @@ def main():
         "basic-crafting": "assembling-machine-3",
         "crafting-with-fluid": "assembling-machine-3",
         "advanced-crafting": "assembling-machine-3",
+        'chemistry':'chemical-plant',
+        # 'kiln':'electric-furnace',
     }
-    target_product = "flying-robot-frame"
+    target_product = 'flying-robot-frame'#"se-rocket-science-pack"
     max_assemblers=24
     # deal with buildings
     assembly_path = "data/assembly_machine.json"
@@ -92,8 +94,8 @@ def main():
         "power": Substations(),
         "output_infrastructure": OutputInfrastructure(),
         "beacons": Beacons(),
-        "roboports": Roboports(),
-        "lights": Lights(),
+        # "roboports": Roboports(),
+        # "lights": Lights(),
     }
     blueprint_maker = BlueprintMaker(
         modules=blueprint_maker_modules,

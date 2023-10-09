@@ -54,8 +54,6 @@ class ProductionLine(Group):
             power: Group,
             output_infrastructure: Group,
             beacons: Group,
-            roboports: Group,
-            lights=Group,
             entities: Group = [],
             **kwargs,
     ):
@@ -67,8 +65,6 @@ class ProductionLine(Group):
             output_infrastructure,
             power,
             beacons,
-            roboports,
-            lights
         ]
         # for group in all_groups[2:]:
         #     group.translate(-1, 0)
@@ -76,8 +72,8 @@ class ProductionLine(Group):
             **kwargs, entities=all_groups
         )
         for i, _ in enumerate(assembling_machines.groups):
-            self.add_circuit_connection('green', (4, i, 0), (1, f'circuit_{i}', 0))
-            self.add_circuit_connection('green', (3, i, 0), (1, f'circuit_{i}', 2))
+            self.add_circuit_connection('green', (4, i, 0), (1, f'circuit_{i}', 'minus_one'))
+            self.add_circuit_connection('green', (3, i, 0), (1, f'circuit_{i}', 'plus_one'))
         self.assembling_machines = assembling_machines
         self.connectors = connectors
         self.wagons = wagons
