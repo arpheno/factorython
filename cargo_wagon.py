@@ -32,10 +32,11 @@ def main():
     available_resources = []
     building_resolver_overrides = {
         "crafting": "assembling-machine-3",
+        "basic-crafting": "assembling-machine-3",
         "crafting-with-fluid": "assembling-machine-3",
         "advanced-crafting": "assembling-machine-3",
     }
-    target_product = 'advanced-circuit' #"military-science-pack"
+    target_product = "flying-robot-frame"
     max_assemblers=24
     # deal with buildings
     assembly_path = "data/assembly_machine.json"
@@ -52,6 +53,15 @@ def main():
     )
 
     recipe_provider = build_recipe_provider(recipes_path, available_resources)
+    try:
+        recipe_provider.by_name(target_product)
+    except:
+        print(f"Could not find recipe for {target_product}")
+        print("Available recipes:")
+        for recipe in recipe_provider.name_includes(target_product):
+            print(recipe.name)
+        raise Exception("Recipe not found")
+
     module_builder = ModuleBuilder(modules)
     recipe_provider = insert_module(
         recipe_provider,
