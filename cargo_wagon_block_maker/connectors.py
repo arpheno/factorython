@@ -98,7 +98,7 @@ def counting_combinator_without_bp(flow):
 
     entities['constant'].signals = [
         {"index": i + 1, "signal": {"type": "item", "name": item}, "count": flow[item]}
-        for i, item in enumerate(flow )if not item in ['lubricant', 'sulfuric-acid','heavy-oil']
+        for i, item in enumerate(flow )if not item in ['lubricant', 'sulfuric-acid','heavy-oil','water']
     ]
     for id, entity in entities.items():
         entity.id = id

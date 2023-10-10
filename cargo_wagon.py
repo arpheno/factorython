@@ -36,10 +36,11 @@ def main():
         "crafting-with-fluid": "assembling-machine-3",
         "advanced-crafting": "assembling-machine-3",
         'chemistry':'chemical-plant',
+        'pulverising':'assembling-machine-3'
         # 'kiln':'electric-furnace',
     }
-    target_product = 'flying-robot-frame'#"se-rocket-science-pack"
-    max_assemblers=24
+    target_product = 'nuclear-reactor'#"se-rocket-science-pack"
+    max_assemblers=32
     # deal with buildings
     assembly_path = "data/assembly_machine.json"
     recipes_path = "data/recipes.json"
