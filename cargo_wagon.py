@@ -14,33 +14,36 @@ from cargo_wagon_block_maker.beacons import Beacons
 from cargo_wagon_assignment_problem import create_cargo_wagon_assignment_problem
 from cargo_wagon_block_maker.connectors import Connectors
 from cargo_wagon_block_maker.input_infrastructure import InputInfrastructure
-from cargo_wagon_block_maker.lights import Lights
 from cargo_wagon_block_maker.output_infrastructure import OutputInfrastructure
-from cargo_wagon_block_maker.power import MediumPowerPoles, Substations
-from cargo_wagon_block_maker.roboports import Roboports
+from cargo_wagon_block_maker.power import  Substations
 from cargo_wagon_block_maker.wagons import Wagons
+from materials import  minable_resources, basic_processing
 from model_finalizer import CargoWagonProblem
 from module import ModuleBuilder, Module
-from module_inserter import insert_module
+from module_inserter import PrimitiveModuleInserter
 from production_line_builder import ProductionLineBuilder
 from parsing.prototype_parser import parse_prototypes
-from recipe_provider_builder import build_recipe_provider
+from recipe_provider_builder import (
+    build_recipe_provider,
+    FreeRecipesAdder,
+    RecipesRemover,
+    apply_transformations,
+)
 
 
 def main():
-    available_resources = ["electronic-circuit", "advanced-circuit", "electric-motor"]
     available_resources = []
     building_resolver_overrides = {
         "crafting": "assembling-machine-3",
         "basic-crafting": "assembling-machine-3",
         "crafting-with-fluid": "assembling-machine-3",
         "advanced-crafting": "assembling-machine-3",
-        'chemistry':'chemical-plant',
-        'pulverising':'assembling-machine-3'
+        "chemistry": "chemical-plant",
+        "pulverising": "assembling-machine-3"
         # 'kiln':'electric-furnace',
     }
-    target_product = 'nuclear-reactor'#"se-rocket-science-pack"
-    max_assemblers=32
+    target_product = "rocket-control-unit"  # "se-rocket-science-pack"
+    max_assemblers = 32
     # deal with buildings
     assembly_path = "data/assembly_machine.json"
     recipes_path = "data/recipes.json"
@@ -55,34 +58,37 @@ def main():
         overrides=building_resolver_overrides,
     )
 
-    recipe_provider = build_recipe_provider(recipes_path, available_resources)
-    try:
-        recipe_provider.by_name(target_product)
-    except:
-        print(f"Could not find recipe for {target_product}")
-        print("Available recipes:")
-        for recipe in recipe_provider.name_includes(target_product):
-            print(recipe.name)
-        raise Exception("Recipe not found")
-
+    recipe_provider = build_recipe_provider(recipes_path)
+    recipe_provider.by_name(target_product)
     module_builder = ModuleBuilder(modules)
-    recipe_provider = insert_module(
-        recipe_provider,
-        dict(
-            productivity=sum(
-                (module_builder.build(module) for module in assembling_machine_modules),
-                Module(name="productivity", productivity=0),
-            )+sum(
-                (module_builder.build(module) for module in beacon_modules),
-                Module(name="speed", speed=0),
-            )*0.5,
-            speed=sum(
-                (module_builder.build(module) for module in beacon_modules),
-                Module(name="speed", speed=0),
-            )*0.5,
-        ),
-    )
 
+    recipe_transformations = [
+        FreeRecipesAdder(minable_resources),
+        FreeRecipesAdder(basic_processing),
+        PrimitiveModuleInserter(
+            dict(
+                productivity=sum(
+                    (
+                        module_builder.build(module)
+                        for module in assembling_machine_modules
+                    ),
+                    Module(name="productivity", productivity=0),
+                )
+                + sum(
+                    (module_builder.build(module) for module in beacon_modules),
+                    Module(name="speed", speed=0),
+                )
+                * 0.5,
+                speed=sum(
+                    (module_builder.build(module) for module in beacon_modules),
+                    Module(name="speed", speed=0),
+                )
+                * 0.5,
+            )
+        )
+        # FreeRecipesAdder(['advanced-circuit', 'se-space-coolant-warm']),
+    ]
+    recipe_provider = apply_transformations(recipe_provider, recipe_transformations)
     blueprint_maker_modules = {
         "assembling_machines": AssemblingMachines(
             modules=assembling_machine_modules,

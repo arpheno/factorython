@@ -47,9 +47,12 @@ basic_processing = [
     "iron-plate",
     "copper-plate",
     "stone-brick",
+    'solid-fuel',
+    'rocket-fuel',
     "steel-plate",
     "plastic-bar",
     "sulfur",
+    'sand',
     # "battery",
     "glass",
     "explosives",
@@ -57,7 +60,7 @@ basic_processing = [
     "light-oil",
     "heavy-oil",
     "petroleum-gas",
-    "concrete",
+    # "concrete",
     'lubricant',
 'se-satellite-telemetry',
 
@@ -98,6 +101,7 @@ nauvis_materials = [
 se_materials = [
     'se-iron-ingot',
     'se-copper-ingot',
+    # 'se-bio-sludge',
     "se-material-testing-pack",
     "se-holmium-cable",
     "se-holmium-ingot",
@@ -123,6 +127,7 @@ se_materials = [
     "se-vitamelange-bloom",
     "se-vitamelange-spice",
     "se-vitamelange-extract",
-    "se-methane-gas",
+    "se-methane-ice",
     "se-heavy-composite",
+    "se-space-coolant-supercooled"
 ]

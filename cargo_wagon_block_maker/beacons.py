@@ -1,4 +1,3 @@
-from draftsman.classes.blueprint import Blueprint
 from draftsman.classes.group import Group
 from draftsman.prototypes.beacon import Beacon
 
