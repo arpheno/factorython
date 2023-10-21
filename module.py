@@ -1,6 +1,6 @@
 import dataclasses
 
-from draftsman.data import modules
+from draftsman.data.modules import raw as modules
 
 
 @dataclasses.dataclass
