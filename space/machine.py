@@ -7,6 +7,7 @@ from draftsman.constants import Direction
 from draftsman.error import InvalidRecipeError
 from draftsman.prototypes.assembling_machine import AssemblingMachine
 
+from materials import trash
 from recipe_provider import RecipeProvider
 from space.liquids import barreler
 
@@ -63,7 +64,9 @@ def robot_connected_space_machine(
     right = max([b.position[0] for b in output_fluid_boxes + input_fluid_boxes])
     input_box_mapping = select_fluid_boxes(input_fluid_boxes, ingredient_fluids)
     for fluid, box in input_box_mapping.items():
-        b = barreler("empty", fluid.name, 1000)
+        b = barreler("empty", fluid.name, fluid.amount*10)
+        if not b.entities:
+            continue
         if box.position[1] == top:
             b.rotate(4)
             b.translate(0, -(b.entities["machine"].tile_height // 2))
@@ -79,9 +82,9 @@ def robot_connected_space_machine(
         b.translate(*box.position)
         g.entities.append(b)
     for fluid, box in zip(product_fluids, output_fluid_boxes[::output_box_ratio]):
-        try:
-            b = barreler("fill", fluid.name, 1000)
-        except InvalidRecipeError:
+        b = barreler("fill", fluid.name, fluid.average_amount*10,provider_chest_name='logistic-chest-active-provider' if fluid.name in trash else 'logistic-chest-passive-provider')
+        if not b.entities:
+            # The liquid couldn't be barreled,
             continue
         if box.position[1] == top:
             b.rotate(4)
@@ -104,13 +107,14 @@ def robot_connected_space_machine(
         position={"x": 0, "y": 0},
     )
     g.entities.append(machine)
+    solid_non_trash_products=[product  for product in R.products if product.name not in trash if product.type== "item" if not product.name in [ingredient.name for ingredient in R.ingredients]]
     solid_infrastructure = [
         {
             "name": "filter-inserter",
             "id": "trash_inserter",
             "position": {"x": left, "y": bottom - 1},
             "direction": Direction.EAST,
-            "filters": [R.products[0].name] if R.products[0].type == "item" else [],
+            "filters": [product.name for product in solid_non_trash_products],
             "filter_mode": "blacklist",
         },
         # Make an active provider chest for the trash inserter to insert into
@@ -140,14 +144,14 @@ def robot_connected_space_machine(
                     "id": "input_chest",
                     "position": {"x": right - 1, "y": bottom + 1},
                     "request_filters": [
-                        {"name": ingredient.name, "count": 1, "index": i + 1}
+                        {"name": ingredient.name, "count": math.ceil(ingredient.amount * 10), "index": i + 1}
                         for i, ingredient in enumerate(R.ingredients)
                         if ingredient.type == "item"
                     ],
                 },
             ]
         )
-        if R.products[0].type == "item":
+        if any(solid_non_trash_products):
             solid_infrastructure.extend(
                 [
                     {
@@ -155,7 +159,7 @@ def robot_connected_space_machine(
                         "id": "output_inserter",
                         "position": {"x": left + 1, "y": bottom} if not g.find_entity_at_position((left + 1,bottom)) else {'x':right-2,'y':bottom},
                         "direction": Direction.NORTH,
-                        "filters": [R.products[0].name],
+                        "filters": [product.name for product in solid_non_trash_products],
                         "filter_mode": "whitelist",
                     },
                     # Make an passive provider chest for the output inserter to insert into
