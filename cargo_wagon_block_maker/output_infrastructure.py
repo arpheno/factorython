@@ -46,8 +46,8 @@ def undergrounds():
 
 
 class OutputInfrastructure(BlueprintMakerModule):
-    def build(self, assembling_machines: AssemblingMachinesGroup, output: str):
-        self.output=output
+    def build(self, assembling_machines: AssemblingMachinesGroup, outputs: [str]):
+        self.outputs=outputs
         g = Group()
         for group in assembling_machines.groups:
             #Sort the group by y position then x position
@@ -128,7 +128,7 @@ class OutputInfrastructure(BlueprintMakerModule):
 
     def inserter(self, machine,i):
         mapping = {0: 1, 2: 1, 1: -1, 3: -1}
-        if not machine.recipe == self.output:
+        if not machine.recipe in self.outputs:
             i = Inserter(**
                          {
                              "name": "fast-inserter",

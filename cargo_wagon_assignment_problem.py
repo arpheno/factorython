@@ -1,8 +1,10 @@
+from pprint import pprint
+
 import pulp
 from pulp import lpSum
 
 
-def create_cargo_wagon_assignment_problem(entities, global_input, production_sites, output):
+def create_cargo_wagon_assignment_problem(entities, global_input, production_sites, outputs):
     # Create a PuLP minimization problem
     problem = pulp.LpProblem("Assignment Problem", pulp.LpMinimize)
 
@@ -15,7 +17,8 @@ def create_cargo_wagon_assignment_problem(entities, global_input, production_sit
     goods = set()
     for entity in entities:
         goods |= entity.keys()
-    goods.remove(output)
+    for output in outputs:
+        goods.remove(output)
     # Create binary decision variables using pulp.LpVariable.dicts
     x = pulp.LpVariable.dicts("Assignment", ((entity, position) for entity in range(N) for position in range(N)), 0, 1,
                               pulp.LpBinary)
@@ -64,7 +67,7 @@ def create_cargo_wagon_assignment_problem(entities, global_input, production_sit
     problem += lpSum(flows.values()) + lpSum(penalty.values()) * 10_000_000
 
     # Solve the problem
-    problem.solve(pulp.PULP_CBC_CMD(mip=True, maxSeconds=10))
+    problem.solve(pulp.PULP_CBC_CMD(mip=True, maxSeconds=20))
 
     # Check the status of the solution
     result = []

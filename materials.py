@@ -42,6 +42,12 @@ intermediate_products = [
     "electric-motor",
     "se-heat-shielding",
     "stone-tablet",
+    'se-vitamelange-bloom',
+    'se-vitamelange-nugget',
+    'se-vitamelange-spice',
+    'se-vitamelange-extract',
+    'se-vitalic-acid',
+    'se-vitalic-reagent'
 ]
 basic_processing = [
     "iron-plate",
@@ -130,4 +136,14 @@ se_materials = [
     "se-methane-ice",
     "se-heavy-composite",
     "se-space-coolant-supercooled"
+]
+trash=[
+    'uranium-ore',
+    'se-scrap',
+    'se-contaminated-scrap',
+    'se-contaminated-space-water',
+    'se-contaminated-bio-sludge',
+    'se-junk-data',
+    'se-broken-data'
+
 ]

@@ -1,5 +1,5 @@
 import json
-from math import ceil
+from math import ceil, floor
 from pprint import pprint
 
 from draftsman.data import modules
@@ -18,9 +18,9 @@ from cargo_wagon_block_maker.output_infrastructure import OutputInfrastructure
 from cargo_wagon_block_maker.power import  Substations
 from cargo_wagon_block_maker.wagons import Wagons
 from materials import  minable_resources, basic_processing
-from model_finalizer import CargoWagonProblem
+from model_finalizer import CargoWagonProblem, CargoWagonMallProblem
 from module import ModuleBuilder, Module
-from module_inserter import PrimitiveModuleInserter
+from module_inserter import PrimitiveModuleInserter, BuildingSpecificModuleInserter
 from production_line_builder import ProductionLineBuilder
 from parsing.prototype_parser import parse_prototypes
 from recipe_provider_builder import (
@@ -42,8 +42,7 @@ def main():
         "pulverising": "assembling-machine-3"
         # 'kiln':'electric-furnace',
     }
-    target_product = "se-delivery-cannon-capsule"  # "se-rocket-science-pack"
-    target_product = "satellite"  # "se-rocket-science-pack"
+    target_products = [(2,'rail'),(1,'cargo-wagon'),(4,'stack-filter-inserter'),(4,'assembling-machine-2')]
     max_assemblers = 32
     # deal with buildings
     assembly_path = "data/assembly_machine.json"
@@ -60,34 +59,18 @@ def main():
     )
 
     recipe_provider = build_recipe_provider(recipes_path)
-    recipe_provider.by_name(target_product)
+    for _,target_product in target_products:
+        recipe_provider.by_name(target_product)
     module_builder = ModuleBuilder(modules)
 
     recipe_transformations = [
         FreeRecipesAdder(minable_resources),
         FreeRecipesAdder(basic_processing),
-        PrimitiveModuleInserter(
-            dict(
-                productivity=sum(
-                    (
-                        module_builder.build(module)
-                        for module in assembling_machine_modules
-                    ),
-                    Module(name="productivity", productivity=0),
-                )
-                + sum(
-                    (module_builder.build(module) for module in beacon_modules),
-                    Module(name="speed", speed=0),
-                )
-                * 0.5,
-                speed=sum(
-                    (module_builder.build(module) for module in beacon_modules),
-                    Module(name="speed", speed=0),
-                )
-                * 0.5,
-            )
-        )
-        # FreeRecipesAdder(['advanced-circuit', 'se-space-coolant-warm']),
+        BuildingSpecificModuleInserter(
+            {"productivity": "productivity-module-2", "speed": "speed-module-2"},
+            building_resolver,
+            beacon_type="small",
+        ),
     ]
     recipe_provider = apply_transformations(recipe_provider, recipe_transformations)
     blueprint_maker_modules = {
@@ -108,7 +91,7 @@ def main():
     blueprint_maker = BlueprintMaker(
         modules=blueprint_maker_modules,
     )
-    model_finalizer = CargoWagonProblem([target_product], max_assemblers=max_assemblers)
+    model_finalizer = CargoWagonMallProblem(target_products, max_assemblers=max_assemblers)
 
     # Determine the flow of goods through the production line
     production_line_builder = ProductionLineBuilder(
@@ -123,25 +106,33 @@ def main():
 
     for production_site in line.production_sites.values():
         if not "ltn" in production_site.recipe.name:
-            for q in range(ceil(production_site.quantity)):
-                production_sites.append(production_site.recipe.name)
-                rate = (
+            rate = (
                     building_resolver(production_site.recipe).crafting_speed
                     / production_site.recipe.energy
-                )
-                products = {
-                    product.name: product.average_amount
-                    for product in production_site.recipe.products
-                }
-                ingredients = {
-                    ingredient.name: -ingredient.amount
-                    for ingredient in production_site.recipe.ingredients
-                }
+            )
+            products = {
+                product.name: product.average_amount
+                for product in production_site.recipe.products
+            }
+            ingredients = {
+                ingredient.name: -ingredient.amount
+                for ingredient in production_site.recipe.ingredients
+            }
+            for _ in range(floor(production_site.quantity)):
+                production_sites.append(production_site.recipe.name)
                 entity = {
                     good: products.get(good, 0) * rate + ingredients.get(good, 0) * rate
                     for good in products.keys() | ingredients.keys()
                 }
                 entities.append(entity)
+            if not ceil(production_site.quantity)==floor(production_site.quantity):
+                production_sites.append(production_site.recipe.name)
+                entity = {
+                    good: (products.get(good, 0) * rate + ingredients.get(good, 0) * rate)*(production_site.quantity-floor(production_site.quantity))
+                    for good in products.keys() | ingredients.keys()
+                }
+                entities.append(entity)
+
         else:
             global_input[
                 production_site.recipe.products[0].name
@@ -154,14 +145,14 @@ def main():
         ugly_reassignment[site] = entity
     # Now that we know the flow of goods, we can assign them to wagons by determining the order of machines
     production_sites, flows = create_cargo_wagon_assignment_problem(
-        entities, global_input, production_sites, outputs=[target_product]
+        entities, global_input, production_sites, outputs=[product for factor,product in target_products]
     )
     pprint(flows)
     # cargo_wagon_blueprint(production_sites, ugly_reassignment, output=target_product, flows=flows)
     blueprint_maker.make_blueprint(
         production_sites,
         ugly_reassignment=ugly_reassignment,
-        output=target_product,
+        output=[product for factor,product in target_products],
         flows=flows,
     )
     return line
