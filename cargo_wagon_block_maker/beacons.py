@@ -6,7 +6,7 @@ from cargo_wagon_block_maker.bbmm import BlueprintMakerModule
 
 
 class Beacons(BlueprintMakerModule):
-    def build(self, assembling_machines: AssemblingMachinesGroup, output: str):
+    def build(self, assembling_machines: AssemblingMachinesGroup,**kwargs):
         g = Group()
         for top_ref in assembling_machines.top_row[2::4]:
             g.entities.append(

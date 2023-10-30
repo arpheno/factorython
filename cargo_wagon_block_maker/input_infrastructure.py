@@ -61,7 +61,7 @@ def mixed_belt_input():
 
 
 class InputInfrastructure(BlueprintMakerModule):
-    def build(self, assembling_machines: AssemblingMachinesGroup, output: str):
+    def build(self, assembling_machines: AssemblingMachinesGroup, **kwargs):
         g = self.connected_inserters(assembling_machines)
         machine = assembling_machines.top_row[0]
         g.entities.append(

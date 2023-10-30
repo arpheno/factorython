@@ -46,7 +46,7 @@ def undergrounds():
 
 
 class OutputInfrastructure(BlueprintMakerModule):
-    def build(self, assembling_machines: AssemblingMachinesGroup, outputs: [str]):
+    def build(self, assembling_machines: AssemblingMachinesGroup, outputs: [str],**kwargs):
         self.outputs=outputs
         g = Group()
         for group in assembling_machines.groups:

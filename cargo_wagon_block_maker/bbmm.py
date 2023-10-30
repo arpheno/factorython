@@ -2,5 +2,5 @@ from cargo_wagon_block_maker.assembling_machines_group import AssemblingMachines
 
 
 class BlueprintMakerModule:
-    def build(self,assembling_machines:AssemblingMachinesGroup,output:str):
+    def build(self,**kwargs):
         pass

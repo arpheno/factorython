@@ -25,7 +25,7 @@ def wagon(filters):
     ]
     return Group(entities=w)
 class Wagons(BlueprintMakerModule):
-    def build(self, assembling_machines: AssemblingMachinesGroup, output: str):
+    def build(self, assembling_machines: AssemblingMachinesGroup, **kwargs):
         g = Group()
         all_items_used = set()
         for block in assembling_machines.groups[::-1]:

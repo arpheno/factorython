@@ -18,9 +18,10 @@ class AssemblingMachines:
         self.building_resolver = building_resolver
         self.recipe_provider = recipe_provider
 
-    def build(self, recipe_names, import_export, flows):
+    def build(self, recipe_names, import_export, flows,**kwargs):
         assert len(recipe_names) % 8 == 0
-        machine_names = [self.building_resolver(self.recipe_provider.by_name(recipe)).name for recipe in recipe_names]
+        machines = [self.building_resolver(self.recipe_provider.by_name(recipe)) for recipe in recipe_names]
+        machine_names = [machine.name for machine in machines]
         half = (len(recipe_names) / 2)
         # Put half the machines in top row, half in bottom row (y is 0 or 7)
         # Offset by assembling machine width in x direction
@@ -105,12 +106,18 @@ class BlueprintMaker:
         # to the top/bottom row enumeration
         mrecipes = list(chain.from_iterable(zip(chunks(recipes, 2))))
         mrecipes = list(chain.from_iterable(mrecipes[::2])) + list(chain.from_iterable(mrecipes[1::2]))
+        default_build_args = dict(
+            recipe_names=mrecipes,
+            import_export=ugly_reassignment,
+            flows=flows,
+            outputs=output,
+        )
 
-        assembling_machines = self.modules['assembling_machines'].build(mrecipes, ugly_reassignment, flows)
-        stuff = {entity_type: module.build(assembling_machines, output) for entity_type, module in self.modules.items()
-                 if not entity_type == 'assembling_machines'}
+        built_modules = {}
+        for key, module in self.modules.items():
+            built_modules[key] = module.build(**default_build_args,**built_modules)
         b = Blueprint()
-        g = ProductionLine(assembling_machines=assembling_machines, **stuff)
+        g = ProductionLine(**built_modules)
         b.entities.append(g)
         b.generate_power_connections(only_axis=True)
         print(b.to_string())

@@ -6,7 +6,7 @@ from cargo_wagon_block_maker.bbmm import BlueprintMakerModule
 
 
 class Roboports(BlueprintMakerModule):
-    def build(self, assembling_machines: AssemblingMachinesGroup, output: str):
+    def build(self, assembling_machines: AssemblingMachinesGroup, **kwargs):
         g = Group()
         top_ref=assembling_machines.top_row[3]
         g.entities.append(

@@ -63,7 +63,7 @@ def exterior_medium_power_poles():
 
 
 class MediumPowerPoles(BlueprintMakerModule):
-    def build(self, assembling_machines: AssemblingMachinesGroup, output: str):
+    def build(self, assembling_machines: AssemblingMachinesGroup,  **kwargs):
         g = Group()
         for machine in assembling_machines.top_row[::3]:
             p = interior_medium_power_poles()
@@ -77,7 +77,7 @@ class MediumPowerPoles(BlueprintMakerModule):
 
 
 class Substations(BlueprintMakerModule):
-    def build(self, assembling_machines: AssemblingMachinesGroup, output: str):
+    def build(self, assembling_machines: AssemblingMachinesGroup, **kwargs):
         g = Group()
         for machine in assembling_machines.bottom_row[::6]:
             sub = ElectricPole(

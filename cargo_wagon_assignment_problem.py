@@ -61,7 +61,7 @@ def create_cargo_wagon_assignment_problem(entities, global_input, production_sit
 
             # The flows should be positive, so we add a penalty for negative flows
             problem += inv[g, good] >= -penalty[g, good]
-            problem += flows[g, good] >= -penalty[g, good]
+            problem += flows[g, good] >= 0
 
     # Objective: Minimize penalty
     problem += lpSum(flows.values()) + lpSum(penalty.values()) * 10_000_000
@@ -79,9 +79,6 @@ def create_cargo_wagon_assignment_problem(entities, global_input, production_sit
                     result.append(production_sites[entity])
                     # print(f"Entity {entity} is assigned to Position {position}")
         flows = {key: pulp.value(value) for key, value in flows.items()}
-        inv = {key: pulp.value(value) for key, value in inv.items()}
-        tally = {key: pulp.value(value) for key, value in tally.items()}
-        penalty = {key: pulp.value(value) for key, value in penalty.items()}
 
         # group the flows by group
         flows = [{good: flows[g, good] for good in goods} for g in range(len(groups))]

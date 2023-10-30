@@ -15,9 +15,9 @@ from cargo_wagon_assignment_problem import create_cargo_wagon_assignment_problem
 from cargo_wagon_block_maker.connectors import Connectors
 from cargo_wagon_block_maker.input_infrastructure import InputInfrastructure
 from cargo_wagon_block_maker.output_infrastructure import OutputInfrastructure
-from cargo_wagon_block_maker.power import  Substations
+from cargo_wagon_block_maker.power import Substations
 from cargo_wagon_block_maker.wagons import Wagons
-from materials import  minable_resources, basic_processing
+from materials import minable_resources, basic_processing
 from model_finalizer import CargoWagonProblem, CargoWagonMallProblem
 from module import ModuleBuilder, Module
 from module_inserter import PrimitiveModuleInserter, BuildingSpecificModuleInserter
@@ -30,25 +30,33 @@ from recipe_provider_builder import (
     apply_transformations,
 )
 
+assembly_path = "data/assembly_machine.json"
+recipes_path = "data/recipes.json"
 
-def main():
-    available_resources = []
-    building_resolver_overrides = {
-        "crafting": "assembling-machine-3",
-        "basic-crafting": "assembling-machine-3",
-        "crafting-with-fluid": "assembling-machine-3",
-        "advanced-crafting": "assembling-machine-3",
-        "chemistry": "chemical-plant",
-        "pulverising": "assembling-machine-3"
-        # 'kiln':'electric-furnace',
+
+def cargo_wagon_mall():
+    config = {
+        'building_resolver_overrides':
+            {
+                "crafting": "assembling-machine-3",
+                "basic-crafting": "assembling-machine-3",
+                "crafting-with-fluid": "assembling-machine-3",
+                "advanced-crafting": "assembling-machine-3",
+                "chemistry": "chemical-plant",
+                "pulverising": "assembling-machine-3"
+            },
+        'target_products': [(2, 'rail'), (1, 'cargo-wagon'), (4, 'stack-filter-inserter'), (4, 'assembling-machine-2')],
+        'max_assemblers':32,
+        'assembling_machine_modules':[
+            "productivity-module-2","productivity-module-2","productivity-module-2","productivity-module-2",
+        ]
+
     }
-    target_products = [(2,'rail'),(1,'cargo-wagon'),(4,'stack-filter-inserter'),(4,'assembling-machine-2')]
-    max_assemblers = 32
+    target_products =config['target_products']
+    max_assemblers = config['max_assemblers']
     # deal with buildings
-    assembly_path = "data/assembly_machine.json"
-    recipes_path = "data/recipes.json"
-    beacon_modules = ["speed-module-2"] * 8
-    assembling_machine_modules = ["productivity-module-2"] * 4
+    assembling_machine_modules = config['assembling_machine_modules']
+    building_resolver_overrides=config['building_resolver_overrides']
 
     with open(assembly_path, "r") as f:
         assembly = json.load(f)
@@ -59,9 +67,8 @@ def main():
     )
 
     recipe_provider = build_recipe_provider(recipes_path)
-    for _,target_product in target_products:
+    for _, target_product in target_products:
         recipe_provider.by_name(target_product)
-    module_builder = ModuleBuilder(modules)
 
     recipe_transformations = [
         FreeRecipesAdder(minable_resources),
@@ -125,10 +132,11 @@ def main():
                     for good in products.keys() | ingredients.keys()
                 }
                 entities.append(entity)
-            if not ceil(production_site.quantity)==floor(production_site.quantity):
+            if not ceil(production_site.quantity) == floor(production_site.quantity):
                 production_sites.append(production_site.recipe.name)
                 entity = {
-                    good: (products.get(good, 0) * rate + ingredients.get(good, 0) * rate)*(production_site.quantity-floor(production_site.quantity))
+                    good: (products.get(good, 0) * rate + ingredients.get(good, 0) * rate) * (
+                            production_site.quantity - floor(production_site.quantity))
                     for good in products.keys() | ingredients.keys()
                 }
                 entities.append(entity)
@@ -138,25 +146,21 @@ def main():
                 production_site.recipe.products[0].name
             ] = production_site.quantity
     pprint(production_sites)
-    # if len(global_input)>4:
-    #     raise Exception("This production line would require more than 4 pre-made things, but we only have 4 slots")
     ugly_reassignment = {}
     for site, entity in zip(production_sites, entities):
         ugly_reassignment[site] = entity
     # Now that we know the flow of goods, we can assign them to wagons by determining the order of machines
     production_sites, flows = create_cargo_wagon_assignment_problem(
-        entities, global_input, production_sites, outputs=[product for factor,product in target_products]
+        entities, global_input, production_sites, outputs=[product for factor, product in target_products]
     )
-    pprint(flows)
-    # cargo_wagon_blueprint(production_sites, ugly_reassignment, output=target_product, flows=flows)
     blueprint_maker.make_blueprint(
         production_sites,
         ugly_reassignment=ugly_reassignment,
-        output=[product for factor,product in target_products],
+        output=[product for factor, product in target_products],
         flows=flows,
     )
     return line
 
 
 if __name__ == "__main__":
-    main()
+    cargo_wagon_mall()

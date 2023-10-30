@@ -24,7 +24,7 @@ def lights():
 
 class Lights(BlueprintMakerModule):
 
-    def build(self, assembling_machines: AssemblingMachinesGroup, output: str):
+    def build(self, assembling_machines: AssemblingMachinesGroup, **kwargs):
         g = Group()
         for machine in assembling_machines.top_row[1::4]:
             p = lights()
