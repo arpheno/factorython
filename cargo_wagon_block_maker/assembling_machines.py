@@ -55,6 +55,7 @@ class ProductionLine(Group):
             power: Group,
             output_infrastructure: Group,
             beacons: Group,
+            train_head:Group,
             entities: Group = [],
             **kwargs,
     ):
@@ -66,6 +67,7 @@ class ProductionLine(Group):
             output_infrastructure,
             power,
             beacons,
+            train_head,
         ]
         # for group in all_groups[2:]:
         #     group.translate(-1, 0)
@@ -113,10 +115,10 @@ class BlueprintMaker:
             outputs=output,
         )
 
+        b = Blueprint()
         built_modules = {}
         for key, module in self.modules.items():
             built_modules[key] = module.build(**default_build_args,**built_modules)
-        b = Blueprint()
         g = ProductionLine(**built_modules)
         b.entities.append(g)
         b.generate_power_connections(only_axis=True)

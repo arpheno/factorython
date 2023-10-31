@@ -107,9 +107,6 @@ def counting_combinator_without_bp(flow):
     g.add_circuit_connection('red', 'integrator','integrator', 1, 2)
     g.add_circuit_connection('green', 'minus_one','integrator', 2, 1)
     g.add_circuit_connection('green', 'plus_one','integrator', 2, 1)
-    b = Blueprint()
-    b.entities.append(g)
-    print(b.to_string())
     return g
 
 

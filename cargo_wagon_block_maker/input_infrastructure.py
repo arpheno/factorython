@@ -76,9 +76,9 @@ class InputInfrastructure(BlueprintMakerModule):
                 'position': {'x': machine.global_position['x'] - 1, 'y': machine.global_position['y'] + 4},
                 'direction': Direction.EAST
             }))
-        mbi = mixed_belt_input()
-        mbi.translate(-7, 3)
-        g.entities.append(mbi)
+        # mbi = mixed_belt_input()
+        # mbi.translate(-7, 3)
+        # g.entities.append(mbi)
         return g
 
     def unconnected_inserters(self, assembling_machines):

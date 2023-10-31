@@ -16,6 +16,7 @@ from cargo_wagon_block_maker.connectors import Connectors
 from cargo_wagon_block_maker.input_infrastructure import InputInfrastructure
 from cargo_wagon_block_maker.output_infrastructure import OutputInfrastructure
 from cargo_wagon_block_maker.power import Substations
+from cargo_wagon_block_maker.train_head import TrainHead
 from cargo_wagon_block_maker.wagons import Wagons
 from materials import minable_resources, basic_processing
 from model_finalizer import CargoWagonProblem, CargoWagonMallProblem
@@ -92,6 +93,7 @@ def cargo_wagon_mall():
         "power": Substations(),
         "output_infrastructure": OutputInfrastructure(),
         "beacons": Beacons(),
+        "train_head": TrainHead(),
         # "roboports": Roboports(),
         # "lights": Lights(),
     }
