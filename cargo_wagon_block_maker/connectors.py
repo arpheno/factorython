@@ -135,7 +135,8 @@ class Connectors(BlueprintMakerModule):
         self.stack_inserter = [(1 + x) * 2.31 for x in [1, 2, 3, 4, 6, 8, 10]]
         self.filter_inserter = [(x) * 2.31 for x in [1, 1, 2, 2, 2, 2, 3]]
 
-    def build(self, assembling_machines: AssemblingMachinesGroup,**kwargs):
+    def build(self, *, blueprint:Blueprint,**kwargs):
+        assembling_machines=blueprint.entities['assembling_machines']
         g = Group()
         for i, (group, flow) in enumerate(
                 zip(assembling_machines.groups, assembling_machines.flows)
@@ -168,6 +169,8 @@ class Connectors(BlueprintMakerModule):
                 )
             except:
                 pass  # Index error but that's ok, we're at the end
+        g.id='connectors'
+        blueprint.entities.append(g)
         return g
 
     def nbuild(self, assembling_machines: AssemblingMachinesGroup, output: str):

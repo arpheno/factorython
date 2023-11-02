@@ -46,7 +46,9 @@ def undergrounds():
 
 
 class OutputInfrastructure(BlueprintMakerModule):
-    def build(self, assembling_machines: AssemblingMachinesGroup, outputs: [str],**kwargs):
+    def build(self, *,blueprint,outputs,**kwargs):
+
+        assembling_machines=blueprint.entities['assembling_machines']
         self.outputs=outputs
         g = Group()
         for group in assembling_machines.groups:
@@ -124,6 +126,10 @@ class OutputInfrastructure(BlueprintMakerModule):
         # })
         # g.entities.append(crossing)
         # # Little output belt to the left
+        g.id='output_infrastructure'
+        blueprint.entities.append(g)
+        for i, _ in enumerate(assembling_machines.groups):
+            blueprint.add_circuit_connection('green', ('output_infrastructure', i, 0), (1, f'circuit_{i}', 'minus_one'))
         return g
 
     def inserter(self, machine,i):

@@ -18,7 +18,7 @@ class AssemblingMachines:
         self.building_resolver = building_resolver
         self.recipe_provider = recipe_provider
 
-    def build(self, recipe_names, import_export, flows,**kwargs):
+    def build(self, blueprint, recipe_names, import_export, flows, **kwargs):
         assert len(recipe_names) % 8 == 0
         machines = [self.building_resolver(self.recipe_provider.by_name(recipe)) for recipe in recipe_names]
         machine_names = [machine.name for machine in machines]
@@ -36,11 +36,11 @@ class AssemblingMachines:
             }
             for (x, y), machine, recipe in zip(machine_positions, machine_names, recipe_names)
         ]
-        g = AssemblingMachinesGroup(entities=entities, flows=flows)
+        g = AssemblingMachinesGroup(entities=entities, flows=flows, id='assembling_machines')
         for entity in g.entities:
             entity.import_export = import_export[entity.recipe]
-
         g.translate(-2, 1)
+        blueprint.entities.append(g)
         return g
 
 
@@ -55,7 +55,7 @@ class ProductionLine(Group):
             power: Group,
             output_infrastructure: Group,
             beacons: Group,
-            train_head:Group,
+            train_head: Group,
             entities: Group = [],
             **kwargs,
     ):
@@ -75,7 +75,6 @@ class ProductionLine(Group):
             **kwargs, entities=all_groups
         )
         for i, _ in enumerate(assembling_machines.groups):
-            self.add_circuit_connection('green', (4, i, 0), (1, f'circuit_{i}', 'minus_one'))
             self.add_circuit_connection('green', (3, i, 0), (1, f'circuit_{i}', 'plus_one'))
         self.assembling_machines = assembling_machines
         self.connectors = connectors
@@ -115,12 +114,11 @@ class BlueprintMaker:
             outputs=output,
         )
 
-        b = Blueprint()
+        blueprint = Blueprint()
         built_modules = {}
         for key, module in self.modules.items():
-            built_modules[key] = module.build(**default_build_args,**built_modules)
-        g = ProductionLine(**built_modules)
-        b.entities.append(g)
-        b.generate_power_connections(only_axis=True)
-        print(b.to_string())
-        return g
+            built_modules[key] = module.build(blueprint=blueprint, **default_build_args)
+        # g = ProductionLine(**built_modules)
+        # blueprint.entities.append(g)
+        blueprint.generate_power_connections(only_axis=True)
+        print(blueprint.to_string())

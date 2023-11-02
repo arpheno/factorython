@@ -77,7 +77,8 @@ class MediumPowerPoles(BlueprintMakerModule):
 
 
 class Substations(BlueprintMakerModule):
-    def build(self, assembling_machines: AssemblingMachinesGroup, **kwargs):
+    def build(self,*,blueprint, **kwargs):
+        assembling_machines=blueprint.entities['assembling_machines']
         g = Group()
         for machine in assembling_machines.bottom_row[::6]:
             sub = ElectricPole(
@@ -99,4 +100,6 @@ class Substations(BlueprintMakerModule):
 
             )
             g.entities.append(sub)
+        g.id='power'
+        blueprint.entities.append(g)
         return g

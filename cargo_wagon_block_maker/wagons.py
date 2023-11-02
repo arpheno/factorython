@@ -25,7 +25,8 @@ def wagon(filters):
     ]
     return Group(entities=w)
 class Wagons(BlueprintMakerModule):
-    def build(self, assembling_machines: AssemblingMachinesGroup, **kwargs):
+    def build(self,*,blueprint,**kwargs):
+        assembling_machines=blueprint.entities['assembling_machines']
         g = Group()
         all_items_used = set()
         for block in assembling_machines.groups[::-1]:
@@ -34,6 +35,8 @@ class Wagons(BlueprintMakerModule):
             w=wagon(all_items_used-{'lubricant','sulfuric-acid','water'})
             w.translate( block[0].global_position['x']+2, 4)
             g.entities.append(w)
+        g.id='wagons'
+        blueprint.entities.append(g)
         return g
 if __name__ == '__main__':
     b=Blueprint()

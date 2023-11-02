@@ -61,7 +61,8 @@ def mixed_belt_input():
 
 
 class InputInfrastructure(BlueprintMakerModule):
-    def build(self, assembling_machines: AssemblingMachinesGroup, **kwargs):
+    def build(self,*,blueprint, **kwargs):
+        assembling_machines=blueprint.entities['assembling_machines']
         g = self.connected_inserters(assembling_machines)
         machine = assembling_machines.top_row[0]
         g.entities.append(
@@ -79,6 +80,10 @@ class InputInfrastructure(BlueprintMakerModule):
         # mbi = mixed_belt_input()
         # mbi.translate(-7, 3)
         # g.entities.append(mbi)
+        g.id='input_infrastructure'
+        blueprint.entities.append(g)
+        for i, _ in enumerate(assembling_machines.groups):
+            blueprint.add_circuit_connection('green', ('input_infrastructure', i, 0), ('connectors', f'circuit_{i}', 'plus_one'))
         return g
 
     def unconnected_inserters(self, assembling_machines):

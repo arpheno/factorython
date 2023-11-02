@@ -6,8 +6,9 @@ from cargo_wagon_block_maker.bbmm import BlueprintMakerModule
 
 
 class Beacons(BlueprintMakerModule):
-    def build(self, assembling_machines: AssemblingMachinesGroup,**kwargs):
+    def build(self, *,blueprint,**kwargs):
         g = Group()
+        assembling_machines=blueprint.entities['assembling_machines']
         for top_ref in assembling_machines.top_row[2::4]:
             g.entities.append(
             Beacon(**{'name': 'beacon',
@@ -22,4 +23,6 @@ class Beacons(BlueprintMakerModule):
                                   'y':bot_ref.global_position['y']+4},
                       'items': {'speed-module-2':8},
                       }))
+        g.id='beacons'
+        blueprint.entities.append(g)
         return g
