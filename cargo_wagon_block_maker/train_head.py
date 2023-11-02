@@ -321,7 +321,7 @@ class TrainHead(BlueprintMakerModule):
         )
         g.add_circuit_connection(
             "red",
-            (LTN_REQUESTER_COMBINATOR, LTN_SIGNALSa),
+            (LTN_REQUESTER_COMBINATOR, LTN_SIGNALS),
             ("logistic-train-stop", "input"),
         )
         blueprint.entities.append(g)
