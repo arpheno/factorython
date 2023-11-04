@@ -7,6 +7,7 @@ from draftsman.classes.group import Group
 from draftsman.data import modules
 
 from building_resolver import BuildingResolver
+from fake_assembly_machine import FakeAssemblyMachine
 from materials import se_materials, minable_resources, basic_processing
 from model_finalizer import ProductionLineProblem
 from module import Module, ModuleBuilder

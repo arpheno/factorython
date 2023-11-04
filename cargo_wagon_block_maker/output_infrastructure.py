@@ -54,9 +54,13 @@ class OutputInfrastructure(BlueprintMakerModule):
         for group in assembling_machines.groups:
             #Sort the group by y position then x position
             group=sorted(group,key=lambda x: (x.global_position['y'], x.global_position['x']))
-            g.entities.append(Group(entities=[
-                self.inserter(machine,i) for i,machine in enumerate(group)
-            ]))
+            _g=[]
+            for i,machine in enumerate(group):
+                try:
+                    _g.append(self.inserter(machine,i))
+                except:
+                    print(f"Didn't make inserter for {machine.name}")
+            g.entities.append(Group(entities=_g) )
             for i1, i2 in product(g.entities[-1].entities[::], g.entities[-1].entities[::]):
                 g.entities[-1].add_circuit_connection('red', i1, i2)
                 g.entities[-1].add_circuit_connection('green', i1, i2)
@@ -129,17 +133,21 @@ class OutputInfrastructure(BlueprintMakerModule):
         g.id='output_infrastructure'
         blueprint.entities.append(g)
         for i, _ in enumerate(assembling_machines.groups):
-            blueprint.add_circuit_connection('green', ('output_infrastructure', i, 0), (1, f'circuit_{i}', 'minus_one'))
+            try:
+                blueprint.add_circuit_connection('green', ('output_infrastructure', i, 0), (1, f'circuit_{i}', 'minus_one'))
+            except:
+                print(f"Didn't make circuit connection for {i}")
         return g
 
     def inserter(self, machine,i):
-        mapping = {0: 1, 2: 1, 1: -1, 3: -1}
+        output_product_mapping = {0: 1, 2: 1, 1: -1, 3: -1}
+        intermediate_mapping = {0: 1, 2: 0, 1: -1, 3: 0}
         if not machine.recipe in self.outputs:
             i = Inserter(**
                          {
                              "name": "fast-inserter",
                              "position": {
-                                 "x": machine.global_position["x"],
+                                 "x": machine.global_position["x"]+intermediate_mapping[i],
                                  "y": machine.global_position["y"] + 2 if machine.direction == Direction.NORTH else
                                  machine.global_position["y"] - 2,
                              },
@@ -156,7 +164,7 @@ class OutputInfrastructure(BlueprintMakerModule):
                              "direction": Direction.NORTH if machine.direction == Direction.SOUTH else Direction.SOUTH,
                              'control_behavior':{'circuit_mode_of_operation': 3, 'circuit_read_hand_contents': True},
                              "position": {
-                                 "x": machine.global_position["x"] + mapping[i],
+                                 "x": machine.global_position["x"] + output_product_mapping[i],
                                  "y": machine.global_position["y"] + 2 if machine.direction == Direction.SOUTH else -1,
                              },
                          })

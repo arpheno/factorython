@@ -38,7 +38,11 @@ class AssemblingMachines:
         ]
         g = AssemblingMachinesGroup(entities=entities, flows=flows, id='assembling_machines')
         for entity in g.entities:
-            entity.import_export = import_export[entity.recipe]
+            try:
+                entity.import_export = import_export[entity.recipe]
+            except:
+                key=next(x for x in import_export.keys() if 'spm' in x)
+                entity.import_export = import_export[key]
         g.translate(-2, 1)
         blueprint.entities.append(g)
         return g

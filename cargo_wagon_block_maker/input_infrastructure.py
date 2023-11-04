@@ -93,25 +93,24 @@ class InputInfrastructure(BlueprintMakerModule):
     def connected_inserters(self, assembling_machines):
         G = Group()
         for group in assembling_machines.groups:
-            G.entities.append(Group(entities=[input_inseter(machine) for machine in group]))
+            sorted_group = sorted(group,key=lambda x: (x.global_position['y'],x.global_position['x']))
+            offsets=[(0,2),(0,2),(1,-2),(-1,-2)]
+            directions=[Direction.SOUTH,Direction.SOUTH,Direction.NORTH,Direction.NORTH]
+            G.entities.append(Group(entities=[input_inseter(machine,offset,direction) for machine,offset,direction in zip(sorted_group,offsets,directions)]))
             for i1, i2 in zip(G.entities[-1].entities[::], G.entities[-1].entities[1::]):
                 G.entities[-1].add_circuit_connection('green', i1, i2)
                 G.entities[-1].add_circuit_connection('red', i1, i2)
         return G
 
-
-def input_inseter(machine):
+def input_inseter(machine,inserter_offset,direction):
     return {
         "name": "fast-inserter",
         "position": {
-            "x": machine.global_position["x"] - 1,
-            "y": machine.global_position["y"] - 2 if machine.direction == Direction.SOUTH else
-            machine.global_position["y"] + 2,
+            "x": machine.global_position["x"] +inserter_offset[0],
+            "y": machine.global_position["y"] +inserter_offset[1]
         },
         'control_behavior':{'circuit_mode_of_operation': 3, 'circuit_read_hand_contents': True},
-        "direction": Direction.SOUTH
-        if machine.direction == Direction.NORTH
-        else Direction.NORTH,
+        "direction": direction
     }
 
 

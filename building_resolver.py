@@ -1,5 +1,6 @@
 from data_structures.assembling_machine import AssemblingMachine
 from data_structures.recipe import Recipe
+from fake_assembly_machine import FakeAssemblyMachine
 
 
 class BuildingResolver:
@@ -20,13 +21,6 @@ class BuildingResolver:
             print(f"Could not find building {name}")
             raise Exception("Building not found")
         return building
-
-
-class FakeAssemblyMachine:
-    def __init__(self, name, crafting_speed=1):
-        self.name = name
-        self.crafting_speed = crafting_speed
-        self.module_specification = None
 
 
 def find_fastest_assembler(recipe, crafting_categories):

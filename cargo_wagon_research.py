@@ -18,6 +18,7 @@ from cargo_wagon_block_maker.output_infrastructure import OutputInfrastructure
 from cargo_wagon_block_maker.power import Substations
 from cargo_wagon_block_maker.train_head import TrainHead
 from cargo_wagon_block_maker.wagons import Wagons
+from fake_assembly_machine import FakeAssemblyMachine
 from materials import minable_resources, basic_processing
 from model_finalizer import CargoWagonProblem, CargoWagonMallProblem
 from module import ModuleBuilder, Module
@@ -45,10 +46,12 @@ def cargo_wagon_mall():
                 "advanced-crafting": "assembling-machine-3",
                 "chemistry": "chemical-plant",
                 "pulverising": "assembling-machine-3",
+                "researching": 'lab',
             },
         # 'target_products': [(2, 'rail'), (1, 'cargo-wagon'), (4, 'stack-filter-inserter'), (4, 'assembling-machine-2')],
-        'target_products': [(1,'rgspm')],
-        'max_assemblers':32,
+        'target_products': [(1,'rgbspm')],
+        # 'target_products': [(1, 'automation-science-pack'), (1, 'chemical-science-pack'), (1,'logistic-science-pack')],
+        'max_assemblers':64,
         'assembling_machine_modules':[
             "productivity-module-2","productivity-module-2","productivity-module-2","productivity-module-2",
         ]
@@ -63,6 +66,7 @@ def cargo_wagon_mall():
     with open(assembly_path, "r") as f:
         assembly = json.load(f)
     crafting_categories = parse_prototypes(assembly)
+    crafting_categories['researching'] =[FakeAssemblyMachine("lab",1)]
     building_resolver = BuildingResolver(
         crafting_categories,
         overrides=building_resolver_overrides,

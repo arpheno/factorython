@@ -22,4 +22,18 @@ probe_recipes = [
         energy=1000,
         category="se-space-probe-launch",
     ),
+    Recipe(name='rgspm',
+           products=[Product(name='rgspm', amount=1, type='item')],
+              ingredients=[Ingredient(name='logistic-science-pack' ,amount=1, type='item'),
+                           Ingredient(name='automation-science-pack' ,amount=1, type='item')],
+                energy=30,
+           category='researching'),
+    Recipe(name='rgbspm',
+           products=[Product(name='rgbspm', amount=1, type='item')],
+           ingredients=[Ingredient(name='logistic-science-pack' ,amount=1, type='item'),
+                        Ingredient(name='automation-science-pack' ,amount=1, type='item'),
+                        Ingredient(name='chemical-science-pack' ,amount=1, type='item')
+                        ],
+           energy=30,
+           category='researching'),
 ]

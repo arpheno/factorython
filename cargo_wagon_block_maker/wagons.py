@@ -32,7 +32,7 @@ class Wagons(BlueprintMakerModule):
         for block in assembling_machines.groups[::-1]:
             all_items_used.update(block.items_used)
         for block in assembling_machines.groups[::-1]:
-            w=wagon(all_items_used-{'lubricant','sulfuric-acid','water'})
+            w=wagon(all_items_used-{'lubricant','sulfuric-acid','water','rgspm','rgbspm','rgbospm'})
             w.translate( block[0].global_position['x']+2, 4)
             g.entities.append(w)
         g.id='wagons'
