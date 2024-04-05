@@ -19,7 +19,7 @@ class ProductionLine:
                 if 'ltn' in recipe_name:
                     print(f'{recipe_name}: {production_site.quantity*duration:.2f} x {production_site.building.name} (input)')
                 else:
-                    print(f'{recipe_name}: {production_site.quantity:.2f} x {production_site.building.name}')
+                    print(f'{recipe_name}: {production_site.quantity:.2f} x {production_site.building.name}({production_site.recipe.category})')
 
             print("Net Production:")
             for item, production in self.net_production.items():

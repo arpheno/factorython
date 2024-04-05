@@ -9,6 +9,7 @@ from cargo_wagon_block_maker.bbmm import BlueprintMakerModule
 from cargo_wagon_block_maker.connectors import counting_combinator_without_bp
 from cargo_wagon_block_maker.wagons import wagon
 
+LIQUIDS=["water","sulfuric-acid","lubricant","petroleum-gas","light-oil","heavy-oil","crude-oil","steam"]
 LTN_SIGNALS = 'ltn-signals'
 
 STRONGBOXES = "strongboxes"
@@ -50,6 +51,7 @@ class TrainHead(BlueprintMakerModule):
         for i in range(3):
             w = wagon([])
             w.id = f"wagon_{i}"
+            w.entities[0].inventory['bar']=25
             w.translate(
                 probably_some_kind_of_combinator.global_position["x"] - 6 - i * 6, 4
             )
@@ -405,8 +407,8 @@ class TrainHead(BlueprintMakerModule):
                     'control_behavior': {'filters': [
                         {
                             "index": i + 1,
-                            "count": -items_needed[item],
-                            "signal": {"type": "item", "name": item},
+                            "count": -int(items_needed[item]),
+                            "signal": {"type": "item" if item not in LIQUIDS else "fluid", "name": item},
                         }
                         for i, item in enumerate(items_needed)
                     ]}

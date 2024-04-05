@@ -21,7 +21,8 @@ probe_recipes = [
         ingredients=[Ingredient(name="satellite", amount=1, type="item")],
         energy=1000,
         category="se-space-probe-launch",
-    ),
+    )]
+spm_recipes = [
     Recipe(name='rgspm',
            products=[Product(name='rgspm', amount=1, type='item')],
               ingredients=[Ingredient(name='logistic-science-pack' ,amount=1, type='item'),

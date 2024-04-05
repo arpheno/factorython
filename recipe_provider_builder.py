@@ -1,6 +1,6 @@
 import json
 
-from custom_recipes import probe_recipes
+from custom_recipes import probe_recipes, spm_recipes
 from data_structures.recipe import Recipe, Product
 from materials import se_materials, nauvis_materials, minable_resources, basic_processing
 from parsing.recipe_parser import parse_recipes
@@ -12,6 +12,7 @@ def build_recipe_provider(recipes_path):
         recipes = json.load(f)
     recipes = parse_recipes(recipes)
     recipes.extend(probe_recipes)
+    recipes.extend(spm_recipes)
     recipe_provider = RecipeProvider(recipes=recipes)
     return recipe_provider
 

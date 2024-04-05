@@ -39,3 +39,18 @@ class RecipeProvider:
             [r.to_series() for r in self.recipes]).fillna(0).T
         recipes_df.drop(self.blocklist, axis=1, inplace=True)
         return recipes_df
+    def verify(self,target):
+        # verify that target can be built from ingredients in the recipe provider
+        try:
+            target_recipe = self.by_name(target)
+        except ValueError:
+            print(f"Could not find recipe for {target}")
+            print("Available recipes:")
+            for recipe in self.name_includes(target):
+                print(recipe.name)
+            raise ValueError(f"Recipe {target} not found")
+        for product in target_recipe.products:
+            if product.type == 'free':
+                continue
+            if product.type == 'item':
+                self.verify(product.name)

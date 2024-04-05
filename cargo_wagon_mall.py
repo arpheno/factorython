@@ -46,9 +46,9 @@ def cargo_wagon_mall():
                 "chemistry": "chemical-plant",
                 "pulverising": "assembling-machine-3",
             },
-        # 'target_products': [(2, 'rail'), (1, 'cargo-wagon'), (4, 'stack-filter-inserter'), (4, 'assembling-machine-2')],
-        'target_products': [(1,'rgspm')],
-        'max_assemblers':32,
+        'target_products': [(2, 'rail'), (1, 'cargo-wagon'), (4, 'stack-filter-inserter'), (4, 'assembling-machine-2')],
+        # 'target_products': [(1,'fast-inserter')],
+        'max_assemblers':8,
         'assembling_machine_modules':[
             "productivity-module-2","productivity-module-2","productivity-module-2","productivity-module-2",
         ]
@@ -110,10 +110,24 @@ def cargo_wagon_mall():
     line = production_line_builder.build()
     line.print()
 
+    entities, global_input, production_sites, ugly_reassignment = make_input_bad_name_idk(building_resolver, line)
+    # Now that we know the flow of goods, we can assign them to wagons by determining the order of machines
+    production_sites, flows = create_cargo_wagon_assignment_problem(
+        entities, global_input, production_sites, outputs=[product for factor, product in target_products]
+    )
+    blueprint_maker.make_blueprint(
+        production_sites,
+        ugly_reassignment=ugly_reassignment,
+        output=[product for factor, product in target_products],
+        flows=flows,
+    )
+    return line
+
+
+def make_input_bad_name_idk(building_resolver, line):
     production_sites = []
     global_input = {}
     entities = []
-
     for production_site in line.production_sites.values():
         if not "ltn" in production_site.recipe.name:
             rate = (
@@ -152,17 +166,7 @@ def cargo_wagon_mall():
     ugly_reassignment = {}
     for site, entity in zip(production_sites, entities):
         ugly_reassignment[site] = entity
-    # Now that we know the flow of goods, we can assign them to wagons by determining the order of machines
-    production_sites, flows = create_cargo_wagon_assignment_problem(
-        entities, global_input, production_sites, outputs=[product for factor, product in target_products]
-    )
-    blueprint_maker.make_blueprint(
-        production_sites,
-        ugly_reassignment=ugly_reassignment,
-        output=[product for factor, product in target_products],
-        flows=flows,
-    )
-    return line
+    return entities, global_input, production_sites, ugly_reassignment
 
 
 if __name__ == "__main__":

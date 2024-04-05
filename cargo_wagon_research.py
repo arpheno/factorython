@@ -18,6 +18,7 @@ from cargo_wagon_block_maker.output_infrastructure import OutputInfrastructure
 from cargo_wagon_block_maker.power import Substations
 from cargo_wagon_block_maker.train_head import TrainHead
 from cargo_wagon_block_maker.wagons import Wagons
+from cargo_wagon_mall import make_input_bad_name_idk
 from fake_assembly_machine import FakeAssemblyMachine
 from materials import minable_resources, basic_processing
 from model_finalizer import CargoWagonProblem, CargoWagonMallProblem
@@ -48,10 +49,10 @@ def cargo_wagon_mall():
                 "pulverising": "assembling-machine-3",
                 "researching": 'lab',
             },
-        # 'target_products': [(2, 'rail'), (1, 'cargo-wagon'), (4, 'stack-filter-inserter'), (4, 'assembling-machine-2')],
+        # 'target_products': [(1, 'cargo-wagon'), (4, 'stack-filter-inserter'), (4, 'assembling-machine-2')],
         'target_products': [(1,'rgbspm')],
         # 'target_products': [(1, 'automation-science-pack'), (1, 'chemical-science-pack'), (1,'logistic-science-pack')],
-        'max_assemblers':64,
+        'max_assemblers':48,
         'assembling_machine_modules':[
             "productivity-module-2","productivity-module-2","productivity-module-2","productivity-module-2",
         ]
@@ -113,50 +114,7 @@ def cargo_wagon_mall():
     )
     line = production_line_builder.build()
     line.print()
-
-    production_sites = []
-    global_input = {}
-    entities = []
-
-    for production_site in line.production_sites.values():
-        if not "ltn" in production_site.recipe.name:
-            rate = (
-                    building_resolver(production_site.recipe).crafting_speed
-                    / production_site.recipe.energy
-            )
-            products = {
-                product.name: product.average_amount
-                for product in production_site.recipe.products
-            }
-            ingredients = {
-                ingredient.name: -ingredient.amount
-                for ingredient in production_site.recipe.ingredients
-            }
-            for _ in range(floor(production_site.quantity)):
-                production_sites.append(production_site.recipe.name)
-                entity = {
-                    good: products.get(good, 0) * rate + ingredients.get(good, 0) * rate
-                    for good in products.keys() | ingredients.keys()
-                }
-                entities.append(entity)
-            if not ceil(production_site.quantity) == floor(production_site.quantity):
-                production_sites.append(production_site.recipe.name)
-                entity = {
-                    good: (products.get(good, 0) * rate + ingredients.get(good, 0) * rate) * (
-                            production_site.quantity - floor(production_site.quantity))
-                    for good in products.keys() | ingredients.keys()
-                }
-                entities.append(entity)
-
-        else:
-            global_input[
-                production_site.recipe.products[0].name
-            ] = production_site.quantity
-    pprint(production_sites)
-    ugly_reassignment = {}
-    for site, entity in zip(production_sites, entities):
-        ugly_reassignment[site] = entity
-    # Now that we know the flow of goods, we can assign them to wagons by determining the order of machines
+    entities, global_input, production_sites, ugly_reassignment = make_input_bad_name_idk(building_resolver, line)
     production_sites, flows = create_cargo_wagon_assignment_problem(
         entities, global_input, production_sites, outputs=[product for factor, product in target_products]
     )

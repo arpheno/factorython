@@ -63,7 +63,13 @@ def main():
     crafting_categories = parse_prototypes(assembly)
     building_resolver = BuildingResolver(
         crafting_categories,
-        overrides={"chemistry": "chemical-plant"},
+        overrides={"chemistry": "chemical-plant",
+                   'crafting': 'assembling-machine-1',
+                   'advanced-crafting': 'assembling-machine-1',
+                   'basic-crafting': 'assembling-machine-1',
+                   'space-supercomputing-1': 'se-space-supercomputer-1',
+                   'space-supercomputing-2': 'se-space-supercomputer-2',
+                   },
     )
     # deal with recipes
     recipes_path = "data/recipes.json"
@@ -79,23 +85,54 @@ def main():
             [
                 "advanced-circuit",
                 "se-space-coolant-warm",
-                "se-cryonite",
+                "se-space-coolant-supercooled",
+                "se-cryonite-rod",
                 "se-vitamelange",
+                # "se-vitamelange-spice",
+                # 'se-vitamelange-extract',
                 "se-vulcanite-block",
+                "se-core-fragment-se-vitamelange",
+                'se-iridium-ingot',
+                'se-heavy-bearing',
+                'se-heavy-girder',
+                'se-beryllium-ingot',
+                'se-bio-sludge',
+                'sulfur',
+                'se-heavy-composite',
+                'se-significant-data',
+                'se-iron-ingot'
+                'se-copper-ingot',
+                'se-holmium-ingot',
+                'uranium-235',
+                'se-heat-shielding',
+                'se-ion-stream',
+                'se-particle-stream',
+                'advanced-circuit',
+                'concrete',
+                'low-density-structure',
+                'electronic'
             ]
         ),
-        BuildingSpecificModuleInserter(
-            {"productivity": "productivity-module-3", "speed": "speed-module-3"},
-            building_resolver,
-            beacon_type="small",
-        ),
+        # BuildingSpecificModuleInserter(
+        #     {"productivity": "productivity-module-2", "speed": "speed-module-2"},
+        #     building_resolver,
+        #     beacon_type="small",
+        # ),
+
     ]
     recipe_provider = apply_transformations(recipe_provider, recipe_transformations)
-    time_running = 600
+    time_running = 60*15
+    # target = [('se-vitamelange-extract', 3.4)]
+    # target = [('electric-mining-drill', 1),('inserter',10),('transport-belt',10),('assembling-machine-1',5)]
+    # v = 0.77/10*(15/13.86)*(15/18.92)
 
+    # target = [(a, b * v) for a, b in target]
+    target = [('automation-science-pack', 2200/time_running), ('logistic-science-pack', 1300/time_running)]
+    # recipe_provider.verify(target[0][0])
     model_finalizer = ProductionLineProblem(
         # [("se-cryonite-rod", 2000.0 / time_running)]
-        [("se-vitalic-reagent", 2000.0 / time_running)]
+        # [("se-vulcanite-block", 15.0 / time_running)]
+        target
     )
     production_line_builder = ProductionLineBuilder(
         recipe_provider, building_resolver, model_finalizer

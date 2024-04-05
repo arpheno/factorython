@@ -1,3 +1,4 @@
+from itertools import product
 from pprint import pprint
 
 import pulp
@@ -26,6 +27,9 @@ def create_cargo_wagon_assignment_problem(entities, global_input, production_sit
                                   pulp.LpContinuous)
     flows = pulp.LpVariable.dicts("Flow", ((group, good) for group in range(N // 4 + 1) for good in goods), None, None,
                                   pulp.LpContinuous)
+    unique_flows = pulp.LpVariable.dicts("unique_flow",
+                                         ((group, good) for group in range(N // 4 + 1) for good in goods),
+                                         cat=pulp.LpBinary)
     inv = pulp.LpVariable.dicts("inv", ((group, good) for group in range(N // 4) for good in goods), None, None,
                                 pulp.LpContinuous)
     penalty = pulp.LpVariable.dicts("penalty", ((group, good) for group in range(N // 4) for good in goods), 0, None,
@@ -38,6 +42,7 @@ def create_cargo_wagon_assignment_problem(entities, global_input, production_sit
     # 2. Each position is assigned to exactly one entity
     for position in range(N):
         problem += pulp.lpSum(x[(entity, position)] for entity in range(N)) == 1
+
     groups = []
     for group_start in range(0, N, 4):
         groups.append(
@@ -48,6 +53,7 @@ def create_cargo_wagon_assignment_problem(entities, global_input, production_sit
     for good in goods:
         problem += flows[0, good] <= global_input.get(good, 0)
         problem += flows[len(groups), good] >= 0
+
     for g, group in enumerate(groups):
         for good in goods:
             # Sum up the contributions of all chosen entities in the group
@@ -62,12 +68,17 @@ def create_cargo_wagon_assignment_problem(entities, global_input, production_sit
             # The flows should be positive, so we add a penalty for negative flows
             problem += inv[g, good] >= -penalty[g, good]
             problem += flows[g, good] >= 0
+            problem += unique_flows[g, good] * 100000000 >= flows[g, good]
 
     # Objective: Minimize penalty
-    problem += lpSum(flows.values()) + lpSum(penalty.values()) * 10_000_000
+    flow_weighting = {'petroleum-gas': 0, 'water': 0, 'sulfuric-acid': 0, 'lubricant': 0,
+                      'automation-science-pack': 0.001, 'chemical-science-pack': 0.001, 'logistic-science-pack': 0.001}
+    flow_contribution = lpSum(flows[g, good] * flow_weighting.get(good, 1) for g, good in flows.keys())
+    # flow_contribution=lpSum(flows.values())
+    problem += flow_contribution + lpSum(penalty.values()) * 10_000_000
 
     # Solve the problem
-    problem.solve(pulp.PULP_CBC_CMD(mip=True, maxSeconds=20))
+    problem.solve(pulp.PULP_CBC_CMD(mip=True, maxSeconds=30))
 
     # Check the status of the solution
     result = []

@@ -26,7 +26,7 @@ def build_core_model(recipe_df, production_rates):
         problem += net_production[item] == p
 
     # Forbid production of trash
-    for item in {"se-broken-data", "se-contaminated-scrap"}:
+    for item in {"se-broken-data", "se-contaminated-scrap","se-scrap",'landfill','copper-ore','iron-ore','heavy-oil'}:
         problem += net_production[item] == 0
 
     problem.net_production = net_production

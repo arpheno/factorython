@@ -16,7 +16,9 @@ from cargo_wagon_block_maker.connectors import Connectors
 from cargo_wagon_block_maker.input_infrastructure import InputInfrastructure
 from cargo_wagon_block_maker.output_infrastructure import OutputInfrastructure
 from cargo_wagon_block_maker.power import  Substations
+from cargo_wagon_block_maker.train_head import TrainHead
 from cargo_wagon_block_maker.wagons import Wagons
+from cargo_wagon_mall import make_input_bad_name_idk
 from materials import  minable_resources, basic_processing
 from model_finalizer import CargoWagonProblem
 from module import ModuleBuilder, Module
@@ -43,8 +45,8 @@ def main():
         # 'kiln':'electric-furnace',
     }
     target_product = "se-delivery-cannon-capsule"  # "se-rocket-science-pack"
-    target_product = "satellite"  # "se-rocket-science-pack"
-    max_assemblers = 32
+    target_product = "se-cargo-rocket-section"  # "se-rocket-science-pack"
+    max_assemblers = 64
     # deal with buildings
     assembly_path = "data/assembly_machine.json"
     recipes_path = "data/recipes.json"
@@ -102,6 +104,7 @@ def main():
         "power": Substations(),
         "output_infrastructure": OutputInfrastructure(),
         "beacons": Beacons(),
+        'trainhead':TrainHead()
         # "roboports": Roboports(),
         # "lights": Lights(),
     }
@@ -116,42 +119,7 @@ def main():
     )
     line = production_line_builder.build()
     line.print()
-
-    production_sites = []
-    global_input = {}
-    entities = []
-
-    for production_site in line.production_sites.values():
-        if not "ltn" in production_site.recipe.name:
-            for q in range(ceil(production_site.quantity)):
-                production_sites.append(production_site.recipe.name)
-                rate = (
-                    building_resolver(production_site.recipe).crafting_speed
-                    / production_site.recipe.energy
-                )
-                products = {
-                    product.name: product.average_amount
-                    for product in production_site.recipe.products
-                }
-                ingredients = {
-                    ingredient.name: -ingredient.amount
-                    for ingredient in production_site.recipe.ingredients
-                }
-                entity = {
-                    good: products.get(good, 0) * rate + ingredients.get(good, 0) * rate
-                    for good in products.keys() | ingredients.keys()
-                }
-                entities.append(entity)
-        else:
-            global_input[
-                production_site.recipe.products[0].name
-            ] = production_site.quantity
-    pprint(production_sites)
-    # if len(global_input)>4:
-    #     raise Exception("This production line would require more than 4 pre-made things, but we only have 4 slots")
-    ugly_reassignment = {}
-    for site, entity in zip(production_sites, entities):
-        ugly_reassignment[site] = entity
+    entities, global_input, production_sites, ugly_reassignment = make_input_bad_name_idk(building_resolver, line)
     # Now that we know the flow of goods, we can assign them to wagons by determining the order of machines
     production_sites, flows = create_cargo_wagon_assignment_problem(
         entities, global_input, production_sites, outputs=[target_product]

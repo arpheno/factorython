@@ -96,9 +96,9 @@ def counting_combinator_without_bp(flow):
                                             first_signal=signal_each, output_signal=signal_each, second_constant=1)
     }
 
-    entities['constant'].signals = [
+    entities['constant'].signals = [# should be converted to constructor usage with control_behavior
         {"index": i + 1, "signal": {"type": "item", "name": item}, "count": flow[item]}
-        for i, item in enumerate(flow )if not item in ['lubricant', 'sulfuric-acid','heavy-oil','water']
+        for i, item in enumerate(flow )if not item in ['lubricant', 'sulfuric-acid','heavy-oil','water','petroleum-gas']
     ]
     for id, entity in entities.items():
         entity.id = id
