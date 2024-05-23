@@ -42,11 +42,20 @@ class BuildingSpecificModuleInserter:
         self.building_resolver = building_resolver
         self.beacon_power = {'': 0, 'small': 4, 'wab': 10}[beacon_type]
 
-    def __call__(self, recipe_provider) -> RecipeProvider:
+    def __call__(self, recipe_provider:RecipeProvider) -> RecipeProvider:
+        """
+        This function does two things to recipes. Both are done so that
+        we don't have to resolve various effects further down the line.
+        1. building speed is taken into account
+        2. modules are applied to the recipe
+        :param recipe_provider:
+        :return:
+        """
         for recipe in recipe_provider.recipes:
             if 'ltn' in recipe.name:
                 continue
             building = self.building_resolver(recipe)
+            recipe.energy = recipe.energy / building.crafting_speed
             module_slots =  building.module_specification.module_slots  if building.module_specification else 0
             if recipe.name in intermediate_products:
                 print(f'putting {module_slots} modules in {building.name} for {recipe.name}')
