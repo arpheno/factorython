@@ -7,9 +7,7 @@ from parsing.recipe_parser import parse_recipes
 from recipe_provider import RecipeProvider
 
 
-def build_recipe_provider(recipes_path):
-    with open(recipes_path, "r") as f:
-        recipes = json.load(f)
+def build_recipe_provider(recipes):
     recipes = parse_recipes(recipes)
     recipes.extend(probe_recipes)
     recipes.extend(spm_recipes)

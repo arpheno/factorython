@@ -1,4 +1,5 @@
 import json
+from functools import partial
 from math import ceil, floor
 from pprint import pprint
 
@@ -31,46 +32,42 @@ from recipe_provider_builder import (
     apply_transformations,
 )
 
-assembly_path = "data/assembly_machine.json"
-recipes_path = "data/recipes.json"
+import yaml
 
 
-def cargo_wagon_mall():
-    config = {
-        'building_resolver_overrides':
-            {
-                "crafting": "assembling-machine-3",
-                "basic-crafting": "assembling-machine-3",
-                "crafting-with-fluid": "assembling-machine-3",
-                "advanced-crafting": "assembling-machine-3",
-                "chemistry": "chemical-plant",
-                "pulverising": "assembling-machine-3",
-            },
-        'target_products': [(2, 'rail'), (1, 'cargo-wagon'), (4, 'stack-filter-inserter'), (4, 'assembling-machine-2')],
-        # 'target_products': [(1,'fast-inserter')],
-        'max_assemblers':8,
-        'assembling_machine_modules':[
-            "productivity-module-2","productivity-module-2","productivity-module-2","productivity-module-2",
-        ]
+def load_config(path):
+    with open(path, 'r') as file:
+        return yaml.safe_load(file)
 
-    }
-    target_products =config['target_products']
-    max_assemblers = config['max_assemblers']
-    # deal with buildings
-    assembling_machine_modules = config['assembling_machine_modules']
-    building_resolver_overrides=config['building_resolver_overrides']
 
-    with open(assembly_path, "r") as f:
-        assembly = json.load(f)
+def build_building_resolver(assembly, building_resolver_overrides):
     crafting_categories = parse_prototypes(assembly)
     building_resolver = BuildingResolver(
         crafting_categories,
         overrides=building_resolver_overrides,
     )
+    return building_resolver
 
-    recipe_provider = build_recipe_provider(recipes_path)
-    for _, target_product in target_products:
-        recipe_provider.by_name(target_product)
+
+def cargo_wagon_mall(config):
+    target_products = config['target_products']
+    max_assemblers = config['max_assemblers']
+    # deal with buildings
+    assembling_machine_modules = config['assembling_machine_modules']
+    building_resolver_overrides = config['building_resolver_overrides']
+    assembly_loader = partial(lambda path: json.load(open(path)), config['assembly_path'])
+    recipe_loader = partial(lambda path: json.load(open(path)), config['recipe_path'])
+
+    assembly = assembly_loader()
+    recipes = recipe_loader()
+
+    recipe_provider = build_recipe_provider(recipes)
+    building_resolver = build_building_resolver(assembly, building_resolver_overrides)
+    try:
+        for _, target_product in target_products:
+            recipe_provider.by_name(target_product)
+    except ValueError:
+        raise ValueError(f"Recipe {target_product} not found")
 
     recipe_transformations = [
         FreeRecipesAdder(minable_resources),
@@ -95,8 +92,6 @@ def cargo_wagon_mall():
         "output_infrastructure": OutputInfrastructure(),
         "beacons": Beacons(),
         "train_head": TrainHead(),
-        # "roboports": Roboports(),
-        # "lights": Lights(),
     }
     blueprint_maker = BlueprintMaker(
         modules=blueprint_maker_modules,
@@ -134,28 +129,15 @@ def make_input_bad_name_idk(building_resolver, line):
                     building_resolver(production_site.recipe).crafting_speed
                     / production_site.recipe.energy
             )
-            products = {
-                product.name: product.average_amount
-                for product in production_site.recipe.products
-            }
-            ingredients = {
-                ingredient.name: -ingredient.amount
-                for ingredient in production_site.recipe.ingredients
-            }
             for _ in range(floor(production_site.quantity)):
                 production_sites.append(production_site.recipe.name)
-                entity = {
-                    good: products.get(good, 0) * rate + ingredients.get(good, 0) * rate
-                    for good in products.keys() | ingredients.keys()
-                }
+                entity = production_site.recipe.summary() * rate
                 entities.append(entity)
             if not ceil(production_site.quantity) == floor(production_site.quantity):
+                # Unless we're producing a whole number of machines, we need to account for the fractional machine
                 production_sites.append(production_site.recipe.name)
-                entity = {
-                    good: (products.get(good, 0) * rate + ingredients.get(good, 0) * rate) * (
-                            production_site.quantity - floor(production_site.quantity))
-                    for good in products.keys() | ingredients.keys()
-                }
+                fractional_modifier = (production_site.quantity - floor(production_site.quantity))
+                entity = production_site.recipe.summary() * rate * fractional_modifier
                 entities.append(entity)
 
         else:
@@ -169,5 +151,11 @@ def make_input_bad_name_idk(building_resolver, line):
     return entities, global_input, production_sites, ugly_reassignment
 
 
+def business(assembly_loader, recipe_loader):
+    pass
+
+
 if __name__ == "__main__":
-    cargo_wagon_mall()
+    config_path = 'block_maker.yaml'
+    config = load_config(config_path)
+    cargo_wagon_mall(config)

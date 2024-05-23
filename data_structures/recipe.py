@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List, Union, Dict
 
 import pandas as pd
 from pydantic import BaseModel
@@ -24,6 +24,7 @@ class Product(BaseModel):
             return float(self.amount_min + self.amount_max) / 2 * self.probability
         else:
             raise ValueError("Product has no amount")
+
     def __str__(self):
         return f"type={self.type} amount={self.average_amount} name={self.name}"
 
@@ -71,12 +72,49 @@ class Item(BaseModel):
         return self.name == other.name
 
 
+class MultiplicableDict(dict):
+    def __mul__(self, other):
+        if isinstance(other, (int, float)):
+            return MultiplicableDict({key: value * other for key, value in self.items()})
+        else:
+            raise ValueError("Multiplication is only supported with numbers (int or float).")
+
+    def __rmul__(self, other):
+        return self.__mul__(other)
+
+
 class Recipe(BaseModel):
     name: str
     category: str
     products: List[Product]
     ingredients: List[Ingredient]
     energy: float
+
+    def summary(self) -> MultiplicableDict[str, float]:
+        """
+        Returns a summary of the recipe in the form of a dictionary
+        Example:
+        {
+            "iron-plate": 1,
+            "copper-plate": 0.5,
+            "iron-ore": -1
+        }
+        Positive values are things that are produced, negative values are things that are consumed
+        """
+        products = {
+            product.name: product.average_amount
+            for product in self.products
+        }
+        ingredients = {
+            ingredient.name: -ingredient.amount
+            for ingredient in self.ingredients
+        }
+
+        entity = {
+            good: products.get(good, 0) + ingredients.get(good, 0)
+            for good in products.keys() | ingredients.keys()
+        }
+        return MultiplicableDict(entity)
 
     def average_amount(self, product: Product):
         return next((p.average_amount for p in self.products if p.name == product.name), None)
