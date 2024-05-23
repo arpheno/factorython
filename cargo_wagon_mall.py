@@ -105,7 +105,13 @@ def cargo_wagon_mall(config):
     line = production_line_builder.build()
     line.print()
 
-    entities, global_input, production_sites, ugly_reassignment = make_input_bad_name_idk(building_resolver, line)
+    global_input = {
+        production_site.recipe.products[0].name: production_site.quantity
+        for production_site in line.production_sites.values()
+        if "ltn" in production_site.recipe.name
+    }
+
+    entities, production_sites, ugly_reassignment = make_input_bad_name_idk(building_resolver, line)
     # Now that we know the flow of goods, we can assign them to wagons by determining the order of machines
     production_sites, flows = create_cargo_wagon_assignment_problem(
         entities, global_input, production_sites, outputs=[product for factor, product in target_products]
@@ -121,34 +127,27 @@ def cargo_wagon_mall(config):
 
 def make_input_bad_name_idk(building_resolver, line):
     production_sites = []
-    global_input = {}
     entities = []
     for production_site in line.production_sites.values():
-        if not "ltn" in production_site.recipe.name:
-            rate = (
-                    building_resolver(production_site.recipe).crafting_speed
-                    / production_site.recipe.energy
-            )
-            for _ in range(floor(production_site.quantity)):
-                production_sites.append(production_site.recipe.name)
-                entity = production_site.recipe.summary() * rate
-                entities.append(entity)
-            if not ceil(production_site.quantity) == floor(production_site.quantity):
-                # Unless we're producing a whole number of machines, we need to account for the fractional machine
-                production_sites.append(production_site.recipe.name)
-                fractional_modifier = (production_site.quantity - floor(production_site.quantity))
-                entity = production_site.recipe.summary() * rate * fractional_modifier
-                entities.append(entity)
-
-        else:
-            global_input[
-                production_site.recipe.products[0].name
-            ] = production_site.quantity
+        rate = (
+                building_resolver(production_site.recipe).crafting_speed
+                / production_site.recipe.energy
+        )
+        for _ in range(floor(production_site.quantity)):
+            production_sites.append(production_site.recipe.name)
+            entity = production_site.recipe.summary() * rate
+            entities.append(entity)
+        if not ceil(production_site.quantity) == floor(production_site.quantity):
+            # Unless we're producing a whole number of machines, we need to account for the fractional machine
+            production_sites.append(production_site.recipe.name)
+            fractional_modifier = (production_site.quantity - floor(production_site.quantity))
+            entity = production_site.recipe.summary() * rate * fractional_modifier
+            entities.append(entity)
     pprint(production_sites)
     ugly_reassignment = {}
     for site, entity in zip(production_sites, entities):
         ugly_reassignment[site] = entity
-    return entities, global_input, production_sites, ugly_reassignment
+    return entities,  production_sites, ugly_reassignment
 
 
 def business(assembly_loader, recipe_loader):
