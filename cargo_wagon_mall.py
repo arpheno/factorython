@@ -1,10 +1,7 @@
 import json
 from functools import partial
-from math import ceil, floor
+from itertools import chain
 from pprint import pprint
-
-from draftsman.data import modules
-from draftsman.data.modules import raw as modules
 
 from building_resolver import BuildingResolver
 from cargo_wagon_block_maker.assembling_machines import (
@@ -20,15 +17,13 @@ from cargo_wagon_block_maker.power import Substations
 from cargo_wagon_block_maker.train_head import TrainHead
 from cargo_wagon_block_maker.wagons import Wagons
 from materials import minable_resources, basic_processing
-from model_finalizer import CargoWagonProblem, CargoWagonMallProblem
-from module import ModuleBuilder, Module
-from module_inserter import PrimitiveModuleInserter, BuildingSpecificModuleInserter
+from model_finalizer import  CargoWagonMallProblem
+from module_inserter import  BuildingSpecificModuleInserter
 from production_line_builder import ProductionLineBuilder
 from parsing.prototype_parser import parse_prototypes
 from recipe_provider_builder import (
     build_recipe_provider,
     FreeRecipesAdder,
-    RecipesRemover,
     apply_transformations,
 )
 
@@ -36,7 +31,7 @@ import yaml
 
 
 def load_config(path):
-    with open(path, 'r') as file:
+    with open(path, "r") as file:
         return yaml.safe_load(file)
 
 
@@ -50,13 +45,15 @@ def build_building_resolver(assembly, building_resolver_overrides):
 
 
 def cargo_wagon_mall(config):
-    target_products = config['target_products']
-    max_assemblers = config['max_assemblers']
+    target_products = config["target_products"]
+    max_assemblers = config["max_assemblers"]
     # deal with buildings
-    assembling_machine_modules = config['assembling_machine_modules']
-    building_resolver_overrides = config['building_resolver_overrides']
-    assembly_loader = partial(lambda path: json.load(open(path)), config['assembly_path'])
-    recipe_loader = partial(lambda path: json.load(open(path)), config['recipe_path'])
+    assembling_machine_modules = config["assembling_machine_modules"]
+    building_resolver_overrides = config["building_resolver_overrides"]
+    assembly_loader = partial(
+        lambda path: json.load(open(path)), config["assembly_path"]
+    )
+    recipe_loader = partial(lambda path: json.load(open(path)), config["recipe_path"])
 
     assembly = assembly_loader()
     recipes = recipe_loader()
@@ -96,7 +93,9 @@ def cargo_wagon_mall(config):
     blueprint_maker = BlueprintMaker(
         modules=blueprint_maker_modules,
     )
-    model_finalizer = CargoWagonMallProblem(target_products, max_assemblers=max_assemblers)
+    model_finalizer = CargoWagonMallProblem(
+        target_products, max_assemblers=max_assemblers
+    )
 
     # Determine the flow of goods through the production line
     production_line_builder = ProductionLineBuilder(
@@ -111,50 +110,33 @@ def cargo_wagon_mall(config):
         if "ltn" in production_site.recipe.name
     }
 
-    entities, production_sites, ugly_reassignment = make_input_bad_name_idk(building_resolver, line)
+    temp = chain(
+        *[
+            production_site.entities
+            for production_site in line.production_sites.values()
+            if  not "ltn" in production_site.recipe.name
+        ]
+    )
+    production_sites, entities = zip(*temp)
+    entity_lookup = {site: entity for site, entity in temp}
+    pprint(production_sites)
     # Now that we know the flow of goods, we can assign them to wagons by determining the order of machines
     production_sites, flows = create_cargo_wagon_assignment_problem(
-        entities, global_input, production_sites, outputs=[product for factor, product in target_products]
+        entities,
+        global_input,
+        production_sites,
+        outputs=[product for factor, product in target_products],
     )
     blueprint_maker.make_blueprint(
         production_sites,
-        ugly_reassignment=ugly_reassignment,
+        ugly_reassignment=entity_lookup,
         output=[product for factor, product in target_products],
         flows=flows,
     )
     return line
 
 
-def make_input_bad_name_idk(building_resolver, line):
-    production_sites = []
-    entities = []
-    for production_site in line.production_sites.values():
-        rate = (
-                building_resolver(production_site.recipe).crafting_speed
-                / production_site.recipe.energy
-        )
-        for _ in range(floor(production_site.quantity)):
-            production_sites.append(production_site.recipe.name)
-            entity = production_site.recipe.summary() * rate
-            entities.append(entity)
-        if not ceil(production_site.quantity) == floor(production_site.quantity):
-            # Unless we're producing a whole number of machines, we need to account for the fractional machine
-            production_sites.append(production_site.recipe.name)
-            fractional_modifier = (production_site.quantity - floor(production_site.quantity))
-            entity = production_site.recipe.summary() * rate * fractional_modifier
-            entities.append(entity)
-    pprint(production_sites)
-    ugly_reassignment = {}
-    for site, entity in zip(production_sites, entities):
-        ugly_reassignment[site] = entity
-    return entities,  production_sites, ugly_reassignment
-
-
-def business(assembly_loader, recipe_loader):
-    pass
-
-
 if __name__ == "__main__":
-    config_path = 'block_maker.yaml'
+    config_path = "block_maker.yaml"
     config = load_config(config_path)
     cargo_wagon_mall(config)
