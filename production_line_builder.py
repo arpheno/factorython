@@ -13,7 +13,7 @@ class ProductionLineBuilder:
         self.recipe_provider: RecipeProvider = recipe_provider
         self.building_resolver = building_resolver
         self.production_rates = {
-            recipe.name: self.building_resolver(recipe).crafting_speed / recipe.energy
+            recipe.name: 1/ recipe.energy
             for recipe in self.recipe_provider.recipes
             if self.building_resolver(recipe)
                is not None  # Free recipes are not craftable

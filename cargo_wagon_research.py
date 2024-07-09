@@ -7,9 +7,9 @@ from draftsman.data.modules import raw as modules
 
 from building_resolver import BuildingResolver
 from cargo_wagon_block_maker.assembling_machines import (
-    BlueprintMaker,
     AssemblingMachines,
 )
+from cargo_wagon_block_maker.blueprint_maker import BlueprintMaker
 from cargo_wagon_block_maker.beacons import Beacons
 from cargo_wagon_assignment_problem import create_cargo_wagon_assignment_problem
 from cargo_wagon_block_maker.connectors import Connectors
@@ -18,7 +18,6 @@ from cargo_wagon_block_maker.output_infrastructure import OutputInfrastructure
 from cargo_wagon_block_maker.power import Substations
 from cargo_wagon_block_maker.train_head import TrainHead
 from cargo_wagon_block_maker.wagons import Wagons
-from cargo_wagon_mall import make_input_bad_name_idk
 from fake_assembly_machine import FakeAssemblyMachine
 from materials import minable_resources, basic_processing
 from model_finalizer import CargoWagonProblem, CargoWagonMallProblem
@@ -49,31 +48,29 @@ def cargo_wagon_mall():
                 "pulverising": "assembling-machine-3",
                 "researching": 'lab',
             },
-        # 'target_products': [(1, 'cargo-wagon'), (4, 'stack-filter-inserter'), (4, 'assembling-machine-2')],
-        'target_products': [(1,'rgbspm')],
-        # 'target_products': [(1, 'automation-science-pack'), (1, 'chemical-science-pack'), (1,'logistic-science-pack')],
-        'max_assemblers':48,
-        'assembling_machine_modules':[
-            "productivity-module-2","productivity-module-2","productivity-module-2","productivity-module-2",
+        'target_products': [(1, 'rgbspm')],
+        'max_assemblers': 48,
+        'assembling_machine_modules': [
+            "productivity-module-2", "productivity-module-2", "productivity-module-2", "productivity-module-2",
         ]
 
     }
-    target_products =config['target_products']
+    target_products = config['target_products']
     max_assemblers = config['max_assemblers']
     # deal with buildings
     assembling_machine_modules = config['assembling_machine_modules']
-    building_resolver_overrides=config['building_resolver_overrides']
+    building_resolver_overrides = config['building_resolver_overrides']
 
     with open(assembly_path, "r") as f:
         assembly = json.load(f)
     crafting_categories = parse_prototypes(assembly)
-    crafting_categories['researching'] =[FakeAssemblyMachine("lab",1)]
+    crafting_categories['researching'] = [FakeAssemblyMachine("lab", 1)]
     building_resolver = BuildingResolver(
         crafting_categories,
         overrides=building_resolver_overrides,
     )
 
-    recipe_provider = build_recipe_provider(recipes_path)
+    recipe_provider = build_recipe_provider(recipes_path, building_resolver)
     for _, target_product in target_products:
         recipe_provider.by_name(target_product)
 
@@ -114,13 +111,27 @@ def cargo_wagon_mall():
     )
     line = production_line_builder.build()
     line.print()
-    entities, global_input, production_sites, ugly_reassignment = make_input_bad_name_idk(building_resolver, line)
+
+    global_input = {
+        production_site.recipe.products[0].name: production_site.quantity
+        for production_site in line.production_sites.values()
+        if "ltn" in production_site.recipe.name
+    }
+
+    temp = [
+        entity
+        for production_site in line.production_sites.values()
+        if not "ltn" in production_site.recipe.name
+        for entity in production_site.entities
+    ]
+    production_sites, entities = zip(*temp)
+    entity_lookup = {site: entity for site, entity in temp}
     production_sites, flows = create_cargo_wagon_assignment_problem(
         entities, global_input, production_sites, outputs=[product for factor, product in target_products]
     )
     blueprint_maker.make_blueprint(
         production_sites,
-        ugly_reassignment=ugly_reassignment,
+        entity_lookup=entity_lookup,
         output=[product for factor, product in target_products],
         flows=flows,
     )

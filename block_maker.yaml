@@ -1,3 +1,15 @@
+target_products:
+  - [ 2, rail ]
+  - [ 1, cargo-wagon ]
+  - [ 4, stack-filter-inserter ]
+  - [ 4, assembling-machine-2 ]
+max_assemblers: 32
+available_resources:
+  - "minable_resources"
+  - "basic_processing"
+additional_resources:
+  - "se-iron-ingot"
+  - "se-copper-ingot"
 building_resolver_overrides:
   crafting: assembling-machine-3
   basic-crafting: assembling-machine-3
@@ -5,16 +17,21 @@ building_resolver_overrides:
   advanced-crafting: assembling-machine-3
   chemistry: chemical-plant
   pulverising: assembling-machine-3
-assembly_path: data/assembly_machine.json
-recipe_path: data/recipes.json
-target_products:
-  - [2, rail]
-  - [1, cargo-wagon]
-  - [4, stack-filter-inserter]
-  - [4, assembling-machine-2]
-max_assemblers: 32
 assembling_machine_modules:
   - productivity-module-2
   - productivity-module-2
   - productivity-module-2
   - productivity-module-2
+beacon:
+  type: small
+  modules:
+    - speed-module-3
+    - speed-module-3
+    - speed-module-3
+    - speed-module-3
+    - speed-module-3
+    - speed-module-3
+    - speed-module-3
+    - speed-module-3
+assembly_path: data/assembly_machine.json
+recipe_path: data/recipes.json

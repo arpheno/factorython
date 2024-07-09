@@ -78,7 +78,7 @@ def create_cargo_wagon_assignment_problem(entities, global_input, production_sit
     problem += flow_contribution + lpSum(penalty.values()) * 10_000_000
 
     # Solve the problem
-    problem.solve(pulp.PULP_CBC_CMD(mip=True, maxSeconds=30))
+    problem.solve(pulp.PULP_CBC_CMD(mip=True, timeLimit=30))
 
     # Check the status of the solution
     result = []

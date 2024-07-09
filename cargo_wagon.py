@@ -7,9 +7,9 @@ from draftsman.data.modules import raw as modules
 
 from building_resolver import BuildingResolver
 from cargo_wagon_block_maker.assembling_machines import (
-    BlueprintMaker,
     AssemblingMachines,
 )
+from cargo_wagon_block_maker.blueprint_maker import BlueprintMaker
 from cargo_wagon_block_maker.beacons import Beacons
 from cargo_wagon_assignment_problem import create_cargo_wagon_assignment_problem
 from cargo_wagon_block_maker.connectors import Connectors
@@ -128,7 +128,7 @@ def main():
     # cargo_wagon_blueprint(production_sites, ugly_reassignment, output=target_product, flows=flows)
     blueprint_maker.make_blueprint(
         production_sites,
-        ugly_reassignment=ugly_reassignment,
+        entity_lookup=ugly_reassignment,
         output=target_product,
         flows=flows,
     )

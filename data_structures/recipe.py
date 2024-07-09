@@ -138,3 +138,18 @@ class Recipe(BaseModel):
 
     def __hash__(self):
         return hash(self.name)
+# i want a new EmbeddedRecipe class that is a subclass of Recipe but has a new field called building
+class EmbeddedRecipe(Recipe):
+    building: str
+
+    def __str__(self):
+        return super().__str__() + f"Building: {self.building}\n"
+
+    def to_series(self):
+        result = super().to_series()
+        result['building'] = self.building
+        return result
+
+    def __hash__(self):
+        return hash((self.name, self.building))
+

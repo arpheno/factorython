@@ -1,0 +1,16 @@
+assembly_path: data/assembly_machine.json
+recipe_path: data/recipes.json
+building_resolver_overrides:
+  crafting: "assembling-machine-3"
+  basic-crafting: "assembling-machine-3"
+  crafting-with-fluid: "assembling-machine-3"
+  advanced-crafting: "assembling-machine-3"
+  chemistry: "chemical-plant"
+  pulverising: "assembling-machine-3"
+  researching: "lab"
+target_products:
+  - [1, 'rgbspm']
+max_assemblers: 48
+assembling_machine_modules:
+  - "productivity-module-2"
+  - "speed-module-2"

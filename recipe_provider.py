@@ -4,7 +4,7 @@ from data_structures.recipe import Recipe, Product
 
 
 class RecipeProvider:
-    def __init__(self, recipes:[Recipe]):
+    def __init__(self, recipes:[Recipe],building_resolver):
         self.recipes = recipes
         # This really needs to be implemented more flexibly
         delivery_cannon = [r.name for r in recipes if "se-delivery-cannon-pack" in r.name]

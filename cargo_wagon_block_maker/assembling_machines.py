@@ -1,14 +1,10 @@
 from collections import Counter
-from itertools import chain
 
-from draftsman.classes.blueprint import Blueprint
 from draftsman.classes.group import Group
 from draftsman.constants import Direction
-from typing import Dict
 
 from building_resolver import BuildingResolver
 from cargo_wagon_block_maker.assembling_machines_group import AssemblingMachinesGroup
-from cargo_wagon_block_maker.bbmm import BlueprintMakerModule
 from recipe_provider import RecipeProvider
 
 
@@ -26,6 +22,8 @@ class AssemblingMachines:
         # Put half the machines in top row, half in bottom row (y is 0 or 7)
         # Offset by assembling machine width in x direction
         machine_positions = [(3 * (i % half), (i // half) * 7) for i in range(len(recipe_names))]
+        assert all(
+            "productivity" in module for module in self.modules), "All modules must be productivity for now until we fix the building specific module inserter"
         entities = [
             {
                 "name": machine,
@@ -41,7 +39,7 @@ class AssemblingMachines:
             try:
                 entity.import_export = import_export[entity.recipe]
             except:
-                key=next(x for x in import_export.keys() if 'spm' in x)
+                key = next(x for x in import_export.keys() if 'spm' in x)
                 entity.import_export = import_export[key]
         g.translate(-2, 1)
         blueprint.entities.append(g)
@@ -87,42 +85,3 @@ class ProductionLine(Group):
         self.output_infrastructure = output_infrastructure
         self.beacons = beacons
         self.power = power
-
-
-class BlueprintMaker:
-    def __init__(
-            self,
-            modules: Dict[str, BlueprintMakerModule],
-    ):
-        self.modules = modules
-
-    def make_blueprint(self, recipes, output, ugly_reassignment, flows):
-        # recipes is in a form of grouped recipes by 4, so the first two apply to the top row, the second two to the bottom row of a group of 4
-        # i need to reshape this into a list of recipes, where the first half is the top row, the second half is the bottom row for the entire row
-        # yield chunks of 4 recipes
-        def chunks(lst, n):
-            for i in range(0, len(lst), n):
-                yield lst[i:i + n]
-
-        # Oh god the horror
-
-        # This reshapes the top/bottom row enumeration of machines into a grouped enumeration of machines
-        # This is necessary because the decision making model works on groups and i'm too lazy to change it
-        # to the top/bottom row enumeration
-        mrecipes = list(chain.from_iterable(zip(chunks(recipes, 2))))
-        mrecipes = list(chain.from_iterable(mrecipes[::2])) + list(chain.from_iterable(mrecipes[1::2]))
-        default_build_args = dict(
-            recipe_names=mrecipes,
-            import_export=ugly_reassignment,
-            flows=flows,
-            outputs=output,
-        )
-
-        blueprint = Blueprint()
-        built_modules = {}
-        for key, module in self.modules.items():
-            built_modules[key] = module.build(blueprint=blueprint, **default_build_args)
-        # g = ProductionLine(**built_modules)
-        # blueprint.entities.append(g)
-        blueprint.generate_power_connections(only_axis=True)
-        print(blueprint.to_string())

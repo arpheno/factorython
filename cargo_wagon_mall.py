@@ -1,13 +1,12 @@
 import json
 from functools import partial
-from itertools import chain
 from pprint import pprint
 
 from building_resolver import BuildingResolver
 from cargo_wagon_block_maker.assembling_machines import (
-    BlueprintMaker,
     AssemblingMachines,
 )
+from cargo_wagon_block_maker.blueprint_maker import BlueprintMaker
 from cargo_wagon_block_maker.beacons import Beacons
 from cargo_wagon_assignment_problem import create_cargo_wagon_assignment_problem
 from cargo_wagon_block_maker.connectors import Connectors
@@ -16,27 +15,25 @@ from cargo_wagon_block_maker.output_infrastructure import OutputInfrastructure
 from cargo_wagon_block_maker.power import Substations
 from cargo_wagon_block_maker.train_head import TrainHead
 from cargo_wagon_block_maker.wagons import Wagons
+from config.schema import CargoWagonMallConfig
+from fake_assembly_machine import FakeAssemblyMachine
 from materials import minable_resources, basic_processing
-from model_finalizer import  CargoWagonMallProblem
-from module_inserter import  BuildingSpecificModuleInserter
+from model_finalizer import CargoWagonMallProblem
+from module_inserter import BuildingSpecificModuleInserter
 from production_line_builder import ProductionLineBuilder
 from parsing.prototype_parser import parse_prototypes
 from recipe_provider_builder import (
     build_recipe_provider,
     FreeRecipesAdder,
-    apply_transformations,
+    apply_transformations, RecipesRemover,
 )
 
 import yaml
 
 
-def load_config(path):
-    with open(path, "r") as file:
-        return yaml.safe_load(file)
-
-
 def build_building_resolver(assembly, building_resolver_overrides):
     crafting_categories = parse_prototypes(assembly)
+    crafting_categories['researching'] = [FakeAssemblyMachine("lab", 1)]
     building_resolver = BuildingResolver(
         crafting_categories,
         overrides=building_resolver_overrides,
@@ -44,41 +41,52 @@ def build_building_resolver(assembly, building_resolver_overrides):
     return building_resolver
 
 
-def cargo_wagon_mall(config):
-    target_products = config["target_products"]
-    max_assemblers = config["max_assemblers"]
-    # deal with buildings
-    assembling_machine_modules = config["assembling_machine_modules"]
-    building_resolver_overrides = config["building_resolver_overrides"]
-    assembly_loader = partial(
-        lambda path: json.load(open(path)), config["assembly_path"]
+def build_recipe_transformations(config, building_resolver):
+    module_inserter = BuildingSpecificModuleInserter(
+        modules={"productivity": config.assembling_machine_modules[0],
+                 "speed": config.beacon.modules[0]},  # This needs to be changed if we want flexible modules
+        beacon_type=config.beacon.type,
+        building_resolver=building_resolver,
     )
-    recipe_loader = partial(lambda path: json.load(open(path)), config["recipe_path"])
+    lookup = {
+        'minable_resources': minable_resources,
+        'basic_processing': basic_processing,
+    }
+    available_resources = [FreeRecipesAdder(lookup[x]) for x in config.available_resources]
+    return (available_resources +
+            [FreeRecipesAdder(config.additional_resources)] +
+            [RecipesRemover(config.unavailable_resources)] +
+            [module_inserter])
+
+
+def cargo_wagon_mall(config: CargoWagonMallConfig):
+    target_products = config.target_products
+    max_assemblers = config.max_assemblers
+    # deal with buildings
+    assembling_machine_modules = config.assembling_machine_modules
+    building_resolver_overrides = config.building_resolver_overrides
+    assembly_loader = partial(
+        lambda path: json.load(open(path)), config.assembly_path
+    )
+    recipe_loader = partial(lambda path: json.load(open(path)), config.recipe_path)
 
     assembly = assembly_loader()
     recipes = recipe_loader()
 
-    recipe_provider = build_recipe_provider(recipes)
     building_resolver = build_building_resolver(assembly, building_resolver_overrides)
+    recipe_provider = build_recipe_provider(recipes, building_resolver)
+    recipe_transformations = build_recipe_transformations(config, building_resolver)
+
     try:
         for _, target_product in target_products:
             recipe_provider.by_name(target_product)
     except ValueError:
         raise ValueError(f"Recipe {target_product} not found")
 
-    recipe_transformations = [
-        FreeRecipesAdder(minable_resources),
-        FreeRecipesAdder(basic_processing),
-        BuildingSpecificModuleInserter(
-            {"productivity": "productivity-module-2", "speed": "speed-module-2"},
-            building_resolver,
-            beacon_type="small",
-        ),
-    ]
     recipe_provider = apply_transformations(recipe_provider, recipe_transformations)
     blueprint_maker_modules = {
         "assembling_machines": AssemblingMachines(
-            modules=assembling_machine_modules,
+            modules=config.assembling_machine_modules,
             building_resolver=building_resolver,
             recipe_provider=recipe_provider,
         ),
@@ -110,13 +118,12 @@ def cargo_wagon_mall(config):
         if "ltn" in production_site.recipe.name
     }
 
-    temp = chain(
-        *[
-            production_site.entities
-            for production_site in line.production_sites.values()
-            if  not "ltn" in production_site.recipe.name
-        ]
-    )
+    temp = [
+        entity
+        for production_site in line.production_sites.values()
+        if not "ltn" in production_site.recipe.name
+        for entity in production_site.entities
+    ]
     production_sites, entities = zip(*temp)
     entity_lookup = {site: entity for site, entity in temp}
     pprint(production_sites)
@@ -129,7 +136,7 @@ def cargo_wagon_mall(config):
     )
     blueprint_maker.make_blueprint(
         production_sites,
-        ugly_reassignment=entity_lookup,
+        entity_lookup=entity_lookup,
         output=[product for factor, product in target_products],
         flows=flows,
     )
@@ -137,6 +144,13 @@ def cargo_wagon_mall(config):
 
 
 if __name__ == "__main__":
+    # from draftsman.env import update
+    # update(verbose=True,path='/Users/swozny/Library/Application Support/factorio/mods')  # equivalent to 'draftsman-update -v -p some/path'
+
     config_path = "block_maker.yaml"
-    config = load_config(config_path)
+
+    with open(config_path, 'r') as file:
+        yaml_data = yaml.safe_load(file)
+
+    config = CargoWagonMallConfig(**yaml_data)
     cargo_wagon_mall(config)
