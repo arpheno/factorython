@@ -65,16 +65,7 @@ class OutputInfrastructure(BlueprintMakerModule):
                 g.entities[-1].add_circuit_connection('red', i1, i2)
                 g.entities[-1].add_circuit_connection('green', i1, i2)
         # Lower belt
-        for machine in assembling_machines.bottom_row[1::4]:
-            p = undergrounds()
-            p.translate(machine.global_position['x'], machine.global_position['y'])
-            g.entities.append(p)
-        # Upper belt
-        for machine in assembling_machines.top_row[1::4]:
-            p = undergrounds()
-            p.translate(machine.global_position['x'], machine.global_position['y'])
-            p.translate(0, -6)  # To offset it from below the machine to above
-            g.entities.append(p)
+        self.output_destination(assembling_machines, g)
         # upper output
         # underground = UndergroundBelt(**{
         #     "name": "underground-belt",
@@ -138,6 +129,18 @@ class OutputInfrastructure(BlueprintMakerModule):
             except:
                 print(f"Didn't make circuit connection for {i}")
         return g
+
+    def output_destination(self, assembling_machines, g):
+        for machine in assembling_machines.bottom_row[1::4]:
+            p = undergrounds()
+            p.translate(machine.global_position['x'], machine.global_position['y'])
+            g.entities.append(p)
+        # Upper belt
+        for machine in assembling_machines.top_row[1::4]:
+            p = undergrounds()
+            p.translate(machine.global_position['x'], machine.global_position['y'])
+            p.translate(0, -6)  # To offset it from below the machine to above
+            g.entities.append(p)
 
     def inserter(self, machine,i):
         output_product_mapping = {0: 1, 2: 1, 1: -1, 3: -1}

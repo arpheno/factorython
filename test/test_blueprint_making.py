@@ -417,10 +417,12 @@ def test_make_blueprint(recorded_data, config):
     # Assert the function was called as expected (use a mock library if needed)
     assert isinstance(blueprint, Blueprint)
     print(blueprint.to_string())
+
+
 def test_make_blueprint_one_liquid(recorded_data, config):
     # Assuming BlueprintMaker is a mockable class
     target_products = config.target_products
-    config.output.liquids=['petroleum-gas']
+    config.output.liquids = ['petroleum-gas']
     building_resolver_overrides = config.building_resolver_overrides
     assembly_loader = partial(
         lambda path: json.load(open(path)), config.assembly_path
@@ -462,10 +464,12 @@ def test_make_blueprint_one_liquid(recorded_data, config):
     # Assert the function was called as expected (use a mock library if needed)
     assert isinstance(blueprint, Blueprint)
     print(blueprint.to_string())
+
+
 def test_make_blueprint_two_liquids(recorded_data, config):
     # Assuming BlueprintMaker is a mockable class
     target_products = config.target_products
-    config.output.liquids=['petroleum-gas','light-oil']
+    config.output.liquids = ['petroleum-gas', 'light-oil']
     building_resolver_overrides = config.building_resolver_overrides
     assembly_loader = partial(
         lambda path: json.load(open(path)), config.assembly_path
@@ -507,10 +511,200 @@ def test_make_blueprint_two_liquids(recorded_data, config):
     # Assert the function was called as expected (use a mock library if needed)
     assert isinstance(blueprint, Blueprint)
     print(blueprint.to_string())
+
+
 def test_make_blueprint_three_liquids(recorded_data, config):
     # Assuming BlueprintMaker is a mockable class
     target_products = config.target_products
-    config.output.liquids=['petroleum-gas','light-oil','water']
+    config.output.liquids = ['petroleum-gas', 'light-oil', 'water']
+    building_resolver_overrides = config.building_resolver_overrides
+    assembly_loader = partial(
+        lambda path: json.load(open(path)), config.assembly_path
+    )
+    recipe_loader = partial(lambda path: json.load(open(path)), config.recipe_path)
+
+    assembly = assembly_loader()
+    recipes = recipe_loader()
+
+    building_resolver = build_building_resolver(assembly, building_resolver_overrides)
+    recipe_provider = build_recipe_provider(recipes, building_resolver)
+    blueprint_maker_modules = {
+        "assembling_machines": AssemblingMachines(
+            modules=config.assembling_machine_modules,
+            building_resolver=building_resolver,
+            recipe_provider=recipe_provider,
+        ),
+        "connectors": Connectors(),
+        "wagons": Wagons(),
+        "input_infrastructure": InputInfrastructure(),
+        "power": Substations(),
+        "output_infrastructure": output_infrastructure_factory(config.output),
+        "beacons": Beacons(),
+        "train_head": train_head_factory(config.output),
+    }
+    blueprint_maker = BlueprintMaker(
+        modules=blueprint_maker_modules,
+    )
+    production_sites = recorded_data["production_sites"]
+    entity_lookup = recorded_data["entity_lookup"]
+    flows = recorded_data["flows"]
+    blueprint = blueprint_maker.make_blueprint(
+        production_sites,
+        entity_lookup=entity_lookup,
+        output=[product for factor, product in target_products],
+        flows=flows,
+    )
+
+    # Assert the function was called as expected (use a mock library if needed)
+    assert isinstance(blueprint, Blueprint)
+    print(blueprint.to_string())
+
+
+def test_make_blueprint_chest(recorded_data, config):
+    # Assuming BlueprintMaker is a mockable class
+    target_products = config.target_products
+    config.output.type = 'chest'
+    building_resolver_overrides = config.building_resolver_overrides
+    assembly_loader = partial(
+        lambda path: json.load(open(path)), config.assembly_path
+    )
+    recipe_loader = partial(lambda path: json.load(open(path)), config.recipe_path)
+
+    assembly = assembly_loader()
+    recipes = recipe_loader()
+
+    building_resolver = build_building_resolver(assembly, building_resolver_overrides)
+    recipe_provider = build_recipe_provider(recipes, building_resolver)
+    blueprint_maker_modules = {
+        "assembling_machines": AssemblingMachines(
+            modules=config.assembling_machine_modules,
+            building_resolver=building_resolver,
+            recipe_provider=recipe_provider,
+        ),
+        "connectors": Connectors(),
+        "wagons": Wagons(),
+        "input_infrastructure": InputInfrastructure(),
+        "power": Substations(),
+        "output_infrastructure": output_infrastructure_factory(config.output),
+        "beacons": Beacons(),
+        "train_head": train_head_factory(config.output),
+    }
+    blueprint_maker = BlueprintMaker(
+        modules=blueprint_maker_modules,
+    )
+    production_sites = recorded_data["production_sites"]
+    entity_lookup = recorded_data["entity_lookup"]
+    flows = recorded_data["flows"]
+    blueprint = blueprint_maker.make_blueprint(
+        production_sites,
+        entity_lookup=entity_lookup,
+        output=[product for factor, product in target_products],
+        flows=flows,
+    )
+
+    # Assert the function was called as expected (use a mock library if needed)
+    assert isinstance(blueprint, Blueprint)
+    print(blueprint.to_string())
+
+
+def test_make_blueprint_one_liquid(recorded_data, config):
+    # Assuming BlueprintMaker is a mockable class
+    target_products = config.target_products
+    config.output.liquids = ['petroleum-gas']
+    building_resolver_overrides = config.building_resolver_overrides
+    assembly_loader = partial(
+        lambda path: json.load(open(path)), config.assembly_path
+    )
+    recipe_loader = partial(lambda path: json.load(open(path)), config.recipe_path)
+
+    assembly = assembly_loader()
+    recipes = recipe_loader()
+
+    building_resolver = build_building_resolver(assembly, building_resolver_overrides)
+    recipe_provider = build_recipe_provider(recipes, building_resolver)
+    blueprint_maker_modules = {
+        "assembling_machines": AssemblingMachines(
+            modules=config.assembling_machine_modules,
+            building_resolver=building_resolver,
+            recipe_provider=recipe_provider,
+        ),
+        "connectors": Connectors(),
+        "wagons": Wagons(),
+        "input_infrastructure": InputInfrastructure(),
+        "power": Substations(),
+        "output_infrastructure": output_infrastructure_factory(config.output),
+        "beacons": Beacons(),
+        "train_head": train_head_factory(config.output),
+    }
+    blueprint_maker = BlueprintMaker(
+        modules=blueprint_maker_modules,
+    )
+    production_sites = recorded_data["production_sites"]
+    entity_lookup = recorded_data["entity_lookup"]
+    flows = recorded_data["flows"]
+    blueprint = blueprint_maker.make_blueprint(
+        production_sites,
+        entity_lookup=entity_lookup,
+        output=[product for factor, product in target_products],
+        flows=flows,
+    )
+
+    # Assert the function was called as expected (use a mock library if needed)
+    assert isinstance(blueprint, Blueprint)
+    print(blueprint.to_string())
+
+
+def test_make_blueprint_two_liquids(recorded_data, config):
+    # Assuming BlueprintMaker is a mockable class
+    target_products = config.target_products
+    config.output.liquids = ['petroleum-gas', 'light-oil']
+    building_resolver_overrides = config.building_resolver_overrides
+    assembly_loader = partial(
+        lambda path: json.load(open(path)), config.assembly_path
+    )
+    recipe_loader = partial(lambda path: json.load(open(path)), config.recipe_path)
+
+    assembly = assembly_loader()
+    recipes = recipe_loader()
+
+    building_resolver = build_building_resolver(assembly, building_resolver_overrides)
+    recipe_provider = build_recipe_provider(recipes, building_resolver)
+    blueprint_maker_modules = {
+        "assembling_machines": AssemblingMachines(
+            modules=config.assembling_machine_modules,
+            building_resolver=building_resolver,
+            recipe_provider=recipe_provider,
+        ),
+        "connectors": Connectors(),
+        "wagons": Wagons(),
+        "input_infrastructure": InputInfrastructure(),
+        "power": Substations(),
+        "output_infrastructure": output_infrastructure_factory(config.output),
+        "beacons": Beacons(),
+        "train_head": train_head_factory(config.output),
+    }
+    blueprint_maker = BlueprintMaker(
+        modules=blueprint_maker_modules,
+    )
+    production_sites = recorded_data["production_sites"]
+    entity_lookup = recorded_data["entity_lookup"]
+    flows = recorded_data["flows"]
+    blueprint = blueprint_maker.make_blueprint(
+        production_sites,
+        entity_lookup=entity_lookup,
+        output=[product for factor, product in target_products],
+        flows=flows,
+    )
+
+    # Assert the function was called as expected (use a mock library if needed)
+    assert isinstance(blueprint, Blueprint)
+    print(blueprint.to_string())
+
+
+def test_make_blueprint_three_liquids(recorded_data, config):
+    # Assuming BlueprintMaker is a mockable class
+    target_products = config.target_products
+    config.output.liquids = ['petroleum-gas', 'light-oil', 'water']
     building_resolver_overrides = config.building_resolver_overrides
     assembly_loader = partial(
         lambda path: json.load(open(path)), config.assembly_path

@@ -13,6 +13,7 @@ from cargo_wagon_assignment_problem import create_cargo_wagon_assignment_problem
 from cargo_wagon_block_maker.connectors import Connectors
 from cargo_wagon_block_maker.input_infrastructure import InputInfrastructure
 from cargo_wagon_block_maker.output_infrastructure import OutputInfrastructure
+from cargo_wagon_block_maker.output_infrastructure_chest import OutputInfrastructureChest
 from cargo_wagon_block_maker.power import Substations
 from cargo_wagon_block_maker.train_head import TrainHead
 from cargo_wagon_block_maker.train_head_one_liquids import TrainHeadOneLiquid
@@ -43,6 +44,7 @@ def output_infrastructure_factory(output):
     cls = {
         "belt": OutputInfrastructure,
         "none": OutputInfrastructure,
+        'chest': OutputInfrastructureChest,
     }
     return cls[output.type]()
 
@@ -134,7 +136,7 @@ if __name__ == "__main__":
     # from draftsman.env import update
     # update(verbose=True,path='/Users/swozny/Library/Application Support/factorio/mods')  # equivalent to 'draftsman-update -v -p some/path'
 
-    config_path = "config/block_maker.yaml"
+    config_path = "config/robot_frames.yaml"
 
     with open(config_path, 'r') as file:
         yaml_data = yaml.safe_load(file)
