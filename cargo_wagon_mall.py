@@ -2,7 +2,8 @@ import json
 from functools import partial
 from pprint import pprint
 
-from building_resolver import BuildingResolver
+from builders.building_resolver import build_building_resolver
+from builders.recipe_transformations import build_recipe_transformations
 from cargo_wagon_block_maker.assembling_machines import (
     AssemblingMachines,
 )
@@ -14,56 +15,42 @@ from cargo_wagon_block_maker.input_infrastructure import InputInfrastructure
 from cargo_wagon_block_maker.output_infrastructure import OutputInfrastructure
 from cargo_wagon_block_maker.power import Substations
 from cargo_wagon_block_maker.train_head import TrainHead
+from cargo_wagon_block_maker.train_head_one_liquids import TrainHeadOneLiquid
+from cargo_wagon_block_maker.train_head_three_liquids import TrainHeadThreeLiquids
+from cargo_wagon_block_maker.train_head_two_liquid import TrainHeadTwoLiquids
 from cargo_wagon_block_maker.wagons import Wagons
 from config.schema import CargoWagonMallConfig
-from fake_assembly_machine import FakeAssemblyMachine
-from materials import minable_resources, basic_processing
 from model_finalizer import CargoWagonMallProblem
-from module_inserter import BuildingSpecificModuleInserter
 from production_line_builder import ProductionLineBuilder
-from parsing.prototype_parser import parse_prototypes
 from recipe_provider_builder import (
     build_recipe_provider,
-    FreeRecipesAdder,
-    apply_transformations, RecipesRemover,
-)
+    apply_transformations, )
 
 import yaml
 
 
-def build_building_resolver(assembly, building_resolver_overrides):
-    crafting_categories = parse_prototypes(assembly)
-    crafting_categories['researching'] = [FakeAssemblyMachine("lab", 1)]
-    building_resolver = BuildingResolver(
-        crafting_categories,
-        overrides=building_resolver_overrides,
-    )
-    return building_resolver
-
-
-def build_recipe_transformations(config, building_resolver):
-    module_inserter = BuildingSpecificModuleInserter(
-        modules={"productivity": config.assembling_machine_modules[0],
-                 "speed": config.beacon.modules[0]},  # This needs to be changed if we want flexible modules
-        beacon_type=config.beacon.type,
-        building_resolver=building_resolver,
-    )
-    lookup = {
-        'minable_resources': minable_resources,
-        'basic_processing': basic_processing,
+def train_head_factory(output):
+    cls = {
+        0: TrainHead,
+        1: TrainHeadOneLiquid,
+        2: TrainHeadTwoLiquids,
+        3: TrainHeadThreeLiquids,
     }
-    available_resources = [FreeRecipesAdder(lookup[x]) for x in config.available_resources]
-    return (available_resources +
-            [FreeRecipesAdder(config.additional_resources)] +
-            [RecipesRemover(config.unavailable_resources)] +
-            [module_inserter])
+    return cls[len(output.liquids)](liquids=output.liquids)
+
+
+def output_infrastructure_factory(output):
+    cls = {
+        "belt": OutputInfrastructure,
+        "none": OutputInfrastructure,
+    }
+    return cls[output.type]()
 
 
 def cargo_wagon_mall(config: CargoWagonMallConfig):
     target_products = config.target_products
     max_assemblers = config.max_assemblers
     # deal with buildings
-    assembling_machine_modules = config.assembling_machine_modules
     building_resolver_overrides = config.building_resolver_overrides
     assembly_loader = partial(
         lambda path: json.load(open(path)), config.assembly_path
@@ -94,9 +81,9 @@ def cargo_wagon_mall(config: CargoWagonMallConfig):
         "wagons": Wagons(),
         "input_infrastructure": InputInfrastructure(),
         "power": Substations(),
-        "output_infrastructure": OutputInfrastructure(),
+        "output_infrastructure": output_infrastructure_factory(config.output),
         "beacons": Beacons(),
-        "train_head": TrainHead(),
+        "train_head": train_head_factory(config.output),
     }
     blueprint_maker = BlueprintMaker(
         modules=blueprint_maker_modules,
@@ -147,7 +134,7 @@ if __name__ == "__main__":
     # from draftsman.env import update
     # update(verbose=True,path='/Users/swozny/Library/Application Support/factorio/mods')  # equivalent to 'draftsman-update -v -p some/path'
 
-    config_path = "block_maker.yaml"
+    config_path = "config/block_maker.yaml"
 
     with open(config_path, 'r') as file:
         yaml_data = yaml.safe_load(file)

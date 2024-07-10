@@ -46,3 +46,4 @@ class BlueprintMaker:
             built_modules[key] = module.build(blueprint=blueprint, **default_build_args)
         blueprint.generate_power_connections(only_axis=True)
         print(blueprint.to_string())
+        return blueprint

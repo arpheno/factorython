@@ -10,6 +10,10 @@ available_resources:
 additional_resources:
   - "se-iron-ingot"
   - "se-copper-ingot"
+output:
+  type: "belt"
+  liquids:
+    - "petroleum-gas"
 building_resolver_overrides:
   crafting: assembling-machine-3
   basic-crafting: assembling-machine-3

@@ -8,6 +8,11 @@ class Beacon(BaseModel):
     modules: List[str]
 
 
+class OutputConfig(BaseModel):
+    liquids: List[str] = []
+    type: str = 'chest'
+
+
 class CargoWagonMallConfig(BaseModel):
     target_products: List
     max_assemblers: int
@@ -19,6 +24,7 @@ class CargoWagonMallConfig(BaseModel):
     beacon: Beacon
     assembly_path: str
     recipe_path: str
+    output: OutputConfig
 
 
 if __name__ == '__main__':
