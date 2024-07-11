@@ -16,6 +16,7 @@ def build_recipe_provider(recipes,building_resolver):
 
 def apply_transformations(recipe_provider: RecipeProvider, transformations) -> RecipeProvider:
     for transformation in transformations:
+        print(f'Applying transformation {transformation}')
         recipe_provider = transformation(recipe_provider)
     return recipe_provider
 

@@ -1,4 +1,5 @@
-from typing import Dict
+from collections import Counter
+from typing import Dict, List
 
 from draftsman.data.modules import raw
 
@@ -8,7 +9,25 @@ from module import Module, ModuleBuilder
 from recipe_provider import RecipeProvider
 
 
-class PrimitiveModuleInserter:
+def transformer_factory(name, **kwargs):
+    cls = {
+        'primitive_module_inserter': PrimitiveModuleInserter,
+        'small_beacon': SmallBeacon,
+        'building_speed_applier': BuildingSpeedApplier,
+        'module_inserter': BuildingSpecificModuleInserter,
+    }
+    return cls[name](**kwargs)
+
+
+class Transformer:
+    def __init__(self, **kwargs):
+        pass
+
+    def __call__(self, recipe_provider: RecipeProvider) -> RecipeProvider:
+        return recipe_provider
+
+
+class PrimitiveModuleInserter(Transformer):
     def __init__(self, modules: Dict[str, Module]):
         self.modules = modules
 
@@ -35,35 +54,63 @@ def insert_module(recipe_provider, modules: Dict[str, Module]):
 
     return recipe_provider
 
-class BuildingSpecificModuleInserter:
-    def __init__(self, modules: Dict[str, str], building_resolver: BuildingResolver, beacon_type: str = ''):
-        module_builder = ModuleBuilder(raw)
-        self.modules = {k: module_builder.build(name) for k, name in modules.items()}
-        self.building_resolver = building_resolver
-        self.beacon_power = {'': 0, 'small': 4, 'wab': 10}[beacon_type]
 
-    def __call__(self, recipe_provider:RecipeProvider) -> RecipeProvider:
-        """
-        This function does two things to recipes. Both are done so that
-        we don't have to resolve various effects further down the line.
-        1. building speed is taken into account
-        2. modules are applied to the recipe
-        :param recipe_provider:
-        :return:
-        """
+class SmallBeacon(Transformer):
+    def __init__(self, modules: List[str], **kwargs):
+        module_builder = ModuleBuilder(raw)
+        module_spec = Counter(modules)
+        self.module = Module(name='none')
+        for module in modules:
+            self.module += module_builder.build(module)
+        self.beacon_power = {'': 0, 'small': 0.5, 'wab': 10}
+
+    def __call__(self, recipe_provider: RecipeProvider) -> RecipeProvider:
+        for recipe in recipe_provider.recipes:
+            if 'ltn' in recipe.name:
+                continue
+            module = self.module * 0.5
+            module(recipe)
+        return recipe_provider
+
+
+class BuildingSpecificModuleInserter(Transformer):
+    def __init__(self, modules: List[str], building_resolver: BuildingResolver, **kwargs):
+        module_builder = ModuleBuilder(raw)
+        self.modules = {
+        }
+        if any('productivity' in module for module in modules):
+            self.modules['productivity'] = module_builder.build('productivity-module-3')
+        else:
+            self.modules['productivity'] = Module(name='none')
+        if any('speed' in module for module in modules):
+            self.modules['speed'] = module_builder.build('speed-module-3')
+        else:
+            self.modules['speed'] = Module(name='none')
+        self.building_resolver = building_resolver
+
+    def __call__(self, recipe_provider: RecipeProvider) -> RecipeProvider:
+        for recipe in recipe_provider.recipes:
+            if 'ltn' in recipe.name:
+                continue
+            building = self.building_resolver(recipe)
+            module_slots = building.module_specification.module_slots if building.module_specification else 0
+            if recipe.name in intermediate_products:
+                module = self.modules['productivity'] * module_slots
+            else:
+                module = self.modules['speed'] * module_slots
+
+            module(recipe)
+        return recipe_provider
+
+
+class BuildingSpeedApplier(Transformer):
+    def __init__(self, modules: Dict[str, str], building_resolver: BuildingResolver, **kwargs):
+        self.building_resolver = building_resolver
+
+    def __call__(self, recipe_provider: RecipeProvider) -> RecipeProvider:
         for recipe in recipe_provider.recipes:
             if 'ltn' in recipe.name:
                 continue
             building = self.building_resolver(recipe)
             recipe.energy = recipe.energy / building.crafting_speed
-            module_slots =  building.module_specification.module_slots  if building.module_specification else 0
-            if recipe.name in intermediate_products:
-                print(f'putting {module_slots} modules in {building.name} for {recipe.name}')
-                module = self.modules['productivity'] * module_slots+ \
-                         self.modules['speed'] * self.beacon_power
-            else:
-                module = self.modules['speed'] * module_slots+ \
-                         self.modules['speed'] * self.beacon_power
-
-            module(recipe)
         return recipe_provider

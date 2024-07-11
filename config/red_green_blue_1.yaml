@@ -1,0 +1,33 @@
+target_products:
+  - [ 1, automation-science-pack ]
+  - [ 1, logistic-science-pack ]
+  - [ 1, chemical-science-pack ]
+max_assemblers: 32
+available_resources:
+  - "minable_resources"
+  - "basic_processing"
+output: "chest"
+building_resolver_overrides:
+  crafting: assembling-machine-2
+  basic-crafting: assembling-machine-2
+  advanced-crafting: assembling-machine-2
+  chemistry: chemical-plant
+  pulverising: assembling-machine-2
+assembling_machine_modules:
+  - productivity-module-2
+  - productivity-module-2
+  - productivity-module-2
+  - productivity-module-2
+beacon:
+  type: small
+  modules:
+    - speed-module-3
+    - speed-module-3
+    - speed-module-3
+    - speed-module-3
+    - speed-module-3
+    - speed-module-3
+    - speed-module-3
+    - speed-module-3
+assembly_path: data/assembly_machine.json
+recipe_path: data/recipes.json

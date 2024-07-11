@@ -30,14 +30,14 @@ from recipe_provider_builder import (
 import yaml
 
 
-def train_head_factory(liquids):
+def train_head_factory(liquids,**kwargs):
     cls = {
         0: TrainHead,
         1: TrainHeadOneLiquid,
         2: TrainHeadTwoLiquids,
         3: TrainHeadThreeLiquids,
     }
-    return cls[len(liquids)](liquids=liquids)
+    return cls[len(liquids)](liquids=liquids,**kwargs)
 
 
 def output_infrastructure_factory(output):
@@ -113,13 +113,13 @@ def cargo_wagon_mall(config: CargoWagonMallConfig):
             building_resolver=building_resolver,
             recipe_provider=recipe_provider,
         ),
-        "connectors": Connectors(),
+        "connectors": Connectors(inserter_type=config.inserter_type, inserter_capacity_bonus_level=config.inserter_capacity_bonus),
         "wagons": Wagons(),
         "input_infrastructure": InputInfrastructure(),
         "power": Substations(),
         "output_infrastructure": output_infrastructure_factory(config.output),
         "beacons": Beacons(),
-        "train_head": train_head_factory(liquids),
+        "train_head": train_head_factory(liquids,inserter_type=config.inserter_type, inserter_capacity_bonus=config.inserter_capacity_bonus),
     }
     blueprint_maker = BlueprintMaker(
         modules=blueprint_maker_modules,
@@ -137,7 +137,7 @@ if __name__ == "__main__":
     # from draftsman.env import update
     # update(verbose=True,path='/Users/swozny/Library/Application Support/factorio/mods')  # equivalent to 'draftsman-update -v -p some/path'
 
-    config_path = "config/stack_filter_inserters.yaml"
+    config_path = "config/fast_inserters.yaml"
 
     with open(config_path, 'r') as file:
         yaml_data = yaml.safe_load(file)

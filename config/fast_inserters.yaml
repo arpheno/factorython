@@ -1,6 +1,7 @@
 target_products:
   - [ 1, fast-inserter]
-max_assemblers: 32
+max_assemblers: 24
+inserter_type: "filter-inserter"
 available_resources:
   - "minable_resources"
   - "basic_processing"
@@ -31,5 +32,25 @@ beacon:
     - speed-module-3
     - speed-module-3
     - speed-module-3
+transformations:
+  - name: 'building_speed_applier'
+  - name: 'small_beacon'
+    modules:
+      - speed-module-3
+      - speed-module-3
+      - speed-module-3
+      - speed-module-3
+      - speed-module-3
+      - speed-module-3
+      - speed-module-3
+      - speed-module-3
+  - name: 'module_inserter'
+    modules:
+      - productivity-module-2
+      - productivity-module-2
+      - productivity-module-2
+      - productivity-module-2
+
+
 assembly_path: data/assembly_machine.json
 recipe_path: data/recipes.json
