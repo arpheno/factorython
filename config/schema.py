@@ -1,30 +1,33 @@
-import yaml
-from pydantic import BaseModel, conlist
 from typing import List, Dict
-
+from pydantic import BaseModel
+import yaml
 
 class Beacon(BaseModel):
     type: str
     modules: List[str]
 
-
 class OutputConfig(BaseModel):
     type: str = 'chest'
 
+class Transformation(BaseModel):
+    name: str
+    modules: List[str] = []
 
 class CargoWagonMallConfig(BaseModel):
-    target_products: List
+    target_products: List[List]  # List of lists to accommodate [1, fast-inserter]
     max_assemblers: int
     available_resources: List[str] = []
     additional_resources: List[str] = []
     unavailable_resources: List[str] = []
+    assembling_machine_modules: List[str] = []
     building_resolver_overrides: Dict[str, str]
-    assembling_machine_modules: List[str]
-    beacon: Beacon
+    beacon: Beacon = None
+    transformations: List[Transformation] = []
     assembly_path: str
     recipe_path: str
     output: str = 'chest'
-
+    inserter_type: str = 'stack-filter-inserter'
+    inserter_capacity_bonus: int = 0
 
 if __name__ == '__main__':
     # Read YAML file

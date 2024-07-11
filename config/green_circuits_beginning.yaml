@@ -1,0 +1,30 @@
+target_products:
+  - [ 1, "fast-inserter" ]
+max_assemblers: 16
+available_resources:
+  - "minable_resources"
+  - "basic_processing"
+output: "chest"
+building_resolver_overrides:
+  crafting: assembling-machine-1
+  basic-crafting: assembling-machine-1
+assembly_path: data/assembly_machine.json
+recipe_path: data/recipes.json
+assembling_machine_modules:
+  - productivity-module-2
+  - productivity-module-2
+  - productivity-module-2
+  - productivity-module-2
+beacon:
+  type: small
+  modules:
+    - speed-module-3
+    - speed-module-3
+    - speed-module-3
+    - speed-module-3
+    - speed-module-3
+    - speed-module-3
+    - speed-module-3
+    - speed-module-3
+assembly_path: data/assembly_machine.json
+recipe_path: data/recipes.json

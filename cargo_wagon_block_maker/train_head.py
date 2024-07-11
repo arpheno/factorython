@@ -23,10 +23,10 @@ NEGATIVE_LIMITER = "negative_limiter"
 REQUESTS_SETTER = 'requests_setter'
 
 
-def stackinserters():
+def stackinserters(name="stack-inserter"):
     entities = [
         {
-            "name": "stack-inserter",
+            "name": name,
             "position": {"x": x, "y": y},
             "direction": Direction.WEST,
         }
@@ -37,9 +37,10 @@ def stackinserters():
 
 
 class TrainHead(BlueprintMakerModule):
-    def __init__(self,operating_time=60,minimum_stacks=40,**kwargs):
+    def __init__(self,operating_time=60,minimum_stacks=40,inserter_type='stack-filter-inserter',**kwargs):
         self.operating_time = operating_time
         self.minimum_stacks = minimum_stacks
+        self.inserter_type = inserter_type
 
 
     def build(self, *, blueprint: Blueprint, flows, **kwargs):
@@ -54,7 +55,7 @@ class TrainHead(BlueprintMakerModule):
             key=lambda x: (x.global_position["x"], x.global_position["y"]),
         )
         first_stack_filter_inserter = min(
-            connectors.find_entities_filtered(name="stack-filter-inserter"),
+            connectors.find_entities_filtered(name=self.inserter_type),
             key=lambda x: (x.global_position["x"], x.global_position["y"]),
         )
         wagons = self.create_wagons(probably_some_kind_of_combinator)
@@ -452,7 +453,7 @@ class TrainHead(BlueprintMakerModule):
         return Group(
             entities=[
                 {
-                    "name": "stack-filter-inserter",
+                    "name": self.inserter_type,
                     "position": {
                         "x": left_stack_inserter_position["x"] - 2 + i,
                         "y": left_stack_inserter_position["y"] - 1,

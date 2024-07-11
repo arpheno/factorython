@@ -32,7 +32,7 @@ class Module:
         recipe.products = [
             product * (1 + self.productivity) for product in recipe.products
         ]
-        recipe.energy = recipe.energy / (1 + self.speed)
+        recipe.energy = recipe.energy / (1 + max(self.speed,-0.8))
         return recipe
 
 
