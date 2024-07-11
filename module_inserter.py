@@ -69,7 +69,11 @@ class SmallBeacon(Transformer):
             if 'ltn' in recipe.name:
                 continue
             module = self.module * 0.5
+            #Compare it before and after
+            before=recipe.energy
             module(recipe)
+            after=recipe.energy
+            print(f'{recipe.name} before: {before} after: {after}')
         return recipe_provider
 
 
@@ -79,11 +83,11 @@ class BuildingSpecificModuleInserter(Transformer):
         self.modules = {
         }
         if any('productivity' in module for module in modules):
-            self.modules['productivity'] = module_builder.build('productivity-module-3')
+            self.modules['productivity'] = module_builder.build(next(module for module in modules if 'productivity' in module))
         else:
             self.modules['productivity'] = Module(name='none')
         if any('speed' in module for module in modules):
-            self.modules['speed'] = module_builder.build('speed-module-3')
+            self.modules['speed'] = module_builder.build(next(module for module in modules if 'speed' in module))
         else:
             self.modules['speed'] = Module(name='none')
         self.building_resolver = building_resolver
@@ -96,10 +100,7 @@ class BuildingSpecificModuleInserter(Transformer):
             module_slots = building.module_specification.module_slots if building.module_specification else 0
             if recipe.name in intermediate_products:
                 module = self.modules['productivity'] * module_slots
-            else:
-                module = self.modules['speed'] * module_slots
-
-            module(recipe)
+                module(recipe)
         return recipe_provider
 
 

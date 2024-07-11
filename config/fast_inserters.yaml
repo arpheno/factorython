@@ -1,6 +1,6 @@
 target_products:
   - [ 1, fast-inserter]
-max_assemblers: 24
+max_assemblers: 32
 inserter_type: "filter-inserter"
 available_resources:
   - "minable_resources"
