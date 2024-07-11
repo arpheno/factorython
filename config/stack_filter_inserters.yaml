@@ -1,27 +1,16 @@
 target_products:
-  - [ 2, rail ]
-  - [ 1, cargo-wagon ]
-  - [ 8, stack-filter-inserter ]
-  - [ 4, assembling-machine-3 ]
-  - [ 8, arithmetic-combinator]
-  - [ 2, constant-combinator]
-  - [ 2, substation ]
-  - [ 10, pipe]
-  - [ 16, fast-inserter]
-#  - [ 8, stack-filter-inserter]
-max_assemblers: 64
+  - [ 1, stack-filter-inserter]
+max_assemblers: 16
 available_resources:
   - "minable_resources"
   - "basic_processing"
 additional_resources:
   - "se-iron-ingot"
   - "se-copper-ingot"
-output:
-  type: "chest"
-  liquids:
-    - "petroleum-gas"
-    - "lubricant"
-    - "water"
+unavailable_resources:
+  - "copper-plate"
+  - "iron-plate"
+output: "chest"
 building_resolver_overrides:
   crafting: assembling-machine-3
   basic-crafting: assembling-machine-3

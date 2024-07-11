@@ -15,7 +15,7 @@ from cargo_wagon_block_maker.input_infrastructure import InputInfrastructure
 from cargo_wagon_block_maker.output_infrastructure import OutputInfrastructure
 from cargo_wagon_block_maker.output_infrastructure_chest import OutputInfrastructureChest
 from cargo_wagon_block_maker.power import Substations
-from cargo_wagon_block_maker.train_head import TrainHead
+from cargo_wagon_block_maker.train_head import TrainHead, LIQUIDS
 from cargo_wagon_block_maker.train_head_one_liquids import TrainHeadOneLiquid
 from cargo_wagon_block_maker.train_head_three_liquids import TrainHeadThreeLiquids
 from cargo_wagon_block_maker.train_head_two_liquid import TrainHeadTwoLiquids
@@ -30,14 +30,14 @@ from recipe_provider_builder import (
 import yaml
 
 
-def train_head_factory(output):
+def train_head_factory(liquids):
     cls = {
         0: TrainHead,
         1: TrainHeadOneLiquid,
         2: TrainHeadTwoLiquids,
         3: TrainHeadThreeLiquids,
     }
-    return cls[len(output.liquids)](liquids=output.liquids)
+    return cls[len(liquids)](liquids=liquids)
 
 
 def output_infrastructure_factory(output):
@@ -73,23 +73,6 @@ def cargo_wagon_mall(config: CargoWagonMallConfig):
         raise ValueError(f"Recipe {target_product} not found")
 
     recipe_provider = apply_transformations(recipe_provider, recipe_transformations)
-    blueprint_maker_modules = {
-        "assembling_machines": AssemblingMachines(
-            modules=config.assembling_machine_modules,
-            building_resolver=building_resolver,
-            recipe_provider=recipe_provider,
-        ),
-        "connectors": Connectors(),
-        "wagons": Wagons(),
-        "input_infrastructure": InputInfrastructure(),
-        "power": Substations(),
-        "output_infrastructure": output_infrastructure_factory(config.output),
-        "beacons": Beacons(),
-        "train_head": train_head_factory(config.output),
-    }
-    blueprint_maker = BlueprintMaker(
-        modules=blueprint_maker_modules,
-    )
     model_finalizer = CargoWagonMallProblem(
         target_products, max_assemblers=max_assemblers
     )
@@ -123,6 +106,24 @@ def cargo_wagon_mall(config: CargoWagonMallConfig):
         production_sites,
         outputs=[product for factor, product in target_products],
     )
+    liquids = [input_fluid for input_fluid in global_input if input_fluid in LIQUIDS]
+    blueprint_maker_modules = {
+        "assembling_machines": AssemblingMachines(
+            modules=config.assembling_machine_modules,
+            building_resolver=building_resolver,
+            recipe_provider=recipe_provider,
+        ),
+        "connectors": Connectors(),
+        "wagons": Wagons(),
+        "input_infrastructure": InputInfrastructure(),
+        "power": Substations(),
+        "output_infrastructure": output_infrastructure_factory(config.output),
+        "beacons": Beacons(),
+        "train_head": train_head_factory(liquids),
+    }
+    blueprint_maker = BlueprintMaker(
+        modules=blueprint_maker_modules,
+    )
     blueprint_maker.make_blueprint(
         production_sites,
         entity_lookup=entity_lookup,
@@ -136,7 +137,7 @@ if __name__ == "__main__":
     # from draftsman.env import update
     # update(verbose=True,path='/Users/swozny/Library/Application Support/factorio/mods')  # equivalent to 'draftsman-update -v -p some/path'
 
-    config_path = "config/robot_frames.yaml"
+    config_path = "config/stack_filter_inserters.yaml"
 
     with open(config_path, 'r') as file:
         yaml_data = yaml.safe_load(file)

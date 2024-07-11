@@ -37,7 +37,7 @@ def stackinserters():
 
 
 class TrainHead(BlueprintMakerModule):
-    def __init__(self,operating_time=60,minimum_stacks=40):
+    def __init__(self,operating_time=60,minimum_stacks=40,**kwargs):
         self.operating_time = operating_time
         self.minimum_stacks = minimum_stacks
 

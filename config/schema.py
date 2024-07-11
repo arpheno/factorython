@@ -9,7 +9,6 @@ class Beacon(BaseModel):
 
 
 class OutputConfig(BaseModel):
-    liquids: List[str] = []
     type: str = 'chest'
 
 
@@ -24,7 +23,7 @@ class CargoWagonMallConfig(BaseModel):
     beacon: Beacon
     assembly_path: str
     recipe_path: str
-    output: OutputConfig
+    output: str = 'chest'
 
 
 if __name__ == '__main__':
