@@ -4,6 +4,7 @@ import sys
 from typing import Dict
 
 from draftsman.classes.blueprint import Blueprint
+from draftsman.classes.group import Group
 
 from cargo_wagon_block_maker.bbmm import BlueprintMakerModule
 
@@ -41,9 +42,11 @@ class BlueprintMaker:
         )
 
         blueprint = Blueprint()
+        g=Group()
         built_modules = {}
         for key, module in self.modules.items():
-            built_modules[key] = module.build(blueprint=blueprint, **default_build_args)
+            built_modules[key] = module.build(blueprint=g, **default_build_args)
+        blueprint.entities.append(g)
         blueprint.generate_power_connections(only_axis=True)
         print(blueprint.to_string())
         return blueprint

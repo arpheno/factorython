@@ -1,17 +1,26 @@
-target_products:
-  - [ 1, 'flying-robot-frame' ]
-max_assemblers: 32
+production_sites:
+    - target_products:
+       - [ 30, rail ]
+       - [ 4, cargo-wagon ]
+       - [1, locomotive ]
+    - target_products:
+        - [ 8, stack-filter-inserter ]
+        - [ 4, assembling-machine-3 ]
+    - target_products:
+        - [ 8, arithmetic-combinator]
+        - [ 2, constant-combinator]
+        - [ 2, substation ]
+    - target_products:
+        - [ 10, pipe]
+        - [ 16, fast-inserter]
+
+max_assemblers: 24
 available_resources:
   - "minable_resources"
   - "basic_processing"
 additional_resources:
   - "se-iron-ingot"
   - "se-copper-ingot"
-output:
-    type: "chest"
-    liquids:
-        - "lubricant"
-        - "sulfuric-acid"
 building_resolver_overrides:
   crafting: assembling-machine-3
   basic-crafting: assembling-machine-3
@@ -20,10 +29,10 @@ building_resolver_overrides:
   chemistry: chemical-plant
   pulverising: assembling-machine-3
 assembling_machine_modules:
-  - productivity-module-3
-  - productivity-module-3
-  - productivity-module-3
-  - productivity-module-3
+  - productivity-module-2
+  - productivity-module-2
+  - productivity-module-2
+  - productivity-module-2
 beacon:
   type: small
   modules:

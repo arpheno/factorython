@@ -46,7 +46,7 @@ def output_infrastructure_factory(output):
         "none": OutputInfrastructure,
         'chest': OutputInfrastructureChest,
     }
-    return cls[output.type]()
+    return cls[output]()
 
 
 def cargo_wagon_mall(config: CargoWagonMallConfig):
@@ -124,13 +124,13 @@ def cargo_wagon_mall(config: CargoWagonMallConfig):
     blueprint_maker = BlueprintMaker(
         modules=blueprint_maker_modules,
     )
-    blueprint_maker.make_blueprint(
+    blueprint = blueprint_maker.make_blueprint(
         production_sites,
         entity_lookup=entity_lookup,
         output=[product for factor, product in target_products],
         flows=flows,
     )
-    return line
+    return blueprint
 
 
 if __name__ == "__main__":
