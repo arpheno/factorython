@@ -446,6 +446,7 @@ class TrainHead(BlueprintMakerModule):
                 "x": first_stack_filter_inserter.global_position["x"] - 7,
                 "y": first_stack_filter_inserter.global_position["y"] - 7,
             },
+
         }
         return substation
 

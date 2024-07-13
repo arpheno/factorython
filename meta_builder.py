@@ -3,11 +3,12 @@ from draftsman.classes.blueprint import Blueprint
 from draftsman.classes.group import Group
 
 from cargo_wagon_mall import cargo_wagon_mall
-from config.meta_schema import denormalize_meta_config, MetaConfig
+from config.schemas.meta_schema import denormalize_meta_config, MetaConfig
 
 if __name__ == '__main__':
-    path = 'config/meta_block_maker.yaml'
-    with open('config/meta_block_maker.yaml', 'r') as file:
+    # print(logistic_passive_containers)
+    path = 'config/robots_and_such.yaml'
+    with open(path, 'r') as file:
         yaml_data = yaml.safe_load(file)
     configs = denormalize_meta_config(MetaConfig(**yaml_data))
     blueprint_strings = []

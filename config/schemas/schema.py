@@ -2,6 +2,9 @@ from typing import List, Dict
 from pydantic import BaseModel
 import yaml
 
+from config.schemas.solver import Solver
+
+
 class Beacon(BaseModel):
     type: str
     modules: List[str]
@@ -28,10 +31,11 @@ class CargoWagonMallConfig(BaseModel):
     output: str = 'chest'
     inserter_type: str = 'stack-filter-inserter'
     inserter_capacity_bonus: int = 0
+    solver: Solver = Solver(time_limit=30)
 
 if __name__ == '__main__':
     # Read YAML file
-    with open('block_maker.yaml', 'r') as file:
+    with open('../block_maker.yaml', 'r') as file:
         yaml_data = yaml.safe_load(file)
 
     # Parse YAML data into Pydantic model

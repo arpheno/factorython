@@ -80,16 +80,8 @@ class SmallBeacon(Transformer):
 class BuildingSpecificModuleInserter(Transformer):
     def __init__(self, modules: List[str], building_resolver: BuildingResolver, **kwargs):
         module_builder = ModuleBuilder(raw)
-        self.modules = {
-        }
-        if any('productivity' in module for module in modules):
-            self.modules['productivity'] = module_builder.build(next(module for module in modules if 'productivity' in module))
-        else:
-            self.modules['productivity'] = Module(name='none')
-        if any('speed' in module for module in modules):
-            self.modules['speed'] = module_builder.build(next(module for module in modules if 'speed' in module))
-        else:
-            self.modules['speed'] = Module(name='none')
+        self.modules=modules
+        self.speed_module = module_builder.build(next(module for module in modules if 'speed' in module))
         self.building_resolver = building_resolver
 
     def __call__(self, recipe_provider: RecipeProvider) -> RecipeProvider:
@@ -99,8 +91,13 @@ class BuildingSpecificModuleInserter(Transformer):
             building = self.building_resolver(recipe)
             module_slots = building.module_specification.module_slots if building.module_specification else 0
             if recipe.name in intermediate_products:
-                module = self.modules['productivity'] * module_slots
+                module = Module(name='final_module')
+                for module_slot, module_name in zip(range(module_slots), self.modules):
+                    module_builder = ModuleBuilder(raw)
+                    module = self.module + module_builder.build(module_name)
                 module(recipe)
+            else:
+                module = self.speed_module[:module_slots]
         return recipe_provider
 
 

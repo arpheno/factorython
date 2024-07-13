@@ -3,46 +3,35 @@ production_sites:
        - [ 30, rail ]
        - [ 4, cargo-wagon ]
        - [1, locomotive ]
+       - [ 1, fluid-wagon ]
+       - [ 1, pump]
+       - [ 1, electric-furnace]
+       - [1, big-electric-pole]
     - target_products:
+        - [1, logistic-chest-passive-provider]
         - [ 8, stack-filter-inserter ]
-        - [ 4, assembling-machine-3 ]
+        - [ 4, assembling-machine-2 ]
+        - [ 10, medium-electric-pole ]
+        - [ 2, substation ]
     - target_products:
         - [ 8, arithmetic-combinator]
         - [ 2, constant-combinator]
-        - [ 2, substation ]
-    - target_products:
-        - [ 10, pipe]
-        - [ 16, fast-inserter]
-
+        - [ 2, chemical-plant]
+        - [ 2, oil-refinery]
+        - [ 2, pumpjack]
+        - [ 8, stack-inserter ]
 max_assemblers: 24
+solver:
+  time_limit: 10
+transformations:
+  - building_speed_applier
 available_resources:
   - "minable_resources"
   - "basic_processing"
-additional_resources:
-  - "se-iron-ingot"
-  - "se-copper-ingot"
 building_resolver_overrides:
-  crafting: assembling-machine-3
-  basic-crafting: assembling-machine-3
-  crafting-with-fluid: assembling-machine-3
-  advanced-crafting: assembling-machine-3
+  crafting: assembling-machine-2
+  basic-crafting: assembling-machine-2
+  crafting-with-fluid: assembling-machine-2
+  advanced-crafting: assembling-machine-2
   chemistry: chemical-plant
-  pulverising: assembling-machine-3
-assembling_machine_modules:
-  - productivity-module-2
-  - productivity-module-2
-  - productivity-module-2
-  - productivity-module-2
-beacon:
-  type: small
-  modules:
-    - speed-module-3
-    - speed-module-3
-    - speed-module-3
-    - speed-module-3
-    - speed-module-3
-    - speed-module-3
-    - speed-module-3
-    - speed-module-3
-assembly_path: data/assembly_machine.json
-recipe_path: data/recipes.json
+  pulverising: assembling-machine-2

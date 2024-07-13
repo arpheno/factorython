@@ -1,8 +1,6 @@
 target_products:
-  - [ 1, automation-science-pack ]
-  - [ 1, logistic-science-pack ]
-  - [ 1, chemical-science-pack ]
-max_assemblers: 32
+  - [ 1, rgbspm ]
+max_assemblers: 48
 available_resources:
   - "minable_resources"
   - "basic_processing"

@@ -4,23 +4,24 @@ from pprint import pprint
 
 from builders.building_resolver import build_building_resolver
 from builders.recipe_transformations import build_recipe_transformations
+from cargo_wagon_assignment_problem import CargoWagonAssignmentProblem
 from cargo_wagon_block_maker.assembling_machines import (
     AssemblingMachines,
 )
 from cargo_wagon_block_maker.blueprint_maker import BlueprintMaker
 from cargo_wagon_block_maker.beacons import Beacons
-from cargo_wagon_assignment_problem import create_cargo_wagon_assignment_problem
 from cargo_wagon_block_maker.connectors import Connectors
 from cargo_wagon_block_maker.input_infrastructure import InputInfrastructure
 from cargo_wagon_block_maker.output_infrastructure import OutputInfrastructure
 from cargo_wagon_block_maker.output_infrastructure_chest import OutputInfrastructureChest
 from cargo_wagon_block_maker.power import Substations
+from cargo_wagon_block_maker.roboports import Roboports
 from cargo_wagon_block_maker.train_head import TrainHead, LIQUIDS
 from cargo_wagon_block_maker.train_head_one_liquids import TrainHeadOneLiquid
 from cargo_wagon_block_maker.train_head_three_liquids import TrainHeadThreeLiquids
 from cargo_wagon_block_maker.train_head_two_liquid import TrainHeadTwoLiquids
 from cargo_wagon_block_maker.wagons import Wagons
-from config.schema import CargoWagonMallConfig
+from config.schemas.schema import CargoWagonMallConfig
 from model_finalizer import CargoWagonMallProblem
 from production_line_builder import ProductionLineBuilder
 from recipe_provider_builder import (
@@ -30,14 +31,14 @@ from recipe_provider_builder import (
 import yaml
 
 
-def train_head_factory(liquids,**kwargs):
+def train_head_factory(liquids, **kwargs):
     cls = {
         0: TrainHead,
         1: TrainHeadOneLiquid,
         2: TrainHeadTwoLiquids,
         3: TrainHeadThreeLiquids,
     }
-    return cls[len(liquids)](liquids=liquids,**kwargs)
+    return cls[len(liquids)](liquids=liquids, **kwargs)
 
 
 def output_infrastructure_factory(output):
@@ -66,6 +67,7 @@ def cargo_wagon_mall(config: CargoWagonMallConfig):
     recipe_provider = build_recipe_provider(recipes, building_resolver)
     recipe_transformations = build_recipe_transformations(config, building_resolver)
 
+    assignment_problem_instance = CargoWagonAssignmentProblem(**config.solver.dict())
     try:
         for _, target_product in target_products:
             recipe_provider.by_name(target_product)
@@ -100,7 +102,7 @@ def cargo_wagon_mall(config: CargoWagonMallConfig):
     entity_lookup = {site: entity for site, entity in temp}
     pprint(production_sites)
     # Now that we know the flow of goods, we can assign them to wagons by determining the order of machines
-    production_sites, flows = create_cargo_wagon_assignment_problem(
+    production_sites, flows = assignment_problem_instance(
         entities,
         global_input,
         production_sites,
@@ -113,13 +115,15 @@ def cargo_wagon_mall(config: CargoWagonMallConfig):
             building_resolver=building_resolver,
             recipe_provider=recipe_provider,
         ),
-        "connectors": Connectors(inserter_type=config.inserter_type, inserter_capacity_bonus_level=config.inserter_capacity_bonus),
+        "connectors": Connectors(inserter_type=config.inserter_type,
+                                 inserter_capacity_bonus_level=config.inserter_capacity_bonus),
         "wagons": Wagons(),
         "input_infrastructure": InputInfrastructure(),
         "power": Substations(),
+        "roboports": Roboports(),
         "output_infrastructure": output_infrastructure_factory(config.output),
-        "beacons": Beacons(),
-        "train_head": train_head_factory(liquids,inserter_type=config.inserter_type, inserter_capacity_bonus=config.inserter_capacity_bonus),
+        "train_head": train_head_factory(liquids, inserter_type=config.inserter_type,
+                                         inserter_capacity_bonus=config.inserter_capacity_bonus),
     }
     blueprint_maker = BlueprintMaker(
         modules=blueprint_maker_modules,
@@ -137,7 +141,7 @@ if __name__ == "__main__":
     # from draftsman.env import update
     # update(verbose=True,path='/Users/swozny/Library/Application Support/factorio/mods')  # equivalent to 'draftsman-update -v -p some/path'
 
-    config_path = "config/fast_inserters.yaml"
+    config_path = "config/small_block_maker.yaml"
 
     with open(config_path, 'r') as file:
         yaml_data = yaml.safe_load(file)

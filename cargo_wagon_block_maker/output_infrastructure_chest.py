@@ -32,5 +32,7 @@ class OutputInfrastructureChest(OutputInfrastructure):
                     "y": inserter.global_position["y"] + 1 if inserter.direction == Direction.NORTH else
                     inserter.global_position["y"] - 1,
                 },
+                "bar":2,
             })
+
             g.entities.append(chest)

@@ -14,7 +14,7 @@ from cargo_wagon_block_maker.power import Substations
 from cargo_wagon_block_maker.wagons import Wagons
 from cargo_wagon_mall import train_head_factory, output_infrastructure_factory
 from builders.building_resolver import build_building_resolver
-from config.schema import CargoWagonMallConfig
+from config.schemas import CargoWagonMallConfig
 from recipe_provider_builder import build_recipe_provider
 
 

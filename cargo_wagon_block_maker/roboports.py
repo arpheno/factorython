@@ -6,13 +6,16 @@ from cargo_wagon_block_maker.bbmm import BlueprintMakerModule
 
 
 class Roboports(BlueprintMakerModule):
-    def build(self, assembling_machines: AssemblingMachinesGroup, **kwargs):
+    def build(self,blueprint, **kwargs):
         g = Group()
+        assembling_machines=blueprint.entities['assembling_machines']
         top_ref=assembling_machines.top_row[3]
         g.entities.append(
         Roboport(**{'name': 'roboport',
-                  'position':{'x':top_ref.global_position['x']+14,
-                              'y':top_ref.global_position['y']-5},
+                  'position':{'x':top_ref.global_position['x']+8,
+                              'y':top_ref.global_position['y']-4},
                   'items': {'speed-module-2':8},
                      }))
+        g.id='roboports'
+        blueprint.entities.append(g)
         return g

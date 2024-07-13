@@ -1,0 +1,53 @@
+production_sites:
+    - target_products:
+        - [1,construction-robot]
+        - [1,logistic-robot]
+        - [1,logistic-chest-storage]
+        - [1,logistic-chest-passive-provider]
+    - target_products:
+        - [20, fast-inserter]
+        - [1, roboport]
+        - [1, se-fuel-refinery]
+    - target_products:
+        - [1, se-strongbox]
+        - [1, se-pulverizer]
+        - [1, se-burner-turbine-generator]
+    - target_products:
+          - [5, electric-mining-drill]
+          - [10, transport-belt]
+          - [2, underground-belt]
+          - [1, splitter]
+    - target_products:
+        -[1 ,portable-solar-panel]
+        -[1, personal-roboport]
+        -[1, personal-battery]
+        -[1, jetpack]
+        -[1, radar]
+    - target_products:
+        -[1,solar-panel]
+        -[1,accumulator]
+        -[1, offshore]
+        -[1, boiler]
+    - target_products:
+        -[1, fuel-processor]
+        -[3,electric-lab]
+        -[2,steam-engine]
+    - target_products:
+        -[1,fast-transport-belt]
+
+
+max_assemblers: 24
+solver:
+  time_limit: 60
+transformations:
+  - building_speed_applier
+available_resources:
+  - "minable_resources"
+  - "basic_processing"
+building_resolver_overrides:
+  crafting: assembling-machine-2
+  basic-crafting: assembling-machine-2
+  crafting-with-fluid: assembling-machine-2
+  advanced-crafting: assembling-machine-2
+  chemistry: chemical-plant
+  pulverising: assembling-machine-2

@@ -9,7 +9,7 @@ from recipe_provider import RecipeProvider
 
 
 class AssemblingMachines:
-    def __init__(self, modules, building_resolver: BuildingResolver, recipe_provider: RecipeProvider):
+    def __init__(self, modules, building_resolver: BuildingResolver, recipe_provider: RecipeProvider,**kwargs):
         self.modules = modules
         self.building_resolver = building_resolver
         self.recipe_provider = recipe_provider
