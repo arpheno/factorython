@@ -389,7 +389,7 @@ def test_make_blueprint(recorded_data, config):
     recipe_provider = build_recipe_provider(recipes, building_resolver)
     blueprint_maker_modules = {
         "assembling_machines": AssemblingMachines(
-            modules=config.assembling_machine_modules,
+            transformations=config.assembling_machine_modules,
             building_resolver=building_resolver,
             recipe_provider=recipe_provider,
         ),
@@ -436,7 +436,7 @@ def test_make_blueprint_one_liquid(recorded_data, config):
     recipe_provider = build_recipe_provider(recipes, building_resolver)
     blueprint_maker_modules = {
         "assembling_machines": AssemblingMachines(
-            modules=config.assembling_machine_modules,
+            transformations=config.assembling_machine_modules,
             building_resolver=building_resolver,
             recipe_provider=recipe_provider,
         ),
@@ -483,7 +483,7 @@ def test_make_blueprint_two_liquids(recorded_data, config):
     recipe_provider = build_recipe_provider(recipes, building_resolver)
     blueprint_maker_modules = {
         "assembling_machines": AssemblingMachines(
-            modules=config.assembling_machine_modules,
+            transformations=config.assembling_machine_modules,
             building_resolver=building_resolver,
             recipe_provider=recipe_provider,
         ),
@@ -530,7 +530,7 @@ def test_make_blueprint_three_liquids(recorded_data, config):
     recipe_provider = build_recipe_provider(recipes, building_resolver)
     blueprint_maker_modules = {
         "assembling_machines": AssemblingMachines(
-            modules=config.assembling_machine_modules,
+            transformations=config.assembling_machine_modules,
             building_resolver=building_resolver,
             recipe_provider=recipe_provider,
         ),
@@ -577,7 +577,7 @@ def test_make_blueprint_chest(recorded_data, config):
     recipe_provider = build_recipe_provider(recipes, building_resolver)
     blueprint_maker_modules = {
         "assembling_machines": AssemblingMachines(
-            modules=config.assembling_machine_modules,
+            transformations=config.assembling_machine_modules,
             building_resolver=building_resolver,
             recipe_provider=recipe_provider,
         ),
@@ -624,7 +624,7 @@ def test_make_blueprint_one_liquid(recorded_data, config):
     recipe_provider = build_recipe_provider(recipes, building_resolver)
     blueprint_maker_modules = {
         "assembling_machines": AssemblingMachines(
-            modules=config.assembling_machine_modules,
+            transformations=config.assembling_machine_modules,
             building_resolver=building_resolver,
             recipe_provider=recipe_provider,
         ),
@@ -671,7 +671,7 @@ def test_make_blueprint_two_liquids(recorded_data, config):
     recipe_provider = build_recipe_provider(recipes, building_resolver)
     blueprint_maker_modules = {
         "assembling_machines": AssemblingMachines(
-            modules=config.assembling_machine_modules,
+            transformations=config.assembling_machine_modules,
             building_resolver=building_resolver,
             recipe_provider=recipe_provider,
         ),
@@ -718,7 +718,7 @@ def test_make_blueprint_three_liquids(recorded_data, config):
     recipe_provider = build_recipe_provider(recipes, building_resolver)
     blueprint_maker_modules = {
         "assembling_machines": AssemblingMachines(
-            modules=config.assembling_machine_modules,
+            transformations=config.assembling_machine_modules,
             building_resolver=building_resolver,
             recipe_provider=recipe_provider,
         ),

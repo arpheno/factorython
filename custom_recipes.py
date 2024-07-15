@@ -37,4 +37,13 @@ spm_recipes = [
                         ],
            energy=30,
            category='researching'),
+    Recipe(name='rgbospm',
+           products=[Product(name='rgbospm', amount=1, type='item')],
+           ingredients=[Ingredient(name='logistic-science-pack', amount=1, type='item'),
+                        Ingredient(name='automation-science-pack', amount=1, type='item'),
+                        Ingredient(name='chemical-science-pack', amount=1, type='item'),
+                        Ingredient(name='se-rocket-science-pack', amount=1, type='item'),
+                        ],
+           energy=30,
+           category='researching'),
 ]

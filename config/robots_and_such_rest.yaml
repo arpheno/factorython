@@ -1,0 +1,20 @@
+production_sites:
+  - target_products:
+      - [1, "effectivity-module"]
+      - [1, "speed-module"]
+      - [1, "productivity-module"]
+max_assemblers: 32
+solver:
+  time_limit: 30
+transformations:
+  - "building_speed_applier"
+available_resources:
+  - "minable_resources"
+  - "basic_processing"
+building_resolver_overrides:
+  crafting: "assembling-machine-2"
+  basic-crafting: "assembling-machine-2"
+  crafting-with-fluid: "assembling-machine-2"
+  advanced-crafting: "assembling-machine-2"
+  chemistry: "chemical-plant"
+  pulverising: "assembling-machine-2"

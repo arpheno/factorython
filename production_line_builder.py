@@ -40,5 +40,5 @@ class ProductionLineBuilder:
             if (v.value() or 0) > epsilon
         }
         if not net_production and status == 'Optimal':
-            raise Exception("Line is optimal but produces nothing, this should not happen. Last cause was not enough max_assemblers")
+            raise AssertionError("Line is optimal but produces nothing, this should not happen. Last cause was not enough max_assemblers")
         return ProductionLine(status, production_sites, net_production)

@@ -24,3 +24,5 @@ class ProductionLine:
             print("Net Production:")
             for item, production in self.net_production.items():
                 print(item, ":", production)
+    def __repr__(self):
+        return self.print(duration=60)

@@ -13,6 +13,7 @@ def build_recipe_transformations(config, building_resolver):
         'basic_processing': basic_processing,
     }
     transformers.extend([FreeRecipesAdder(lookup[x]) for x in config.available_resources])
+    transformers.extend([FreeRecipesAdder(config.additional_resources)])
     transformers.extend([RecipesRemover(lookup[x]) for x in config.unavailable_resources])
 
     return transformers

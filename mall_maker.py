@@ -2,6 +2,8 @@ import json
 from functools import partial, cached_property
 from pprint import pprint
 
+from pydantic import BaseModel
+
 from builders.building_resolver import build_building_resolver
 from builders.recipe_transformations import build_recipe_transformations
 from cargo_wagon_assignment_problem import CargoWagonAssignmentProblem
@@ -50,8 +52,21 @@ def output_infrastructure_factory(output):
     return cls[output]()
 
 
-class CargoWagonMall:
-    def __init__(self, config: CargoWagonMallConfig):
+class MallMakerConfig(BaseModel):
+    target_products: list
+    max_assemblers: int
+    assembly_path: str
+    recipe_path: str
+    building_resolver_overrides: dict
+    solver: dict
+    inserter_type: str
+    inserter_capacity_bonus: int
+    assembling_machine_modules: dict
+    output: str
+
+
+class MallMaker:
+    def __init__(self, config: MallMakerConfig):
         self.config = config
 
         self.target_products = self.config.target_products
@@ -110,7 +125,7 @@ class CargoWagonMall:
         liquids = [input_fluid for input_fluid in global_input if input_fluid in LIQUIDS]
         blueprint_maker_modules = {
             "assembling_machines": AssemblingMachines(
-                transformations=self.config.transformations,
+                transformations=self.config.assembling_machine_modules,
                 building_resolver=self.building_resolver,
                 recipe_provider=self.recipe_provider,
             ),
@@ -133,7 +148,7 @@ class CargoWagonMall:
             output=[product for factor, product in self.target_products],
             flows=flows,
         )
-        return blueprint, line
+        return blueprint
 
     def build_optimal_ratios(self):
         assignment_problem_instance = CargoWagonAssignmentProblem(**self.config.solver.dict())

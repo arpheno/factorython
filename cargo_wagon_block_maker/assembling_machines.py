@@ -5,12 +5,14 @@ from draftsman.constants import Direction
 
 from building_resolver import BuildingResolver
 from cargo_wagon_block_maker.assembling_machines_group import AssemblingMachinesGroup
+from module_inserter import BuildingSpecificModuleInserter
 from recipe_provider import RecipeProvider
 
 
 class AssemblingMachines:
-    def __init__(self, modules, building_resolver: BuildingResolver, recipe_provider: RecipeProvider,**kwargs):
-        self.modules = modules
+    def __init__(self, transformations, building_resolver: BuildingResolver, recipe_provider: RecipeProvider, **kwargs):
+        self.transformations =[x for x in transformations if isinstance(BuildingSpecificModuleInserter,x)]
+        self.modules = {} if not self.transformations else self.transformations[0].modules
         self.building_resolver = building_resolver
         self.recipe_provider = recipe_provider
 
@@ -22,14 +24,12 @@ class AssemblingMachines:
         # Put half the machines in top row, half in bottom row (y is 0 or 7)
         # Offset by assembling machine width in x direction
         machine_positions = [(3 * (i % half), (i // half) * 7) for i in range(len(recipe_names))]
-        assert all(
-            "productivity" in module for module in self.modules), "All modules must be productivity for now until we fix the building specific module inserter"
         entities = [
             {
                 "name": machine,
                 "recipe": recipe,
                 "position": {"x": x, "y": y},
-                "items": dict(Counter(self.modules)),
+                "items": dict(Counter(self.transformations)),
                 "direction": Direction.NORTH if y == 0 else Direction.SOUTH,
             }
             for (x, y), machine, recipe in zip(machine_positions, machine_names, recipe_names)

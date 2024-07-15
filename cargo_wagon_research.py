@@ -86,7 +86,7 @@ def cargo_wagon_mall():
     recipe_provider = apply_transformations(recipe_provider, recipe_transformations)
     blueprint_maker_modules = {
         "assembling_machines": AssemblingMachines(
-            modules=assembling_machine_modules,
+            transformations=assembling_machine_modules,
             building_resolver=building_resolver,
             recipe_provider=recipe_provider,
         ),

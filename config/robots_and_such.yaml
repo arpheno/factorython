@@ -1,53 +1,75 @@
 production_sites:
-    - target_products:
-        - [1,construction-robot]
-        - [1,logistic-robot]
-        - [1,logistic-chest-storage]
-        - [1,logistic-chest-passive-provider]
-    - target_products:
-        - [20, fast-inserter]
-        - [1, roboport]
-        - [1, se-fuel-refinery]
-    - target_products:
-        - [1, se-strongbox]
-        - [1, se-pulverizer]
-        - [1, se-burner-turbine-generator]
-    - target_products:
-          - [5, electric-mining-drill]
-          - [10, transport-belt]
-          - [2, underground-belt]
-          - [1, splitter]
-    - target_products:
-        -[1 ,portable-solar-panel]
-        -[1, personal-roboport]
-        -[1, personal-battery]
-        -[1, jetpack]
-        -[1, radar]
-    - target_products:
-        -[1,solar-panel]
-        -[1,accumulator]
-        -[1, offshore]
-        -[1, boiler]
-    - target_products:
-        -[1, fuel-processor]
-        -[3,electric-lab]
-        -[2,steam-engine]
-    - target_products:
-        -[1,fast-transport-belt]
+  - target_products:
+      - [1, "solar-panel"]
+      - [1, "accumulator"]
+      - [1, "offshore-pump"]
+      - [1, "boiler"]
+      - [5, "small-iron-electric-pole"]
+  - target_products:
+      - [1, "construction-robot"]
+      - [1, "logistic-robot"]
+      - [1, "logistic-chest-storage"]
+      - [1, "logistic-chest-passive-provider"]
+      - [1, "medium-electric-pole"]
+  - target_products:
+      - [1, "solar-panel-equipment"]
+      - [1, "personal-roboport-equipment"]
+      - [1, "battery-equipment"]
+      - [1, "jetpack-1"]
+      - [1, "radar"]
+  - target_products:
+      - [20, "fast-inserter"]
+      - [1, "roboport"]
+      - [1, "se-fuel-refinery"]
+      - [1, "se-pulveriser"]
+      - [10, "transport-belt"]
+  - target_products:
+      - [4, "electric-mining-drill"]
+  - target_products:
+      - [1, "chemical-plant"]
+      - [1, "oil-refinery"]
+      - [1, "pumpjack"]
+      - [1, "storage-tank"]
+      - [1, "substation"]
+  - target_products:
+      - [2, "assembling-machine-2"]
+      - [1, "electric-furnace"]
+  - target_products:
+      - [10, "big-electric-pole"]
+      - [10, "pump"]
+      - [1,  "locomotive"]
+      - [1, "fluid-wagon"]
+  - target_products:
+      - [1, "fuel-processor"]
+      - [3, "lab"]
+      - [2, "steam-engine"]
+  - target_products:
+      - [5, "fast-transport-belt"]
+      - [1, "splitter"]
+      - [2, "underground-belt"]
+      - [1, "pipe-to-ground"]
+  - target_products:
+      - [1, "logistic-train-stop"]
+      - [1, "rail-signal"]
+      - [1, "rail-chain-signal"]
+      - [1, "constant-combinator"]
+      - [1, "decider-combinator"]
+      - [1, "arithmetic-combinator"]
+      - [1, "small-lamp"]
+      - [1, "ltn-combinator"]
 
-
-max_assemblers: 24
+max_assemblers: 32
 solver:
-  time_limit: 60
+  time_limit: 30
 transformations:
-  - building_speed_applier
+  - "building_speed_applier"
 available_resources:
   - "minable_resources"
   - "basic_processing"
 building_resolver_overrides:
-  crafting: assembling-machine-2
-  basic-crafting: assembling-machine-2
-  crafting-with-fluid: assembling-machine-2
-  advanced-crafting: assembling-machine-2
-  chemistry: chemical-plant
-  pulverising: assembling-machine-2
+  crafting: "assembling-machine-2"
+  basic-crafting: "assembling-machine-2"
+  crafting-with-fluid: "assembling-machine-2"
+  advanced-crafting: "assembling-machine-2"
+  chemistry: "chemical-plant"
+  pulverising: "assembling-machine-2"

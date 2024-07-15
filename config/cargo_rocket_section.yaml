@@ -1,0 +1,47 @@
+production_sites:
+#  - target_products:
+#      - [1, "rocket-control-unit"]
+#    max_assemblers: 40
+#  - target_products:
+#      - [1, "se-heat-shielding"]
+#    max_assemblers: 40
+  - target_products:
+      - [1, "se-cargo-rocket-section"]
+    max_assemblers: 32
+    additional_materials:
+      - "se-cargo-rocket-cargo-pod"
+      - "se-cargo-rocket-fuel-tank"
+      - "plastic-bar"
+  - target_products:
+      - [1, "se-cargo-rocket-cargo-pod"]
+    additional_materials:
+      - "plastic-bar"
+    max_assemblers: 16
+  - target_products:
+      - [1, "se-cargo-rocket-fuel-tank"]
+    max_assemblers: 16
+    additional_materials:
+      - "plastic-bar"
+max_assemblers: 32
+solver:
+  time_limit: 15
+transformations:
+  - "building_speed_applier"
+  - module_inserter:
+      - "productivity-module"
+      - "speed-module"
+available_resources:
+  - "minable_resources"
+  - "basic_processing"
+additional_resources:
+  - "plastic-bar"
+assembling_machine_modules:
+  - "speed-module"
+  - "productivity-module"
+building_resolver_overrides:
+  crafting: "assembling-machine-2"
+  basic-crafting: "assembling-machine-2"
+  crafting-with-fluid: "assembling-machine-2"
+  advanced-crafting: "assembling-machine-2"
+  chemistry: "chemical-plant"
+  pulverising: "assembling-machine-2"

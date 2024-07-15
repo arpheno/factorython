@@ -5,7 +5,6 @@ from draftsman.classes.blueprint import Blueprint
 
 from cargo_wagon_block_maker import eight_block_maker
 from cargo_wagon_block_maker.belt_input import belt_input
-from cargo_wagon_block_maker.filter_connector import filter_connector_4, filter_connector
 
 
 def cargo_wagon_blueprint(production_sites: [str], machines: Dict[Any, Dict[str, float]], output,flows:[{str:float}]):

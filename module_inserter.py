@@ -95,6 +95,7 @@ class BuildingSpecificModuleInserter(Transformer):
                 for module_slot, module_name in zip(range(module_slots), self.modules):
                     module_builder = ModuleBuilder(raw)
                     module = self.module + module_builder.build(module_name)
+                    print(f'assembled module {module}')
                 module(recipe)
             else:
                 module = self.speed_module[:module_slots]
