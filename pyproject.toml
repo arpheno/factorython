@@ -17,6 +17,8 @@ factorio-draftsman = "^1.0.5"
 matplotlib = "^3.7.2"
 networkx = "^3.1"
 south = "^1.0.2"
+hmni = "^0.1.8"
+rapidfuzz = "^3.9.4"
 
 
 [build-system]

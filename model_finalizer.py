@@ -74,15 +74,15 @@ class CargoWagonMallProblem(ModelSpecialization):
             problem += problem.int_building_count[recipe] >= problem.building_count[recipe]
         # Constraint: limit number of non-ltn assemblers
         problem += lpSum(
-            value for key, value in problem.int_building_count.items() if not 'ltn' in key) <= self.max_assemblers
+            value for key, value in problem.int_building_count.items() if not 'ltn' in key) == self.max_assemblers
         # Create variable for each term of the objective
 
         weighted_product_quantities = LpVariable.dicts(
-            "weighted_product_quantities", [product for factor, product in self.products],
+            "weighted_product_quantities", [product for product,factor in self.products.items()],
             lowBound=0, cat="Continuous"
         )
         minimum_weighted_product_quantity = LpVariable('minimum_weighted_product_quantity')
-        for (factor, product) in self.products:
+        for product,factor in self.products.items():
             problem += weighted_product_quantities[product] == (1/factor) * problem.net_production[product]
             problem += minimum_weighted_product_quantity <= weighted_product_quantities[product]
         objective_terms = [minimum_weighted_product_quantity]

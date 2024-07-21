@@ -20,7 +20,7 @@ class ProductionLineBuilder:
         }
         self.model_finalizer = model_finalizer
 
-    def build(self):
+    def build(self)-> ProductionLine:
         core_model = build_core_model(self.recipe_provider.as_dataframe(), self.production_rates)
         finalized_model = self.model_finalizer.finalize(core_model)
         status, production_sites, production_exprs = solve_model(finalized_model)

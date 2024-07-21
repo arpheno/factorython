@@ -29,7 +29,7 @@ from recipe_provider_builder import (
     build_recipe_provider,
     FreeRecipesAdder,
     RecipesRemover,
-    apply_transformations,
+    apply_transformers,
 )
 
 assembly_path = "data/assembly_machine.json"
@@ -83,7 +83,7 @@ def cargo_wagon_mall():
             beacon_type="small",
         ),
     ]
-    recipe_provider = apply_transformations(recipe_provider, recipe_transformations)
+    recipe_provider = apply_transformers(recipe_provider, recipe_transformations)
     blueprint_maker_modules = {
         "assembling_machines": AssemblingMachines(
             transformations=assembling_machine_modules,
@@ -122,7 +122,7 @@ def cargo_wagon_mall():
         entity
         for production_site in line.production_sites.values()
         if not "ltn" in production_site.recipe.name
-        for entity in production_site.entities
+        for entity in production_site.import_export_dictionary_entities
     ]
     production_sites, entities = zip(*temp)
     entity_lookup = {site: entity for site, entity in temp}

@@ -1,6 +1,9 @@
 import json
+from dataclasses import dataclass
 from functools import partial, cached_property
 from pprint import pprint
+
+from draftsman.prototypes.assembling_machine import AssemblingMachine
 
 from builders.building_resolver import build_building_resolver
 from builders.recipe_transformations import build_recipe_transformations
@@ -23,12 +26,15 @@ from cargo_wagon_block_maker.train_head_two_liquid import TrainHeadTwoLiquids
 from cargo_wagon_block_maker.wagons import Wagons
 from config.schemas.schema import CargoWagonMallConfig
 from model_finalizer import CargoWagonMallProblem
+from production_line import ProductionLine
 from production_line_builder import ProductionLineBuilder
 from recipe_provider_builder import (
     build_recipe_provider,
-    apply_transformations, )
+    apply_transformers, )
 
 import yaml
+
+AssemblingMachine
 
 
 def train_head_factory(liquids, **kwargs):
@@ -37,6 +43,7 @@ def train_head_factory(liquids, **kwargs):
         1: TrainHeadOneLiquid,
         2: TrainHeadTwoLiquids,
         3: TrainHeadThreeLiquids,
+        4: TrainHeadThreeLiquids,
     }
     return cls[len(liquids)](liquids=liquids, **kwargs)
 
@@ -50,6 +57,7 @@ def output_infrastructure_factory(output):
     return cls[output]()
 
 
+@dataclass
 class CargoWagonMall:
     def __init__(self, config: CargoWagonMallConfig):
         self.config = config
@@ -67,45 +75,40 @@ class CargoWagonMall:
 
     @cached_property
     def recipe_provider(self):
-        result = apply_transformations(self._recipe_provider, self._recipe_transformations)
+        result = apply_transformers(self._recipe_provider, self._recipe_transformations)
         return result
+
     def validate_self(self):
         for _, target_product in self.target_products:
             self.validate(target_product)
+
     def validate(self, product):
         try:
             self._recipe_provider.by_name(product)
         except ValueError:
             raise ValueError(f"Recipe {product} not found")
 
-    def build_mall(self):
+    def build_mall(self, line: ProductionLine) -> str:
 
-        for _, target_product in self.target_products:
-            self.validate(target_product)
-
-        assignment_problem_instance, line = self.build_optimal_ratios()
-
-        global_input = {
-            production_site.recipe.products[0].name: production_site.quantity
-            for production_site in line.production_sites.values()
-            if "ltn" in production_site.recipe.name
-        }
-
+        global_input = line.global_input
         temp = [
-            entity
-            for production_site in line.production_sites.values()
-            if not "ltn" in production_site.recipe.name
-            for entity in production_site.entities
+            (product, import_export)
+            for production_site in line.prod_sites
+            for product, import_export in production_site.import_export_dictionary_entities
         ]
+        if len(temp) % 8 != 0:
+            # Add some dummy entities to make the number of entities divisible by 8
+            temp += [("sulfur", {})] * (8 - len(temp) % 8)
         production_sites, entities = zip(*temp)
-        entity_lookup = {site: entity for site, entity in temp}
+        entity_lookup = dict(temp)
         pprint(production_sites)
         # Now that we know the flow of goods, we can assign them to wagons by determining the order of machines
+        assignment_problem_instance = CargoWagonAssignmentProblem(**self.config.solver.dict())
         production_sites, flows = assignment_problem_instance(
             entities,
             global_input,
             production_sites,
-            outputs=[product for factor, product in self.target_products],
+            outputs=[product for product, factor in self.target_products.items()],
         )
         liquids = [input_fluid for input_fluid in global_input if input_fluid in LIQUIDS]
         blueprint_maker_modules = {
@@ -130,13 +133,12 @@ class CargoWagonMall:
         blueprint = blueprint_maker.make_blueprint(
             production_sites,
             entity_lookup=entity_lookup,
-            output=[product for factor, product in self.target_products],
+            output=[product for product, factor in self.target_products.items()],
             flows=flows,
         )
-        return blueprint, line
+        return blueprint.to_string()
 
     def build_optimal_ratios(self):
-        assignment_problem_instance = CargoWagonAssignmentProblem(**self.config.solver.dict())
         model_finalizer = CargoWagonMallProblem(
             self.target_products, max_assemblers=self.max_assemblers
         )
@@ -146,7 +148,7 @@ class CargoWagonMall:
         )
         line = production_line_builder.build()
         line.print()
-        return assignment_problem_instance, line
+        return line
 
 
 if __name__ == "__main__":

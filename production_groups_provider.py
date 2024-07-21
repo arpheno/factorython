@@ -6,7 +6,7 @@ class ProductionGroupsProvider:
         self.recipe_provider = recipe_provider
 
     def science_packs_4(self):
-        four_packs = self.recipe_provider.name_includes("science-pack-4")
+        four_packs = self.recipe_provider.name_includes_word_of_candidate("science-pack-4")
         other_packs = [
             self.recipe_provider.by_name(r)
             for r in [
@@ -20,7 +20,7 @@ class ProductionGroupsProvider:
         return [r for r in self.science_packs_4() if not "deep" in r.name]
 
     def catalogues(self):
-        return self.recipe_provider.name_includes("catalogue")
+        return self.recipe_provider.name_includes_word_of_candidate("catalogue")
 equipment = [
     'jetpack-2',
     'battery-equipment',

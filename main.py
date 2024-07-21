@@ -17,7 +17,7 @@ from parsing.prototype_parser import parse_prototypes
 from recipe_provider_builder import (
     build_recipe_provider,
     FreeRecipesAdder,
-    apply_transformations,
+    apply_transformers,
     RecipesRemover,
     Barreler,
 )
@@ -120,7 +120,7 @@ def main():
         # ),
 
     ]
-    recipe_provider = apply_transformations(recipe_provider, recipe_transformations)
+    recipe_provider = apply_transformers(recipe_provider, recipe_transformations)
     time_running = 60*15
     # target = [('se-vitamelange-extract', 3.4)]
     # target = [('electric-mining-drill', 1),('inserter',10),('transport-belt',10),('assembling-machine-1',5)]

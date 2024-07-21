@@ -11,7 +11,7 @@ from recipe_provider import RecipeProvider
 
 class AssemblingMachines:
     def __init__(self, transformations, building_resolver: BuildingResolver, recipe_provider: RecipeProvider, **kwargs):
-        self.transformations =[x for x in transformations if isinstance(BuildingSpecificModuleInserter,x)]
+        self.transformations =[x for x in transformations if isinstance(x,BuildingSpecificModuleInserter)]
         self.modules = {} if not self.transformations else self.transformations[0].modules
         self.building_resolver = building_resolver
         self.recipe_provider = recipe_provider

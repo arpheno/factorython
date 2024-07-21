@@ -29,7 +29,7 @@ from recipe_provider_builder import (
     build_recipe_provider,
     FreeRecipesAdder,
     RecipesRemover,
-    apply_transformations,
+    apply_transformers,
 )
 
 
@@ -91,7 +91,7 @@ def main():
         )
         # FreeRecipesAdder(['advanced-circuit', 'se-space-coolant-warm']),
     ]
-    recipe_provider = apply_transformations(recipe_provider, recipe_transformations)
+    recipe_provider = apply_transformers(recipe_provider, recipe_transformations)
     blueprint_maker_modules = {
         "assembling_machines": AssemblingMachines(
             transformations=assembling_machine_modules,

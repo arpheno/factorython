@@ -69,10 +69,10 @@ class SmallBeacon(Transformer):
             if 'ltn' in recipe.name:
                 continue
             module = self.module * 0.5
-            #Compare it before and after
-            before=recipe.energy
+            # Compare it before and after
+            before = recipe.energy
             module(recipe)
-            after=recipe.energy
+            after = recipe.energy
             print(f'{recipe.name} before: {before} after: {after}')
         return recipe_provider
 
@@ -80,25 +80,26 @@ class SmallBeacon(Transformer):
 class BuildingSpecificModuleInserter(Transformer):
     def __init__(self, modules: List[str], building_resolver: BuildingResolver, **kwargs):
         module_builder = ModuleBuilder(raw)
-        self.modules=modules
+        self.modules = modules
         self.speed_module = module_builder.build(next(module for module in modules if 'speed' in module))
         self.building_resolver = building_resolver
 
     def __call__(self, recipe_provider: RecipeProvider) -> RecipeProvider:
+        module_builder = ModuleBuilder(raw)
         for recipe in recipe_provider.recipes:
             if 'ltn' in recipe.name:
                 continue
             building = self.building_resolver(recipe)
             module_slots = building.module_specification.module_slots if building.module_specification else 0
             if recipe.name in intermediate_products:
-                module = Module(name='final_module')
-                for module_slot, module_name in zip(range(module_slots), self.modules):
-                    module_builder = ModuleBuilder(raw)
-                    module = self.module + module_builder.build(module_name)
-                    print(f'assembled module {module}')
+                module = Module(name=f'{building.name}')
+                for module_name in self.modules[:module_slots]:
+                    module = module + module_builder.build(module_name)
+                print(f'assembled module {module} in building {building.name} for recipe {recipe.name}')
                 module(recipe)
             else:
-                module = self.speed_module[:module_slots]
+                module = self.speed_module * module_slots
+                module(recipe)
         return recipe_provider
 
 

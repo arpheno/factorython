@@ -18,7 +18,7 @@ from parsing.prototype_parser import parse_prototypes
 from recipe_provider_builder import (
     build_recipe_provider,
     FreeRecipesAdder,
-    apply_transformations,
+    apply_transformers,
     RecipesRemover, Barreler,
 )
 from space.machine import robot_connected_space_machine
@@ -69,7 +69,7 @@ def main():
         FreeRecipesAdder(['advanced-circuit', 'se-space-coolant-warm','uranium-235','uranium-238','se-space-coolant-cold','se=space-coolant-supercooled','empty-barrel','processing-unit','se-bio-sludge']),
 
     ]
-    recipe_provider = apply_transformations(recipe_provider, recipe_transformations)
+    recipe_provider = apply_transformers(recipe_provider, recipe_transformations)
 
     model_finalizer = ProductionLineProblem(
         [("se-biological-science-pack-4", 2000.0 / 3600)]

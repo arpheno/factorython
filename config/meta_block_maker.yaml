@@ -6,11 +6,11 @@ production_sites:
        - [ 1, fluid-wagon ]
        - [ 1, pump]
        - [ 1, electric-furnace]
-       - [1, big-electric-pole]
     - target_products:
         - [1, logistic-chest-passive-provider]
+        - [1, logistic-chest-passive-provider]
         - [ 8, stack-filter-inserter ]
-        - [ 4, assembling-machine-2 ]
+        - [1, big-electric-pole]
         - [ 10, medium-electric-pole ]
         - [ 2, substation ]
     - target_products:

@@ -18,7 +18,10 @@ class CargoWagonAssignmentProblem:
         # Define the number of entities and positions
         N = len(entities)
         # give me 8 entities
-        assert N % 4 == 0
+        try:
+            assert N % 4 == 0
+        except AssertionError as e:
+            raise e
         assert len(entities) == N
         # get a list of all goods in the program
         goods = set()

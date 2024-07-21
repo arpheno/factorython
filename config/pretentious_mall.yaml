@@ -1,0 +1,38 @@
+production_sites:
+  - target_products:
+    -  [1, "assembling-machine-3"]
+    -  [1, "industrial-furnace"]
+    -  [1, "fast-transport-belt"]
+    -  [1, "fast-inserter"]
+    -  [1, "stack-filter-inserter"]
+    -  [1, "stack-inserter"]
+    -  [1, "express-transport-belt"]
+    -  [1, "solar-panel"]
+    - [1, "accumulator"]
+    - [1, "electric-furnace"]
+    - [1, "industrial-furnace"]
+    - [1, "electric-mining-drill"]
+    - [1, "pumpjack"]
+    - [1, "oil-refinery"]
+    - [1, "chemical-plant"]
+max_assemblers: 32
+#transformations:
+#  - name: "building_speed_applier"
+#  - name: "module_inserter"
+#    modules:
+#      - "productivity-module-2"
+#      - "productivity-module-2"
+#      - "speed-module-2"
+#      - "speed-module-2"
+available_resources:
+  - "minable_resources"
+  - "basic_processing"
+additional_resources:
+  - "plastic-bar"
+building_resolver_overrides:
+  crafting: "assembling-machine-3"
+  basic-crafting: "assembling-machine-3"
+  crafting-with-fluid: "assembling-machine-3"
+  advanced-crafting: "assembling-machine-3"
+  chemistry: "chemical-plant"
+  pulverising: "assembling-machine-3"

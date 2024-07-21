@@ -23,7 +23,7 @@ class ProductionSite:
         return int(self.quantity) if self.quantity == int(self.quantity) else int(self.quantity) + 1
 
     @property
-    def entities(self) -> [(str, dict)]:
+    def import_export_dictionary_entities(self) -> [(str, dict)]:
         """
         Computes the entities based on the quantity of the production site.
         Each entity is a dictionary representing a summary of the recipe scaled by the production rate.

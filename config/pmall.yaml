@@ -1,0 +1,113 @@
+production_sites:
+- target_products:
+    assembling-machine-3: 1
+    industrial-furnace: 1
+    substation: 1
+    big-electric-pole: 1
+  additional_materials:
+  - concrete
+  - advanced-electronic-circuit
+- target_products:
+    se-pulveriser: 1
+    se-fuel-refinery: 1
+    se-recycling-facility: 1
+    se-lifesupport-facility: 1
+    se-meteor-point-defence: 1
+    refined-hazard-concrete: 1
+  additional_materials:
+  - concrete
+  - advanced-electronic-circuit
+- target_products:
+    burner-turbine: 1
+    steam-engine: 1
+    boiler: 1
+    offshore-pump: 1
+    se-electric-boiler: 1
+    chemical-plant: 1
+    oil-refinery: 1
+    pumpjack: 1
+    pipe-to-ground: 1
+    pump: 1
+- target_products:
+    se-meteor-defence: 1
+    nuclear-reactor: 1
+    heat-exchanger: 32
+    steam-turbine: 100
+    heat-pipe: 40
+    centrifuge: 5
+- target_products:
+    construction-robot: 1
+    logistic-robot: 1
+    logistic-chest-storage: 1
+    logistic-chest-active-provider: 1
+    logistic-chest-buffer: 1
+    logistic-chest-passive-provider: 1
+    logistic-chest-requester: 1
+    iron-chest: 1
+    aai-strongbox: 1
+- target_products:
+    solar-panel-equipment: 1
+    personal-roboport-equipment: 1
+    battery-equipment: 1
+    jetpack-1: 1
+    radar: 1
+    jetpack-2: 1
+    exoskeleton-equipment: 1
+    accumulator: 1
+- target_products:
+    stack-filter-inserter: 1
+    filter-inserter: 1
+- target_products:
+    express-transport-belt: 4
+    express-underground-belt: 1
+    express-splitter: 1
+- target_products:
+    se-delivery-cannon-chest: 1
+    se-delivery-cannon: 1
+    se-rocket-launch-pad: 1
+    se-rocket-landing-pad: 1
+    aai-signal-receiver: 1
+    aai-signal-sender: 1
+    se-core-miner: 1
+- target_products:
+    se-meteor-point-defence-ammo: 1
+    se-meteor-defence-ammo: 1
+    repair-pack: 1
+- target_products:
+    rail: 30
+    locomotive: 1
+    fluid-wagon: 1
+    cargo-wagon: 1
+- target_products:
+    logistic-train-stop: 1
+    rail-signal: 1
+    rail-chain-signal: 1
+    decider-combinator: 1
+    arithmetic-combinator: 1
+- target_products:
+    productivity-module-3: 1
+  additional_resources:
+  - se-vulcanite-block
+- target_products:
+    speed-module-3: 1
+max_assemblers: 32
+building_resolver_overrides:
+  crafting: assembling-machine-3
+  basic-crafting: assembling-machine-3
+  crafting-with-fluid: assembling-machine-3
+  advanced-crafting: assembling-machine-3
+  chemistry: chemical-plant
+  pulverising: assembling-machine-3
+transformations:
+- name: building_speed_applier
+- name: module_inserter
+  modules:
+  - productivity-module-2
+  - speed-module-2
+  - productivity-module-2
+  - speed-module-2
+available_resources:
+- minable_resources
+- basic_processing
+solver:
+  time_limit: 30

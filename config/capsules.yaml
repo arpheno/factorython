@@ -1,7 +1,6 @@
 production_sites:
   - target_products:
-    - [1, "se-thruster-suit"]
-    - [1, "se-lifesupport-facility"]
+    - [1, "se-cargo-rocket-capsule"]
 max_assemblers: 24
 solver:
   time_limit: 15
@@ -15,9 +14,6 @@ available_resources:
   - "basic_processing"
 additional_resources:
   - "plastic-bar"
-assembling_machine_modules:
-  - "speed-module"
-  - "productivity-module"
 building_resolver_overrides:
   crafting: "assembling-machine-2"
   basic-crafting: "assembling-machine-2"
