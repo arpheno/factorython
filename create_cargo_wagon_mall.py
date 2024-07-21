@@ -15,4 +15,4 @@ if __name__ == "__main__":
     config = CargoWagonMallConfig(**yaml_data)
 
     mall_builder = CargoWagonMall(config)
-    mall_builder.build_mall()
+    mall_builder.construct_blueprint_string()

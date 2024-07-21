@@ -32,7 +32,6 @@ from recipe_provider_builder import (
     build_recipe_provider,
     apply_transformers, )
 
-import yaml
 
 AssemblingMachine
 
@@ -62,14 +61,15 @@ class CargoWagonMall:
     def __init__(self, config: CargoWagonMallConfig):
         self.config = config
 
-        self.target_products = self.config.target_products
-        self.max_assemblers = self.config.max_assemblers
+        self.target_products = config.target_products
+        self.max_assemblers = config.max_assemblers
 
-        assembly = json.load(open(self.config.assembly_path))
+        self.assignment_problem_instance = CargoWagonAssignmentProblem(**config.solver.dict())
+        assembly = json.load(open(config.assembly_path))
 
         self.building_resolver = build_building_resolver(assembly, self.config.building_resolver_overrides)
 
-        recipes = json.load(open(self.config.recipe_path))
+        recipes = json.load(open(config.recipe_path))
         self._recipe_provider = build_recipe_provider(recipes, self.building_resolver)
         self._recipe_transformations = build_recipe_transformations(self.config, self.building_resolver)
 
@@ -88,29 +88,20 @@ class CargoWagonMall:
         except ValueError:
             raise ValueError(f"Recipe {product} not found")
 
-    def build_mall(self, line: ProductionLine) -> str:
-
-        global_input = line.global_input
-        temp = [
-            (product, import_export)
-            for production_site in line.prod_sites
-            for product, import_export in production_site.import_export_dictionary_entities
-        ]
-        if len(temp) % 8 != 0:
-            # Add some dummy entities to make the number of entities divisible by 8
-            temp += [("sulfur", {})] * (8 - len(temp) % 8)
-        production_sites, entities = zip(*temp)
-        entity_lookup = dict(temp)
-        pprint(production_sites)
+    def compute_flows(self, line: ProductionLine):
+        production_sites, entities = zip(*line.dictionaries)
         # Now that we know the flow of goods, we can assign them to wagons by determining the order of machines
-        assignment_problem_instance = CargoWagonAssignmentProblem(**self.config.solver.dict())
-        production_sites, flows = assignment_problem_instance(
+        production_sites, flows = self.assignment_problem_instance(
             entities,
-            global_input,
+            line.global_input,
             production_sites,
             outputs=[product for product, factor in self.target_products.items()],
         )
-        liquids = [input_fluid for input_fluid in global_input if input_fluid in LIQUIDS]
+        return production_sites, flows
+
+    def construct_blueprint_string(self, line: ProductionLine, production_sites, flows) -> str:
+
+        liquids = [input_fluid for input_fluid in line.global_input if input_fluid in LIQUIDS]
         blueprint_maker_modules = {
             "assembling_machines": AssemblingMachines(
                 transformations=self.config.transformations,
@@ -132,7 +123,7 @@ class CargoWagonMall:
         )
         blueprint = blueprint_maker.make_blueprint(
             production_sites,
-            entity_lookup=entity_lookup,
+            entity_lookup=dict(line.dictionaries),
             output=[product for product, factor in self.target_products.items()],
             flows=flows,
         )
@@ -149,18 +140,3 @@ class CargoWagonMall:
         line = production_line_builder.build()
         line.print()
         return line
-
-
-if __name__ == "__main__":
-    # from draftsman.env import update
-    # update(verbose=True,path='/Users/swozny/Library/Application Support/factorio/mods')  # equivalent to 'draftsman-update -v -p some/path'
-
-    config_path = "config/small_block_maker.yaml"
-
-    with open(config_path, 'r') as file:
-        yaml_data = yaml.safe_load(file)
-
-    config = CargoWagonMallConfig(**yaml_data)
-
-    mall_builder = CargoWagonMall(config)
-    mall_builder.build_mall()

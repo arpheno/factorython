@@ -1,0 +1,34 @@
+production_sites:
+- target_products:
+    assembling-machine-3: 1
+    industrial-furnace: 1
+    substation: 1
+    big-electric-pole: 1
+- target_products:
+    se-pulveriser: 1
+    se-fuel-refinery: 1
+    se-recycling-facility: 1
+    se-lifesupport-facility: 1
+    se-meteor-point-defence: 1
+    refined-hazard-concrete: 1
+max_assemblers: 32
+building_resolver_overrides:
+  crafting: assembling-machine-3
+  basic-crafting: assembling-machine-3
+  crafting-with-fluid: assembling-machine-3
+  advanced-crafting: assembling-machine-3
+  chemistry: chemical-plant
+  pulverising: assembling-machine-3
+transformations:
+- name: building_speed_applier
+- name: module_inserter
+  modules:
+  - productivity-module-2
+  - speed-module-2
+  - productivity-module-2
+  - speed-module-2
+available_resources:
+- minable_resources
+- basic_processing
+solver:
+  time_limit: 30

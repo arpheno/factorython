@@ -24,6 +24,25 @@ class ProductionLine:
         return [site for site in self.production_sites.values() if 'ltn' not in site.recipe.name]
 
     @property
+    def dictionaries(self):
+        """
+        I know the name is shit i don't know what else to call this right now,
+         after thinking fora day or so.
+         What this does is
+
+         """
+        temp = [
+            (product, import_export)
+            for production_site in self.prod_sites
+            for product, import_export in production_site.import_export_dictionary_entities
+        ]
+
+        if len(temp) % 8 != 0:
+            # Add some dummy entities to make the number of entities divisible by 8
+            temp += [("sulfur", {})] * (8 - len(temp) % 8)
+        return temp
+
+    @property
     def building_counts(self):
         c = Counter()
         for site in self.prod_sites:
