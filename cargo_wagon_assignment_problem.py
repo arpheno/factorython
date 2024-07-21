@@ -1,9 +1,13 @@
+from dataclasses import dataclass
 from itertools import product
 from pprint import pprint
 
 import pulp
 from pulp import lpSum
-
+@dataclass
+class BlueprintInstruction:
+    production_sites: list
+    flows: list
 
 class CargoWagonAssignmentProblem:
     def __init__(self, mip=True, time_limit=30, **solver_kwargs):
@@ -106,7 +110,7 @@ class CargoWagonAssignmentProblem:
 
             # group the flows by group
             flows = [{good: flows[g, good] for good in goods} for g in range(len(groups))]
-            return result, flows
+            return BlueprintInstruction(result, flows)
         else:
             raise Exception("No optimal solution found.")
 
@@ -127,4 +131,4 @@ if __name__ == '__main__':
         {'iron-plate': 0, 'copper-plate': 1, 'copper-cable': -1, 'electronic-circuit': -1, 'stone-tablet': 0},
     ]
     global_input = {'copper-plate': 0, 'iron-plate': 0, 'copper-cable': 0, 'electronic-circuit': 30, 'stone-tablet': 0}
-    create_cargo_wagon_assignment_problem(entities, global_input, output='iron-plate')
+    p=1

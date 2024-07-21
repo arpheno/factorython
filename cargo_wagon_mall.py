@@ -7,7 +7,7 @@ from draftsman.prototypes.assembling_machine import AssemblingMachine
 
 from builders.building_resolver import build_building_resolver
 from builders.recipe_transformations import build_recipe_transformations
-from cargo_wagon_assignment_problem import CargoWagonAssignmentProblem
+from cargo_wagon_assignment_problem import CargoWagonAssignmentProblem, BlueprintInstruction
 from cargo_wagon_block_maker.assembling_machines import (
     AssemblingMachines,
 )
@@ -91,15 +91,15 @@ class CargoWagonMall:
     def compute_flows(self, line: ProductionLine):
         production_sites, entities = zip(*line.dictionaries)
         # Now that we know the flow of goods, we can assign them to wagons by determining the order of machines
-        production_sites, flows = self.assignment_problem_instance(
+        blueprint_instructions = self.assignment_problem_instance(
             entities,
             line.global_input,
             production_sites,
             outputs=[product for product, factor in self.target_products.items()],
         )
-        return production_sites, flows
+        return blueprint_instructions
 
-    def construct_blueprint_string(self, line: ProductionLine, production_sites, flows) -> str:
+    def construct_blueprint_string(self, line: ProductionLine, blueprint_instruction:BlueprintInstruction) -> str:
 
         liquids = [input_fluid for input_fluid in line.global_input if input_fluid in LIQUIDS]
         blueprint_maker_modules = {
@@ -122,10 +122,10 @@ class CargoWagonMall:
             modules=blueprint_maker_modules,
         )
         blueprint = blueprint_maker.make_blueprint(
-            production_sites,
+            blueprint_instruction.production_sites,
             entity_lookup=dict(line.dictionaries),
             output=[product for product, factor in self.target_products.items()],
-            flows=flows,
+            flows=blueprint_instruction.flows,
         )
         return blueprint.to_string()
 

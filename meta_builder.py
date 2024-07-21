@@ -7,10 +7,13 @@ from draftsman.classes.blueprint import Blueprint
 from draftsman.classes.group import Group
 from typing import List
 
+from cargo_wagon_assignment_problem import BlueprintInstruction
 from cargo_wagon_mall import CargoWagonMall
 from config.schemas.meta_schema import MetaConfig
 from parallel_stuff import generate_blueprints
 from production_line import ProductionLine
+
+
 class ParallelMetaBuilder:
     def __init__(self, path):
         with open(path, 'r') as file:
@@ -21,16 +24,11 @@ class ParallelMetaBuilder:
         self.meta_config.update_yaml(path)
         self.failed_configs = []
 
-
     def build(self):
         configs = self.meta_config.configs()
-        malls = []
-        for config in configs:
-            print(f'Processing config: {config.target_products}')
-            mall = CargoWagonMall(config)
-            malls.append(mall)
-        p = Pool(4)
-        lines: List[ProductionLine] = p.map(CargoWagonMall.build_optimal_ratios, malls)
+        malls = self.process_to_malls(configs)
+
+        lines = self.process_to_production_lines(malls)
 
         for config, line in zip(configs, lines):
             print(config.target_products)
@@ -42,10 +40,42 @@ class ParallelMetaBuilder:
         print("LTN Supply:")
         for product, quantity in ltn_supply.items():
             print(f'{product}: {quantity}')
-        production_sites,flows= zip(*[mall.compute_flows(line) for mall, line in zip(malls, lines)])
-        bps: List[str] = [mall.construct_blueprint_string(line, production_site, flow) for mall, line, production_site, flow in zip(malls, lines, production_sites, flows)]
+
+        blueprint_instructions: List[BlueprintInstruction] = self.process_to_blueprint_instruction(lines, malls)
+        blueprint_strings: List[str] = self.process_to_blueprint_string(blueprint_instructions, lines, malls)
 
         print(f'Processed {len(configs)} configs.')
+        self.combine_blueprints(blueprint_strings)
+        print("Procssed configs:")
+        for config, line in zip(configs, lines):
+            print(config.target_products)
+            line.print()
+        print("Failed configs:")
+        for config in self.failed_configs:
+            print(config.target_products)
+
+    def process_to_blueprint_instruction(self, lines, malls):
+        return [mall.compute_flows(line) for mall, line in
+                zip(malls, lines)]
+
+    def process_to_blueprint_string(self, blueprint_instructions, lines, malls):
+        return [mall.construct_blueprint_string(line, blueprint_instruction) for
+                mall, line, blueprint_instruction in zip(malls, lines, blueprint_instructions)]
+
+    def process_to_malls(self, configs):
+        malls = []
+        for config in configs:
+            print(f'Processing config: {config.target_products}')
+            mall = CargoWagonMall(config)
+            malls.append(mall)
+        return malls
+
+    def process_to_production_lines(self, malls):
+        p = Pool(4)
+        lines: List[ProductionLine] = p.map(CargoWagonMall.build_optimal_ratios, malls)
+        return lines
+
+    def combine_blueprints(self, bps):
         G = Group()
         y = 0
         for blueprint_string in bps:
@@ -58,13 +88,8 @@ class ParallelMetaBuilder:
         b.entities.append(G)
         print('Done, printing blueprint.')
         print(b.to_string())
-        print("Procssed configs:")
-        for config, line in zip(configs, lines):
-            print(config.target_products)
-            line.print()
-        print("Failed configs:")
-        for config in self.failed_configs:
-            print(config.target_products)
+
+
 if __name__ == '__main__':
     # print(logistic_passive_containers)
     path = 'config/robots_and_such_rest.yaml'
