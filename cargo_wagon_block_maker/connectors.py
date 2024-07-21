@@ -115,7 +115,7 @@ class Connectors(BlueprintMakerModule):
         g = Group()
         for (x, y) in [(0, 0), (0, 1), (1, 0), (1, 1)]:
             g.entities.append(
-                name=self.inserter_type,
+                name= self.inserter_type if x==0  else  "filter-inserter",
                 position={"x": x, "y": y},
                 direction=Direction.WEST,
                 control_behavior={
